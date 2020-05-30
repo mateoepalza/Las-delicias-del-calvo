@@ -1,4 +1,5 @@
 <?php
-    include "Vista/head";
-    include "Vistas/bottom"
+    include "Vista/Main/head.php";
+    include "Vista/Main/mainPage.php";
+    include "Vista/Main/bottom.php";
 ?>
