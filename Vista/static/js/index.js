@@ -5,7 +5,9 @@ $(function () {
 			display: "flex",
 		});
 	});
-	$(".hidden").click(function () {
-		$(".hidden").fadeOut();
+	$(".hidden").mouseup(function(e) {
+        if(e.target.className == "hidden"){
+            $(".hidden").fadeOut();
+        }
 	});
 });

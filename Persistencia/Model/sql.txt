@@ -1,0 +1,22 @@
+
+create table Administrador(
+    idAdministrador int not null auto_increment,
+    nombre varchar(50) not null,
+    apellido varchar(50) not null,
+    email varchar(50) not null,
+    clave varchar(100) not null,
+    foto varchar(100),
+    primary key(idAdministrador)
+);
+
+create table Cliente(
+    idCliente int not null auto_increment,
+    nombre varchar(50) not null,
+    apellido varchar(50) not null,
+    email varchar(50) not null,
+    clave varchar(100) not null,
+    foto varchar(100),
+    estado varchar(1),
+    activation varchar(100),
+    primary key(idCliente)
+);

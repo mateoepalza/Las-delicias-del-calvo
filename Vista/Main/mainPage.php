@@ -2,7 +2,7 @@
 <script type="text/javascript" src="Vista/static/js/index.js"></script>
 <div class="hidden">
     <div class="form">
-        <form action="" method="">
+        <form action="Vista/Auth/autenticar.php" method="post">
             <div class="d-flex flex-row justify-content-center">
                 <img src="Vista/static/img/logo.png" width=50>
             </div>
