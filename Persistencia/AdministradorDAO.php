@@ -27,6 +27,12 @@ class AdministradorDAO{
                 FROM Administrador
                 Where email = '" . $this -> correo . "' AND clave = '" . md5($this -> clave) . "'";
     }
+
+    public function getInfoBasic(){
+        return "SELECT idAdministrador, nombre, apellido, email, clave, foto 
+                FROM Administrador
+                WHERE idAdministrador = " . $this -> idAdministrador;
+    }
 }
 
 ?>

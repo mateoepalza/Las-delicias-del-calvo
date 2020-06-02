@@ -13,10 +13,11 @@ create table Cliente(
     idCliente int not null auto_increment,
     nombre varchar(50) not null,
     apellido varchar(50) not null,
-    email varchar(50) not null,
+    email varchar(50) unique not null,
     clave varchar(100) not null,
     foto varchar(100),
-    estado varchar(1),
-    activation varchar(100),
+    estado int not null,
+    activation varchar(50),
     primary key(idCliente)
 );
+insert into Cliente (nombre, apellido, email, clave, estado) values ('Juanito', 'Perez', '456@456', md5('456'), -1);

@@ -2,7 +2,7 @@
 <script type="text/javascript" src="Vista/static/js/index.js"></script>
 <div class="hidden">
     <div class="form">
-        <form action="Vista/Auth/autenticar.php" method="post">
+        <form action="index.php?pid=<?php echo base64_encode("Vista/Auth/autenticar.php") ?>" method="post">
             <div class="d-flex flex-row justify-content-center">
                 <img src="Vista/static/img/logo.png" width=50>
             </div>
@@ -20,7 +20,34 @@
         </form>
     </div>
 </div>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<?php
+    if (isset($_GET['error'])) {
+        $error = $_GET['error'];
+        $msj = "";
+        $class = "alert-danger";
+        if ($error == 1) {
+            $msj = "El correo y la contraseña no coinciden, intente denuevo.";
+        } else if ($error == 2) {
+            $msj = "Por favor revise su correo y active su cuenta";
+            $class = "alert-warning";
+        } else if ($error == 3) {
+            $msj = "Su usuario ha sido inactivado, por favor contactese con el administrador";
+        }else{
+            $msj = "Ha ocurrido un error";
+        }
+
+    ?>
+        <div class="alert <?php echo $class ?> alert-dismissible fade show" role="alert" style="position: fixed; z-index:12; margin-top : 50px; transform: translateX(-50%); margin-left: 50%">
+            <?php echo $msj?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <?php
+    }
+?>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position: fixed; z-index:11; width: 100%">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>

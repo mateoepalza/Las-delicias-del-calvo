@@ -1,33 +1,37 @@
 <?php 
 
-    require_once "Persistencia/Conexion.php";
-    require_once "Persistencia/AdministradorDAO.php";
+require_once "Persistencia/Conexion.php";
+require_once "Persistencia/ClienteDAO.php";
 
-class Administrador{
-    private $idAdministrador;
+class Cliente{
+    private $idCliente;
     private $nombre;
     private $apellido;
     private $correo;
     private $clave;
     private $foto;
-    private $AdministradorDAO;
+    private $estado;
+    private $activacion;
+    private $ClienteDAO;
     private $conexion;
 
-    public function Administrador($idAdministardor = "", $nombre = "", $apellido = "", $correo = "", $clave = "", $foto = ""){
-        $this -> idAdministrador = $idAdministardor;
+    public function Cliente($idCliente = "", $nombre = "", $apellido = "", $correo = "", $clave = "", $foto = "", $estado = "", $activacion = ""){
+        $this -> idCliente = $idCliente;
         $this -> nombre = $nombre;
         $this -> apellido = $apellido;
         $this -> correo = $correo;
         $this -> clave = $clave;
         $this -> foto = $foto;
-        $this -> AdministradorDAO = new AdministradorDAO($idAdministardor, $nombre, $apellido, $correo, $clave, $foto);
+        $this -> estado = $estado;
+        $this -> activacion = $activacion;
+        $this -> ClienteDAO = new ClienteDAO($idCliente, $nombre, $apellido, $correo, $clave, $foto, $estado, $activacion);
         $this -> conexion = new Conexion();
     }
     /*
     *   Getters
     */
-    public function getIdAdministrador(){
-        return $this -> idAdministrador;
+    public function getIdCliente(){
+        return $this -> idCliente;
     }
 
     public function getNombre(){
@@ -49,12 +53,18 @@ class Administrador{
     public function getFoto(){
         return $this -> Foto;
     }
+    public function getEstado(){
+        return $this -> estado;
+    }
+    public function getActivacion(){
+        return $this -> Activacion;
+    }
 
     /*
     *   Setters
     */
-    public function setIdAdministrador($idAdministardor){
-        $this -> idAdministrador = $idAdministardor;
+    public function setIdCliente($idCliente){
+        $this -> idCliente = $idCliente;
     }
 
     public function setNombre($nombre){
@@ -76,37 +86,34 @@ class Administrador{
     public function setFoto($foto){
         $this -> Foto = $foto;
     }
+    public function setEstado($estado){
+        $this -> Estado = $estado;
+    }
+    public function setActivacion($activacion){
+        $this -> Activacion = $activacion;
+    }
     /* 
     *   Functions
     */
-
     public function autenticar(){
         $this -> conexion -> abrir();
-        $this -> conexion -> ejecutar( $this -> AdministradorDAO -> autenticar());
-        //$this -> conexion -> cerrar();
-
+        echo $this -> ClienteDAO -> autenticar();
+        $this -> conexion -> ejecutar( $this -> ClienteDAO -> autenticar());
         if($this -> conexion -> numFilas() == 1){
             $res = $this -> conexion -> extraer();
-            $this -> idAdministrador = $res[0];
+            var_dump($res);
+            $this -> idCliente = $res[0];
+            $this -> nombre = $res[1];
+            $this -> apellido = $res[2];
+            $this -> foto = $res[3];
+            $this -> estado = $res[4];
+            $this -> activacion = $res[5];
+
             return True;
         }else{
             return False;
         }
-    }
-
-    public function getInfoBasic(){
-        $this -> conexion -> abrir();
-        $this -> conexion -> ejecutar( $this -> AdministradorDAO -> getInfoBasic() );
-        $res = $this -> conexion -> extraer();
-        /* Actualzar OBJ*/
-        $this -> nombre = $res[1];
-        $this -> apellido = $res[2];
-        $this -> correo = $res[3];
-        $this -> clave = $res[4];
-        $this -> foto = $res[5];
-        /* FIN Actualzar OBJ*/
         $this -> conexion -> cerrar();
     }
 }
-
 ?>
