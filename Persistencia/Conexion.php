@@ -24,6 +24,10 @@ class Conexion{
     public function numFilas(){
         return $this -> result -> num_rows;
     }
+
+    public function filasAfectadas(){
+        return $this -> mysqli -> affected_rows;
+    }
 }
 
 ?>

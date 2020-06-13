@@ -97,11 +97,9 @@ class Cliente{
     */
     public function autenticar(){
         $this -> conexion -> abrir();
-        echo $this -> ClienteDAO -> autenticar();
         $this -> conexion -> ejecutar( $this -> ClienteDAO -> autenticar());
         if($this -> conexion -> numFilas() == 1){
             $res = $this -> conexion -> extraer();
-            var_dump($res);
             $this -> idCliente = $res[0];
             $this -> nombre = $res[1];
             $this -> apellido = $res[2];
@@ -113,6 +111,24 @@ class Cliente{
         }else{
             return False;
         }
+        $this -> conexion -> cerrar();
+    }
+
+    public function getInfoBasic(){
+
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar( $this -> ClienteDAO -> getInfoBasic() );
+        $res = $this -> conexion -> extraer();
+        
+        /* Actualzar OBJ*/
+        $this -> nombre = $res[1];
+        $this -> apellido = $res[2];
+        $this -> email = $res[3];
+        $this -> clave = $res[4];
+        $this -> foto = $res[5];
+        $this -> estado = $res[6];
+        
+        /* FIN Actualzar OBJ*/
         $this -> conexion -> cerrar();
     }
 }

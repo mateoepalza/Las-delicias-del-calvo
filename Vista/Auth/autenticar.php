@@ -10,7 +10,7 @@
     if($admin -> autenticar()){
         $_SESSION['id'] = $admin -> getIdAdministrador();
         $_SESSION['rol'] = 1;
-        header('Location: index.php?pid='. base64_encode('Vista/Administrador/main.php'));
+        header('Location: index.php?pid='. base64_encode('Vista/Administrador/mainAdministrador.php'));
     }else if($clien -> autenticar()){
         if($clien -> getEstado() == 1){
             $_SESSION['id'] = $clien -> getIdCliente();

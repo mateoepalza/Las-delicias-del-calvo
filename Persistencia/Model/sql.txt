@@ -20,4 +20,52 @@ create table Cliente(
     activation varchar(50),
     primary key(idCliente)
 );
+create table fotoProducto(
+    idFotoProducto varchar(100) not null,
+    FK_idProducto int not null,
+    primary key(idFotoProducto, FK_idProducto),
+    Foreign Key (FK_idProducto) references Producto(idProducto)
+);
+create table Categoria(
+    idCategoria int not null auto_increment,
+    nombre varchar(50) not null,
+    primary key(idCategoria)
+);
+create table Producto(
+    idProducto int not null auto_increment,
+    nombre varchar(50) not null,
+    foto varchar(200) not null,
+    descripcion varchar(200) null,
+    precio float not null,
+    FK_idCategoria int not null,
+    primary key(idProducto),
+    Foreign key (FK_idCategoria) references Categoria(idCategoria)
+);
+create table ingredientes(
+    idIngrediente int not null auto_increment,
+    nombre varchar(50) not null,
+    primary key(idIngrediente)
+);
+create table ProductoIngrediente(
+    FK_idProducto int not null,
+    FK_idIngrediente int not null,
+    primary key(FK_idProducto, FK_idIngrediente)
+);
 insert into Cliente (nombre, apellido, email, clave, estado) values ('Juanito', 'Perez', '456@456', md5('456'), -1);
+
+Ala
+aceites
+
+Aderezos
+aji
+
+comidas 
+hamburguesas
+Lasaña
+chorizo artesanal
+
+Bebidas Saludables
+Smothies
+Jugos saludables
+
+Chef en casa y parriladas

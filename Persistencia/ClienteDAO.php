@@ -26,4 +26,11 @@ class ClienteDAO{
                 FROM cliente 
                 WHERE email = '" . $this -> correo . "' AND clave ='" . md5($this -> clave) . "'";
     }
+
+    public function getInfoBasic(){
+
+        return "SELECT idCliente, nombre, apellido, email, clave, foto, estado 
+        FROM cliente ";
+
+    }
 }

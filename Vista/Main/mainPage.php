@@ -36,14 +36,7 @@
             $msj = "Ha ocurrido un error";
         }
 
-    ?>
-        <div class="alert <?php echo $class ?> alert-dismissible fade show" role="alert" style="position: fixed; z-index:12; margin-top : 50px; transform: translateX(-50%); margin-left: 50%">
-            <?php echo $msj?>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    <?php
+        include "Vista/Main/error.php";
     }
 ?>
 
@@ -80,7 +73,7 @@
         <div class="carousel-item active" style="height: 600px; overflow: hidden">
             <div style="background : rgba(0,0,0,0.5); width : 100%; height : 100%; position: absolute">
             </div>
-            <img src="Vista/static/img/bg1.jpg" class="d-block w-100" alt="...">
+            <div class="w-100 h-100" style="background-Image: url('Vista/static/img/bg1.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover"></div>
             <div class="carousel-caption d-none d-md-block">
                 <h5>First slide label</h5>
                 <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
@@ -89,7 +82,7 @@
         <div class="carousel-item" style="height: 600px; overflow: hidden">
             <div style="background : rgba(0,0,0,0.5); width : 100%; height : 100%; position: absolute">
             </div>
-            <img src="Vista/static/img/bg2.jpg" class="d-block w-100" alt="...">
+            <div class="w-100 h-100" style="background-Image: url('Vista/static/img/bg2.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover"></div>
             <div class="carousel-caption d-none d-md-block">
                 <h5>Second slide label</h5>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -98,7 +91,7 @@
         <div class="carousel-item" style="height: 600px; overflow: hidden">
             <div style="background : rgba(0,0,0,0.5); width : 100%; height : 100%; position: absolute">
             </div>
-            <img src="Vista/static/img/bg3.jpg" class="d-block w-100" alt="...">
+            <div class="w-100 h-100" style="background-Image: url('Vista/static/img/bg3.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover"></div>
             <div class="carousel-caption d-none d-md-block">
                 <h5>Third slide label</h5>
                 <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>

@@ -2,8 +2,10 @@
 
     session_start();
 
-    require "Negocio/Administrador.php";
-    require "Negocio/Cliente.php";
+    require_once "Negocio/Administrador.php";
+    require_once "Negocio/Cliente.php";
+    require_once "Negocio/Categoria.php";
+    require_once "Negocio/Producto.php";
     
     $pid = null;
 
@@ -23,8 +25,10 @@
 
         if(isset($_SESSION['id'])){
             if($_SESSION['rol'] == 1){
+                include "Vista/Administrador/navAdministrador.php";
                 include $pid;
             }else if($_SESSION['rol'] == 2){
+                include "Vista/Cliente/navCliente.php";
                 include $pid;
             }else{
                 include "Vista/Main/mainPage.php";/*Toca cambiarlo*/
