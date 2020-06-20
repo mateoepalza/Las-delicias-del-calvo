@@ -24,6 +24,34 @@ class ProductoDAO{
                 VALUES ('" . $this -> nombre . "', '" . $this -> foto . "', '" . $this -> descripcion . "', '" . $this -> precio . "', '" . $this -> categoria . "')";
     }
 
+    public function buscarPaginado($pag, $cant){
+        return "SELECT idProducto, Producto.nombre, foto, descripcion, precio,  Categoria.nombre as categoria 
+                FROM Producto 
+                INNER JOIN Categoria 
+                ON FK_idCategoria = idCategoria 
+                LIMIT " . (($pag - 1)*$cant) . ", " . $cant;
+    }
+
+    public function buscarCantidad(){
+        return "SELECT count(*) 
+                FROM Producto";
+    }
+
+    public function filtroPaginado($str, $pag, $cant){
+        return "SELECT idProducto, Producto.nombre, precio,  Categoria.nombre as categoria 
+                FROM Producto 
+                INNER JOIN Categoria 
+                ON FK_idCategoria = idCategoria 
+                WHERE Producto.nombre like '%". $str ."%'
+                LIMIT " . (($pag - 1)*$cant) . ", " . $cant;
+    }
+
+    public function filtroCantidad($str){
+        return "SELECT count(*) 
+                FROM Producto
+                WHERE nombre like '%" . $str . "%'";
+    }
+    
     public function getInfo(){
         return "SELECT idProducto, Producto.nombre, foto, descripcion, precio, Categoria.nombre as categoria 
                 FROM Producto 

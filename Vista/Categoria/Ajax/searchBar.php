@@ -4,7 +4,7 @@
     $str = $_GET['search'];
 
     $pagina = $_GET['page'];
-    $cantPag = 5;
+    $cantPag = $_GET['cantPag'];
 
     $categoria = new Categoria();
     if($str != "0"){

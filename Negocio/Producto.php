@@ -97,6 +97,74 @@ class Producto{
         return $res;
     }
 
+    /*
+     * Función que busca por paginación y devuelve n objetos de tipo Producto en un array
+     */
+    public function buscarPaginado($pag, $cant){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> ProductoDAO -> buscarPaginado($pag, $cant));
+        $resList = Array();
+        while($res = $this -> Conexion -> extraer()){
+            array_push($resList, new Producto($res[0], $res[1], $res[2], $res[3], $res[4], $res[5]));
+        }
+        $this -> Conexion -> cerrar();
+
+        return $resList;
+    }
+
+    /*
+     * Función que busca por paginación y devuelve la información en un array
+     */
+    public function buscarAPaginado($pag, $cant){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> ProductoDAO -> buscarPaginado($pag, $cant));
+        $resList = Array();
+        while($res = $this -> Conexion -> extraer()){
+            array_push($resList, $res);
+        }
+        $this -> Conexion -> cerrar();
+
+        return $resList;
+    }
+
+    /*
+     * Busca la cantidad de registros sin ningun filtro
+     */
+    public function buscarCantidad(){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> ProductoDAO -> buscarCantidad());
+        $res = $this -> Conexion -> extraer();
+        $this -> Conexion -> cerrar();
+        return $res[0];
+    }
+
+    /*
+     * Función que busca por paginación, filtro de palabra y devuelve la información en un array
+     */
+    public function filtroPaginado($str, $pag, $cant){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> ProductoDAO -> filtroPaginado($str, $pag, $cant));
+        $resList = Array();
+        while($res = $this -> Conexion -> extraer()){
+            array_push($resList, $res);
+        }
+        $this -> Conexion -> cerrar();
+
+        return $resList;
+    }
+
+    /*
+     * Busca la cantidad de registros con filtro de palabra
+     */
+    public function filtroCantidad($str){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> ProductoDAO -> filtroCantidad($str));
+        $res = $this -> Conexion -> extraer();
+        $this -> Conexion -> cerrar();
+
+        return $res[0];
+    }
+
     public function guardarImagen($tempName, $ruta){
         //$ruta = $ruta + rand(0,10000000);
         return  @move_uploaded_file($tempName, $ruta);

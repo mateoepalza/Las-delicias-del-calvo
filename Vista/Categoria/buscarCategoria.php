@@ -7,19 +7,26 @@ $Categoria = new Categoria();
 $resultados = $Categoria->buscarPaginado($pagina, $numReg);
 $cantPag = $Categoria->buscarCantidad();
 $pagination = $cantPag / $numReg;
-echo $pagination;
 ?>
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-8">
+        <div class="col-10">
             <div class="card">
-                <div class="card-header">
-                    Ingrese una nueva categoria
+                <div class="card-header bg-dark d-flex flex-row justify-content-between">
+                    <span class="text-white">Busque una categoria</span>
+                    <select id="select-cantidad">
+                        <option value="5" >5</option>
+                        <option value="10" >10</option>
+                        <option value="15" >15</option>
+                        <option value="25" >25</option>
+                        <option value="50" >50</option>
+                        <option value="100" >100</option>
+                    </select>
                     <input id="search" type="search" placeholder="search">
                 </div>
                 <div class="card-body">
                     <table class="table">
-                        <thead>
+                        <thead class="thead-dark">
                             <tr>
                                 <th>#</th>
                                 <th>Nombre</th>
@@ -73,12 +80,12 @@ echo $pagination;
             json = {
                 "pid": "<?php echo base64_encode("Vista/Categoria/Ajax/searchBar.php") ?>",
                 "page": "1",
+                "cantPag" : $("#select-cantidad").val(),
                 "search": $(this).val()
             };
 
             $.get("indexAJAX.php", json, function(data) {
                 res = JSON.parse(data);
-                console.log(res);
                 // Imprime los datos de la tabla
                 tablePrint(res.DataT);
                 //Imprime la paginación
@@ -92,23 +99,42 @@ echo $pagination;
          */
         
         $(".pagination").on('click', ".page-item-list", function(){
-            alert($(this).data("page"));
             json = {
                 "pid": "<?php echo base64_encode("Vista/Categoria/Ajax/searchBar.php") ?>",
                 "page": $(this).data("page"),
+                "cantPag" : $("#select-cantidad").val(),
                 "search": $("#search").val()
             };
 
             $.get("indexAJAX.php", json, function(data) {
-                console.log(data);
                 res = JSON.parse(data);
-                console.log(res);
                 //imprime los datos en la tabla
                 tablePrint(res.DataT);
                 //Imprime paginación
                 paginationPrint(res.DataP, parseInt(res.Cpage));
             });
         })
+
+        /*
+         * Evento de select (cantidad de registros a mostrar)
+         */
+
+        $("#select-cantidad").on('change', function(){
+            json = {
+                "pid": "<?php echo base64_encode("Vista/Categoria/Ajax/searchBar.php") ?>",
+                "page": "1",
+                "cantPag" : $(this).val(),
+                "search": $("#search").val()
+            };
+            console.log(json);
+            $.get("indexAJAX.php", json, function(data) {
+                res = JSON.parse(data);
+                //imprime los datos en la tabla
+                tablePrint(res.DataT);
+                //Imprime paginación
+                paginationPrint(res.DataP, parseInt(res.Cpage));
+            });
+        });
 
     });
 
@@ -128,9 +154,8 @@ echo $pagination;
     function paginationPrint(cantPag, actualPage){
         $(".page-numbers").remove();
         updateBefore(actualPage-1);
-        console.log("aca : "+cantPag)
         updateNext(actualPage+1, Math.ceil(cantPag));
-        for(let i = 0; i <= cantPag; i++){
+        for(let i = 0; i < cantPag; i++){
             if((i+1) == actualPage){
                 $("#page-next").before("<li class='page-item page-item-list page-numbers active' data-page='" + (i+1) + "'><a class='page-link' href='#'>" + (i+1) + "</a></li>")
             }else{
@@ -155,8 +180,6 @@ echo $pagination;
     }
 
     function updateNext(nextNumber, cantPag){
-        console.log(nextNumber);
-        console.log(cantPag);
         if(nextNumber > cantPag){
             $("#page-next").addClass("disabled");
             $("#page-next").data("page", cantPag); 
