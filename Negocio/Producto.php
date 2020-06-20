@@ -77,7 +77,17 @@ class Producto{
     }
 
     /*Methods*/
-
+    public function getInfo(){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> ProductoDAO -> getInfo());
+        $res = $this -> Conexion -> extraer();
+        $this -> nombre = $res[1];
+        $this -> foto = $res[2];
+        $this -> descripcion = $res[3];
+        $this -> precio = $res[4];
+        $this -> categoria = $res[5];
+        $this -> Conexion -> cerrar();
+    }
     public function insertar(){
         $this -> Conexion -> abrir();
         echo $this -> ProductoDAO -> insertar();

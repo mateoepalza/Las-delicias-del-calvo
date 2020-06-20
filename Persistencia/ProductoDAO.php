@@ -24,6 +24,13 @@ class ProductoDAO{
                 VALUES ('" . $this -> nombre . "', '" . $this -> foto . "', '" . $this -> descripcion . "', '" . $this -> precio . "', '" . $this -> categoria . "')";
     }
 
+    public function getInfo(){
+        return "SELECT idProducto, Producto.nombre, foto, descripcion, precio, Categoria.nombre as categoria 
+                FROM Producto 
+                INNER JOIN Categoria 
+                ON FK_idCategoria = idCategoria 
+                WHERE idProducto = ". $this -> idProducto;
+    }
 }
 
 

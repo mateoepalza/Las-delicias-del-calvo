@@ -30,6 +30,7 @@
             }else if($_SESSION['rol'] == 2){
                 include "Vista/Cliente/navCliente.php";
                 include $pid;
+                include "Vista/Cliente/footerCliente.php";
             }else{
                 include "Vista/Main/mainPage.php";/*Toca cambiarlo*/
             }

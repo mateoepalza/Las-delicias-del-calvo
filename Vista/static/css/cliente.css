@@ -1,6 +1,91 @@
-body{
-    background-color: #fafaf8;
+@font-face {
+    font-family: "futura";
+    src: url("../fonts/Futura_Book_font.ttf");
 }
+
+*{
+    font-family: "futura";
+}
+.product-container{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+.product{
+    padding-bottom: 40px;
+    width: 320px;
+}
+.product-title{
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-top: 20px;
+}
+.product-info{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+}
+.precio-descrip{
+    font-size: 14px;
+    color: #5f5e5e;
+    margin-right: 5px;
+}
+
+.img-producto{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+.navbar-expand-md .collapse ul li a{  
+    font-size: 16px;
+    color: #5d5d5d;
+    letter-spacing: 2px;
+    padding: 20px 20px !important;
+}
+#navMain{
+    background-color: #FFF;
+    top: 0px;
+    position: sticky;
+    z-index: 12;
+}
+#logoImg{
+    padding: 10px;
+    background-image: url('../img/logoB.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-origin: content-box;
+}
+.menu-right{
+    height: 40px;
+}
+.footerClient{
+    padding: 50px 0px;
+    background-color: #f9f9f9;
+}
+.description{
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 20px 10px;
+}
+.description-title{
+    font-size: 55px;
+    letter-spacing: 10px;
+}
+.description-price{
+    font-size: 35px;
+    letter-spacing: 3px;
+}
+.description-desc-title{
+    font-size: 25px;
+    letter-spacing: 2px;
+}
+.description-real-desc-title{
+    letter-spacing: 1px;
+}
+/*
 .navbar{
     position: sticky;
     top: 0px;
@@ -44,4 +129,4 @@ body{
     flex-flow: row wrap;
     justify-content: center;
     background-color: #FFF;
-}
+}*/
