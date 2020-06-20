@@ -27,6 +27,17 @@
                     FROM Categoria";
         }
 
+        public function buscarPaginado($pag, $cant){
+            return "SELECT idCategoria, nombre 
+                    FROM Categoria
+                    LIMIT " . (($pag - 1)*$cant) . ", " . $cant;
+        }
+
+        public function buscarCantidad(){
+            return "SELECT count(*) 
+                    FROM Categoria";
+        }
+
         public function filtro($str){
             return "SELECT idCategoria, nombre 
                     FROM Categoria

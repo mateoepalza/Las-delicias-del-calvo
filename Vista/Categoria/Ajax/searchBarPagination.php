@@ -1,20 +1,13 @@
 <?php 
-
-
     $str = $_GET['search'];
 
-    $pagina = $_GET['page'];
+    $pagina = 1;
     $cantPag = 5;
 
     $categoria = new Categoria();
-    if($str != "0"){
-        $data = $categoria -> filtroPaginado($str, $pagina, $cantPag);
-        $resultado = $categoria -> filtroCantidad($str);
-    }else{
-        $data = $categoria -> buscarAPaginado($pagina, $cantPag);
-        $resultado = $categoria -> buscarCantidad($str);
-    }
-    
+    $data = $categoria -> filtroPaginado($str, $pagina, $cantPag);
+    $resultado = $categoria -> filtroCantidad($str);
+
     $cant = $resultado/$cantPag;
 
     $ajax = Array(

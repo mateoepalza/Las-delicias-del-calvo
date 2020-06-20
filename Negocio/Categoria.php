@@ -68,10 +68,36 @@
             return $resList;
         }
 
-        public function buscarPaginado(){
+        public function buscarPaginado($pag, $cant){
             $this -> Conexion -> abrir();
-            $this -> Conexion -> ejecutar();
+            $this -> Conexion -> ejecutar( $this -> categoriaDAO -> buscarPaginado($pag, $cant));
+            $resList = Array();
+            while($res = $this -> Conexion -> extraer()){
+                array_push($resList, new Categoria($res[0], $res[1]));
+            }
             $this -> Conexion -> cerrar();
+
+            return $resList;
+        }
+
+        public function buscarAPaginado($pag, $cant){
+            $this -> Conexion -> abrir();
+            $this -> Conexion -> ejecutar( $this -> categoriaDAO -> buscarPaginado($pag, $cant));
+            $resList = Array();
+            while($res = $this -> Conexion -> extraer()){
+                array_push($resList, $res);
+            }
+            $this -> Conexion -> cerrar();
+
+            return $resList;
+        }
+
+        public function buscarCantidad(){
+            $this -> Conexion -> abrir();
+            $this -> Conexion -> ejecutar( $this -> categoriaDAO -> buscarCantidad());
+            $res = $this -> Conexion -> extraer();
+            $this -> Conexion -> cerrar();
+            return $res[0];
         }
 
         public function filtro($str){
