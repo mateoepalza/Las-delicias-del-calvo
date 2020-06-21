@@ -8,7 +8,7 @@ $categoria = new Categoria();
 $categorias = $categoria->buscarTodo();
 
 ?>
-<link rel="stylesheet" href="Vista/static/css/cliente.css">
+<link rel="stylesheet" href="static/css/cliente.css">
 <div class="container-fluid bg-white">
     <div class="row" style="height:100px;">
 

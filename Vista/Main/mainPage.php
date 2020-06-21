@@ -1,10 +1,10 @@
-<link rel="stylesheet" href="Vista/static/css/index.css">
-<script type="text/javascript" src="Vista/static/js/index.js"></script>
+<link rel="stylesheet" href="static/css/index.css">
+<script type="text/javascript" src="static/js/index.js"></script>
 <div class="hidden">
     <div class="form">
         <form action="index.php?pid=<?php echo base64_encode("Vista/Auth/autenticar.php") ?>" method="post">
             <div class="d-flex flex-row justify-content-center">
-                <img src="Vista/static/img/logo.png" width=50>
+                <img src="static/img/logo.png" width=50>
             </div>
             <div class="form-group">
                 <label>Email</label>
@@ -45,7 +45,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <a class="navbar-brand" href="#"><img src="Vista/static/img/logo.png" width=50></a>
+        <a class="navbar-brand" href="#"><img src="static/img/logo.png" width=50></a>
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item active">
                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
@@ -73,7 +73,7 @@
         <div class="carousel-item active" style="height: 600px; overflow: hidden">
             <div style="background : rgba(0,0,0,0.5); width : 100%; height : 100%; position: absolute">
             </div>
-            <div class="w-100 h-100" style="background-Image: url('Vista/static/img/bg1.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover"></div>
+            <div class="w-100 h-100" style="background-Image: url('static/img/bg1.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover"></div>
             <div class="carousel-caption d-none d-md-block">
                 <h5>First slide label</h5>
                 <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
@@ -82,7 +82,7 @@
         <div class="carousel-item" style="height: 600px; overflow: hidden">
             <div style="background : rgba(0,0,0,0.5); width : 100%; height : 100%; position: absolute">
             </div>
-            <div class="w-100 h-100" style="background-Image: url('Vista/static/img/bg2.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover"></div>
+            <div class="w-100 h-100" style="background-Image: url('static/img/bg2.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover"></div>
             <div class="carousel-caption d-none d-md-block">
                 <h5>Second slide label</h5>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -91,7 +91,7 @@
         <div class="carousel-item" style="height: 600px; overflow: hidden">
             <div style="background : rgba(0,0,0,0.5); width : 100%; height : 100%; position: absolute">
             </div>
-            <div class="w-100 h-100" style="background-Image: url('Vista/static/img/bg3.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover"></div>
+            <div class="w-100 h-100" style="background-Image: url('static/img/bg3.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover"></div>
             <div class="carousel-caption d-none d-md-block">
                 <h5>Third slide label</h5>
                 <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
@@ -111,7 +111,7 @@
     <div class="row">
         <div class="col-sm-6  col-lg-4 mb-5 d-flex flex-column align-items-center">
             <div class="mb-4 d-flex flex-column justify-content-center align-items-end" style="width : 300px; height: 300px; border-radius: 200px; background: red; overflow: hidden; position: relative">
-                <img src="Vista/static/img/bg3.jpg" height="100%" style="position: absolute">
+                <img src="static/img/bg3.jpg" height="100%" style="position: absolute">
             </div>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ea alias excepturi praesentium iure odit provident dolorum, maiores qui reiciendis nesciunt, dignissimos ratione. Aliquid sapiente et atque fuga libero possimus.</p>
             <div class="d-flex flex-row justify-content-center">
@@ -121,7 +121,7 @@
         <div class="col-sm-6  col-lg-4 mb-5 d-flex flex-column align-items-center">
 
             <div class="mb-4 d-flex flex-column justify-content-center" style="width : 300px; height: 300px; border-radius: 200px; background: red; overflow: hidden; position: relative">
-                <img src="Vista/static/img/bg2.jpg" height="100%" style="position: absolute">
+                <img src="static/img/bg2.jpg" height="100%" style="position: absolute">
             </div>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ea alias excepturi praesentium iure odit provident dolorum, maiores qui reiciendis nesciunt, dignissimos ratione. Aliquid sapiente et atque fuga libero possimus.</p>
             <div class="d-flex flex-row justify-content-center">
@@ -131,7 +131,7 @@
         <div class="col-sm-6  col-lg-4 mb-5 d-flex flex-column align-items-center">
 
             <div class="mb-4 d-flex flex-column justify-content-center" style="width : 300px; height: 300px; border-radius: 200px; background: red; overflow: hidden; position: relative">
-                <img src="Vista/static/img/bg1.jpg" height="100%" style="position: absolute">
+                <img src="static/img/bg1.jpg" height="100%" style="position: absolute">
             </div>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ea alias excepturi praesentium iure odit provident dolorum, maiores qui reiciendis nesciunt, dignissimos ratione. Aliquid sapiente et atque fuga libero possimus.</p>
             <div class="d-flex flex-row justify-content-center">
@@ -140,7 +140,7 @@
         </div>
         <div class="col-sm-6  col-lg-4 mb-5 d-flex flex-column align-items-center">
             <div class="mb-4 d-flex flex-column justify-content-center align-items-end" style="width : 300px; height: 300px; border-radius: 200px; background: red; overflow: hidden; position: relative">
-                <img src="Vista/static/img/bg3.jpg" height="100%" style="position: absolute">
+                <img src="static/img/bg3.jpg" height="100%" style="position: absolute">
             </div>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ea alias excepturi praesentium iure odit provident dolorum, maiores qui reiciendis nesciunt, dignissimos ratione. Aliquid sapiente et atque fuga libero possimus.</p>
             <div class="d-flex flex-row justify-content-center">
@@ -150,7 +150,7 @@
         <div class="col-sm-6  col-lg-4 mb-5 d-flex flex-column align-items-center">
 
             <div class="mb-4 d-flex flex-column justify-content-center" style="width : 300px; height: 300px; border-radius: 200px; background: red; overflow: hidden; position: relative">
-                <img src="Vista/static/img/bg2.jpg" height="100%" style="position: absolute">
+                <img src="static/img/bg2.jpg" height="100%" style="position: absolute">
             </div>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ea alias excepturi praesentium iure odit provident dolorum, maiores qui reiciendis nesciunt, dignissimos ratione. Aliquid sapiente et atque fuga libero possimus.</p>
             <div class="d-flex flex-row justify-content-center">
@@ -160,7 +160,7 @@
         <div class="col-sm-6 col-lg-4 mb-5 d-flex flex-column align-items-center">
 
             <div class="mb-4 d-flex flex-column justify-content-center" style="width : 300px; height: 300px; border-radius: 200px; background: red; overflow: hidden; position: relative">
-                <img src="Vista/static/img/bg1.jpg" height="100%" style="position: absolute">
+                <img src="static/img/bg1.jpg" height="100%" style="position: absolute">
             </div>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ea alias excepturi praesentium iure odit provident dolorum, maiores qui reiciendis nesciunt, dignissimos ratione. Aliquid sapiente et atque fuga libero possimus.</p>
             <div class="d-flex flex-row justify-content-center">

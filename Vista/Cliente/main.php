@@ -16,7 +16,7 @@
         <div class="carousel-item active" style="height: 600px; overflow: hidden">
             <div style="background : rgba(0,0,0,0.5); width : 100%; height : 100%; position: absolute">
             </div>
-            <div class="w-100 h-100" style="background-Image: url('Vista/static/img/bg1.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover"></div>
+            <div class="w-100 h-100" style="background-Image: url('static/img/bg1.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover"></div>
             <div class="carousel-caption d-none d-md-block">
                 <h5>First slide label</h5>
                 <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
@@ -25,7 +25,7 @@
         <div class="carousel-item" style="height: 600px; overflow: hidden">
             <div style="background : rgba(0,0,0,0.5); width : 100%; height : 100%; position: absolute">
             </div>
-            <div class="w-100 h-100" style="background-Image: url('Vista/static/img/bg2.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover"></div>
+            <div class="w-100 h-100" style="background-Image: url('static/img/bg2.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover"></div>
             <div class="carousel-caption d-none d-md-block">
                 <h5>Second slide label</h5>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -34,7 +34,7 @@
         <div class="carousel-item" style="height: 600px; overflow: hidden">
             <div style="background : rgba(0,0,0,0.5); width : 100%; height : 100%; position: absolute">
             </div>
-            <div class="w-100 h-100" style="background-Image: url('Vista/static/img/bg3.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover"></div>
+            <div class="w-100 h-100" style="background-Image: url('static/img/bg3.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover"></div>
             <div class="carousel-caption d-none d-md-block">
                 <h5>Third slide label</h5>
                 <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
@@ -60,7 +60,7 @@
     <div class="row product-container">
         <div class="product">
                 <a href="index.php?pid=<?php echo base64_encode("Vista/Producto/descripProducto.php") ?>&idProducto=1" class="img-producto">
-                    <img src="Vista/static/img/Productos/fresas.png" class="img-fluid img-portfolio img-hover">
+                    <img src="static/img/Productos/fresas.png" class="img-fluid img-portfolio img-hover">
                 </a>
                 <h4 class="product-title">Hamburguesa</h4>
                 <div class="product-info">
@@ -70,7 +70,7 @@
         </div>
         <div class="product">
                 <a href="#" class="img-producto">
-                    <img src="Vista/static/img/Productos/maracuya.png" class="img-fluid img-portfolio img-hover">
+                    <img src="static/img/Productos/maracuya.png" class="img-fluid img-portfolio img-hover">
                 </a>
                 <h4 class="product-title">Hamburguesa</h4>
                 <div class="product-info">
@@ -80,7 +80,7 @@
         </div>
         <div class="product">
                 <a href="#" class="img-producto">
-                    <img src="Vista/static/img/Productos/fresas.png" class="img-fluid img-portfolio img-hover">
+                    <img src="static/img/Productos/fresas.png" class="img-fluid img-portfolio img-hover">
                 </a>
                 <h4 class="product-title">Hamburguesa</h4>
                 <div class="product-info">
@@ -90,7 +90,7 @@
         </div>
         <div class="product">
                 <a href="#" class="img-producto">
-                    <img src="Vista/static/img/Productos/maracuya.png" class="img-fluid img-portfolio img-hover">
+                    <img src="static/img/Productos/maracuya.png" class="img-fluid img-portfolio img-hover">
                 </a>
                 <h4 class="product-title">Hamburguesa</h4>
                 <div class="product-info">
@@ -100,7 +100,7 @@
         </div>
         <div class="product">
                 <a href="#" class="img-producto">
-                    <img src="Vista/static/img/Productos/fresas.png" class="img-fluid img-portfolio img-hover">
+                    <img src="static/img/Productos/fresas.png" class="img-fluid img-portfolio img-hover">
                 </a>
                 <h4 class="product-title">Hamburguesa</h4>
                 <div class="product-info">
@@ -110,7 +110,7 @@
         </div>
         <div class="product">
                 <a href="#" class="img-producto">
-                    <img src="Vista/static/img/Productos/maracuya.png" class="img-fluid img-portfolio img-hover">
+                    <img src="static/img/Productos/maracuya.png" class="img-fluid img-portfolio img-hover">
                 </a>
                 <h4 class="product-title">Hamburguesa</h4>
                 <div class="product-info">

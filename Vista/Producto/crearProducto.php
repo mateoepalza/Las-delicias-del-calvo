@@ -34,14 +34,14 @@ if (isset($_POST['sent'])) {
         $tipo = $_FILES['archivo']['type'];
         $tamano = $_FILES['archivo']['size'];
         $temp = $_FILES['archivo']['tmp_name'];
-        $url = 'Vista/static/img/Productos/' . $archivo;
+        $url = 'static/img/Productos/' . $archivo;
     
         if (!((strpos($tipo, "gif") || strpos($tipo, "jpeg") || strpos($tipo, "jpg") || strpos($tipo, "png")) && ($tamano < 9000000))) {
             $class = "alert-danger";
             $msj = "El tipo de archivo no es valido o el tamañano es demasiado grande";
         }else{
             if (move_uploaded_file($temp, $url)) {
-                chmod('Vista/static/img/Productos/' . $archivo, 0777);
+                chmod('static/img/Productos/' . $archivo, 0777);
                 $producto = new Producto("", $nombre, $url, $descripcion, $precio, $categoria);
                 $resInsert = $producto -> insertar();
                 if($resInsert == 1){

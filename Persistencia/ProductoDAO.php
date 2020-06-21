@@ -53,10 +53,21 @@ class ProductoDAO{
     }
     
     public function getInfo(){
-        return "SELECT idProducto, Producto.nombre, foto, descripcion, precio, Categoria.nombre as categoria 
+        return "SELECT idProducto, Producto.nombre, foto, descripcion, precio, Categoria.idCategoria, Categoria.nombre as categoria 
                 FROM Producto 
                 INNER JOIN Categoria 
                 ON FK_idCategoria = idCategoria 
+                WHERE idProducto = ". $this -> idProducto;
+    }
+
+    public function actualizarProducto(){
+        return "UPDATE producto
+                SET 
+                    nombre = '". $this -> nombre ."',
+                    foto = '". $this -> foto ."',
+                    descripcion = '". $this -> descripcion ."',
+                    precio = ". $this -> precio .",
+                    FK_idCategoria =". $this -> categoria. "
                 WHERE idProducto = ". $this -> idProducto;
     }
 }

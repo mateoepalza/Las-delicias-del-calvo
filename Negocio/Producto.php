@@ -85,9 +85,22 @@ class Producto{
         $this -> foto = $res[2];
         $this -> descripcion = $res[3];
         $this -> precio = $res[4];
+        $this -> categoria = $res[6];
+        $this -> Conexion -> cerrar();
+    }
+
+    public function getInfoBasic(){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> ProductoDAO -> getInfo());
+        $res = $this -> Conexion -> extraer();
+        $this -> nombre = $res[1];
+        $this -> foto = $res[2];
+        $this -> descripcion = $res[3];
+        $this -> precio = $res[4];
         $this -> categoria = $res[5];
         $this -> Conexion -> cerrar();
     }
+
     public function insertar(){
         $this -> Conexion -> abrir();
         echo $this -> ProductoDAO -> insertar();
@@ -169,7 +182,19 @@ class Producto{
         //$ruta = $ruta + rand(0,10000000);
         return  @move_uploaded_file($tempName, $ruta);
     }
+    
+    /*
+     * Actualizar el producto
+     */
 
+    public function actualizarProducto(){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> ProductoDAO -> actualizarProducto());
+        $res = $this -> Conexion -> filasAfectadas();
+        var_dump($res);
+        $this -> Conexion -> cerrar();
+        return $res;
+    }
 }
 
 
