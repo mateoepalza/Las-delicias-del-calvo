@@ -111,6 +111,36 @@ class Producto{
     }
 
     /*
+     * Función que busca los productos destacados
+     */
+    public function getDestProducts(){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> ProductoDAO -> getDestProducts());
+        $resList = array();
+        while($res = $this -> Conexion -> extraer()){
+            array_push($resList, new Producto($res[0], $res[1], $res[2], "",  $res[3]));
+        }
+        $this -> Conexion -> cerrar();
+
+        return $resList;
+    }
+
+    /*
+     * Productos por categoria
+     */
+
+    public function getProductsByCategory($category){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> ProductoDAO -> getProductsByCategory($category));
+        $resList = array();
+        while($res = $this -> Conexion -> extraer()){
+            array_push($resList, new Producto($res[0], $res[1], $res[2], "",  $res[3]));
+        }
+        $this -> Conexion -> cerrar();
+        return $resList;
+    }
+
+    /*
      * Función que busca por paginación y devuelve n objetos de tipo Producto en un array
      */
     public function buscarPaginado($pag, $cant){
@@ -177,6 +207,7 @@ class Producto{
 
         return $res[0];
     }
+
 
     public function guardarImagen($tempName, $ruta){
         //$ruta = $ruta + rand(0,10000000);

@@ -24,6 +24,26 @@ class ProductoDAO{
                 VALUES ('" . $this -> nombre . "', '" . $this -> foto . "', '" . $this -> descripcion . "', '" . $this -> precio . "', '" . $this -> categoria . "')";
     }
 
+    /*
+     * Función que busca los productos destacados
+     */
+    public function getDestProducts(){
+        return "SELECT idProducto, nombre, foto, precio
+                FROM producto
+                LIMIT 0, 10";
+    }
+
+    /*
+     * 
+     */
+
+    public function getProductsByCategory($category){
+        return "SELECT idProducto, nombre, foto, precio
+                FROM producto
+                WHERE FK_idCategoria = " . $category . "
+                LIMIT 0, 15";
+    }
+
     public function buscarPaginado($pag, $cant){
         return "SELECT idProducto, Producto.nombre, foto, descripcion, precio,  Categoria.nombre as categoria 
                 FROM Producto 
