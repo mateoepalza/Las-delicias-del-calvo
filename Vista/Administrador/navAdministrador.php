@@ -13,7 +13,7 @@ $admin->getInfoBasic();
 
     <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Productos
                 </a>
@@ -31,8 +31,15 @@ $admin->getInfoBasic();
             <li class="nav-item">
                 <a class="nav-link" href="#">Proveedores</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Seguridad
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Security/buscarCliente.php") ?>">Clientes</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/") ?>">Proveedores</a>
+                </div>
             </li>
         </ul>
         <div>
@@ -41,3 +48,6 @@ $admin->getInfoBasic();
         </div>
     </div>
 </nav>
+<div id="alert-ajax">
+
+</div>

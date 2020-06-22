@@ -5,7 +5,17 @@
     if(isset($_POST['sent'])){
         $nombre = $_POST['nombre'];
         $categoria = new Categoria("", $nombre);
-        $categoria -> insertar();
+        $res = $categoria -> insertar();
+
+        if($res == 1){
+            $msj = "La categoria se ha creado satisfactoriamente";
+            $class = "alert-success";
+        }else{
+            $msj = "Ocurrió algo inesperado, intente de nuevo.";
+            $class = "alert-danger";
+        }
+
+        include "Vista/Main/error.php";
     }
 ?>
 

@@ -103,7 +103,6 @@ class Producto{
 
     public function insertar(){
         $this -> Conexion -> abrir();
-        echo $this -> ProductoDAO -> insertar();
         $this -> Conexion -> ejecutar( $this -> ProductoDAO -> insertar() );
         $res = $this -> Conexion -> filasAfectadas();
         $this -> Conexion -> cerrar();

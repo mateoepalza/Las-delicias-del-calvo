@@ -33,4 +33,35 @@ class ClienteDAO{
         FROM cliente ";
 
     }
+
+    public function buscarPaginado($pag, $cant){
+        return "SELECT idCliente, nombre, apellido, email, clave, foto, estado, activation 
+                FROM Cliente
+                LIMIT " . (($pag - 1)*$cant) . ", " . $cant;
+    }
+
+    public function buscarCantidad(){
+        return "SELECT count(*) 
+                FROM Cliente";
+    }
+
+    public function filtroPaginado($str, $pag, $cant){
+        return "SELECT idCliente, nombre, apellido, email, estado 
+                FROM Cliente 
+                WHERE Cliente.nombre like '%". $str ."%' OR Cliente.apellido like '%" . $str . "%' OR Cliente.email like '%" . $str . "%'
+                LIMIT " . (($pag - 1)*$cant) . ", " . $cant;
+    }
+
+    public function filtroCantidad($str){
+        return "SELECT count(*) 
+                FROM Cliente
+                WHERE Cliente.nombre like '%" . $str . "%'";
+    }
+
+    public function updateEstado(){
+        return "UPDATE Cliente
+                SET
+                    estado = ". $this -> estado . "
+                WHERE idCliente = " . $this -> idCliente;
+    }
 }

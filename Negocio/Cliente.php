@@ -114,6 +114,85 @@ class Cliente{
         $this -> conexion -> cerrar();
     }
 
+    /*
+     * Función que busca por paginación y devuelve n objetos de tipo Producto en un array
+     */
+    public function buscarPaginado($pag, $cant){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar( $this -> ClienteDAO -> buscarPaginado($pag, $cant));
+        $resList = Array();
+        while($res = $this -> conexion -> extraer()){
+            array_push($resList, new Cliente($res[0], $res[1], $res[2], $res[3], $res[4], $res[5], $res[6]));
+        }
+        $this -> conexion -> cerrar();
+
+        return $resList;
+    }
+
+    /*
+     * Busca la cantidad de registros sin ningun filtro
+     */
+    public function buscarCantidad(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar( $this -> ClienteDAO -> buscarCantidad());
+        $res = $this -> conexion -> extraer();
+        $this -> conexion -> cerrar();
+        return $res[0];
+    }
+
+    /*
+     * Función que busca por paginación, filtro de palabra y devuelve la información en un array
+     */
+    public function filtroPaginado($str, $pag, $cant){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar( $this -> ClienteDAO -> filtroPaginado($str, $pag, $cant));
+        $resList = Array();
+        while($res = $this -> conexion -> extraer()){
+            array_push($resList, $res);
+        }
+        $this -> conexion -> cerrar();
+
+        return $resList;
+    }
+
+    /*
+     * Busca la cantidad de registros con filtro de palabra
+     */
+    public function filtroCantidad($str){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar( $this -> ClienteDAO -> filtroCantidad($str));
+        $res = $this -> conexion -> extraer();
+        $this -> conexion -> cerrar();
+
+        return $res[0];
+    }
+
+    /*
+     * Función que busca por paginación y devuelve la información en un array
+     */
+    public function buscarAPaginado($pag, $cant){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar( $this -> ClienteDAO -> buscarPaginado($pag, $cant));
+        $resList = Array();
+        while($res = $this -> conexion -> extraer()){
+            array_push($resList, $res);
+        }
+        $this -> conexion -> cerrar();
+
+        return $resList;
+    }
+
+    /*
+     * Función que actualiza el estado de un cliente
+     */
+    public function updateEstado(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar( $this -> ClienteDAO -> updateEstado());
+        $res = $this -> conexion -> filasAfectadas();
+        $this -> conexion -> cerrar();
+        return $res;
+    }
+
     public function getInfoBasic(){
 
         $this -> conexion -> abrir();
