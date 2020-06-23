@@ -29,7 +29,7 @@ if(isset($_POST['carrito'])){
 }
 
 $cliente = new Cliente($_SESSION['id']);
-$cliente->getInfoBasic();
+$cliente -> getInfoBasic();
 
 $categoria = new Categoria();
 $categorias = $categoria->buscarTodo();
@@ -74,7 +74,7 @@ $categorias = $categoria->buscarTodo();
                 foreach($categorias as $cate){
                     ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?pid=<?php echo base64_encode("Vista/cliente/categorias.php") ?>&idCategoria=<?php echo $cate -> getIdCategoria() ?>"><?php echo $cate -> getNombre() ?></a>
+                        <a class="nav-link" href="index.php?pid=<?php echo base64_encode("Vista/Producto/categorias.php") ?>&idCategoria=<?php echo $cate -> getIdCategoria() ?>"><?php echo $cate -> getNombre() ?></a>
                     </li>
                     <?php
                 }

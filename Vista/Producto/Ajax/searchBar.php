@@ -12,7 +12,7 @@
         $resultado = $producto -> filtroCantidad($str);
     }else{
         $data = $producto -> buscarAPaginado($pagina, $cantPag);
-        $resultado = $producto -> buscarCantidad($str);
+        $resultado = $producto -> buscarCantidad();
     }
     
     $cant = $resultado/$cantPag;

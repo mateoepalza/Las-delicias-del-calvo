@@ -141,6 +141,21 @@ class Producto{
     }
 
     /*
+     * Productos por categoria paginado
+     */
+
+    public function getProductsByCategoryPaginado($category, $pagina, $numReg){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> ProductoDAO -> getProductsByCategoryPaginado($category, $pagina, $numReg));
+        $resList = array();
+        while($res = $this -> Conexion -> extraer()){
+            array_push($resList, new Producto($res[0], $res[1], $res[2], "",  $res[3]));
+        }
+        $this -> Conexion -> cerrar();
+        return $resList;
+    }
+
+    /*
      * Función que busca por paginación y devuelve n objetos de tipo Producto en un array
      */
     public function buscarPaginado($pag, $cant){
@@ -171,11 +186,39 @@ class Producto{
     }
 
     /*
+     * ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+     */
+
+    public function buscarAPaginadoByCategory($category, $pagina, $cantPag){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> ProductoDAO -> buscarPaginadoByCategory($category, $pag, $cant));
+        $resList = Array();
+        while($res = $this -> Conexion -> extraer()){
+            array_push($resList, $res);
+        }
+        $this -> Conexion -> cerrar();
+
+        return $resList;
+    }
+
+    /*
      * Busca la cantidad de registros sin ningun filtro
      */
     public function buscarCantidad(){
         $this -> Conexion -> abrir();
         $this -> Conexion -> ejecutar( $this -> ProductoDAO -> buscarCantidad());
+        $res = $this -> Conexion -> extraer();
+        $this -> Conexion -> cerrar();
+        return $res[0];
+    }
+
+    /*
+     * Buscar la cantidad de productos de una categoria especifica 
+     */
+
+    public function buscarCantidadByCategory($category){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> ProductoDAO -> buscarCantidadByCategory($category));
         $res = $this -> Conexion -> extraer();
         $this -> Conexion -> cerrar();
         return $res[0];
@@ -197,11 +240,36 @@ class Producto{
     }
 
     /*
+     * Función que busca por paginación, filtro de palabra en una categoria en especifico, devuelve la información en un array
+     */
+
+    public function filtroPaginadoByCategoria($category, $str, $pag, $cant){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> ProductoDAO -> filtroPaginadoByCategoria($category, $str, $pag, $cant));
+        $resList = Array();
+        while($res = $this -> Conexion -> extraer()){
+            array_push($resList, $res);
+        }
+        $this -> Conexion -> cerrar();
+
+        return $resList;
+    }
+
+    /*
      * Busca la cantidad de registros con filtro de palabra
      */
     public function filtroCantidad($str){
         $this -> Conexion -> abrir();
         $this -> Conexion -> ejecutar( $this -> ProductoDAO -> filtroCantidad($str));
+        $res = $this -> Conexion -> extraer();
+        $this -> Conexion -> cerrar();
+
+        return $res[0];
+    }
+
+    public function filtroCantidadByCategoria($category, $str){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> ProductoDAO -> filtroCantidadByCategoria($category, $str));
         $res = $this -> Conexion -> extraer();
         $this -> Conexion -> cerrar();
 
@@ -222,9 +290,38 @@ class Producto{
         $this -> Conexion -> abrir();
         $this -> Conexion -> ejecutar( $this -> ProductoDAO -> actualizarProducto());
         $res = $this -> Conexion -> filasAfectadas();
-        var_dump($res);
         $this -> Conexion -> cerrar();
         return $res;
+    }
+
+    /*
+     * Busca todos los productos por medio de su id y devuelve los objetos en forma de lista
+     */
+    public function searchCarritoItems($lista){
+        $this -> Conexion -> abrir();
+
+        $resList = array();
+
+        foreach($lista as $item){
+            $this -> Conexion -> ejecutar( $this -> ProductoDAO -> searchItemById($item[0]));
+            $res = $this -> Conexion -> extraer();
+            array_push($resList, array(new Producto($res[0], $res[1], $res[2], $res[3], $res[4]), $item[1]));
+        }
+        $this -> Conexion -> cerrar();
+
+        return $resList;
+    }
+
+    /*
+     * Hace el valor total de los productos que se encuentran en el carrito
+     */
+    public function getTotalPrice($lista){
+        $suma = 0;
+        foreach($lista as $prod){
+            $suma += ($prod[0] -> getPrecio() * $prod[1]);
+        }
+
+        return $suma;
     }
 }
 

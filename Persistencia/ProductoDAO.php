@@ -24,24 +24,24 @@ class ProductoDAO{
                 VALUES ('" . $this -> nombre . "', '" . $this -> foto . "', '" . $this -> descripcion . "', '" . $this -> precio . "', '" . $this -> categoria . "')";
     }
 
-    /*
-     * Función que busca los productos destacados
-     */
     public function getDestProducts(){
         return "SELECT idProducto, nombre, foto, precio
                 FROM producto
                 LIMIT 0, 10";
     }
 
-    /*
-     * 
-     */
-
     public function getProductsByCategory($category){
         return "SELECT idProducto, nombre, foto, precio
                 FROM producto
                 WHERE FK_idCategoria = " . $category . "
                 LIMIT 0, 15";
+    }
+
+    public function getProductsByCategoryPaginado($category, $pag, $cant){
+        return "SELECT idProducto, nombre, foto, precio
+                FROM producto
+                WHERE FK_idCategoria = " . $category . "
+                LIMIT " . (($pag - 1)*$cant) . ", " . $cant;
     }
 
     public function buscarPaginado($pag, $cant){
@@ -52,9 +52,22 @@ class ProductoDAO{
                 LIMIT " . (($pag - 1)*$cant) . ", " . $cant;
     }
 
+    public function buscarPaginadoByCategory($category, $pag, $cant){
+        return "SELECT idProducto, Producto.nombre, foto, descripcion, precio,  Categoria.nombre as categoria 
+                FROM Producto 
+                WHERE FK_idCategoria = " . $category . "
+                LIMIT " . (($pag - 1)*$cant) . ", " . $cant;
+    }
+
     public function buscarCantidad(){
         return "SELECT count(*) 
                 FROM Producto";
+    }
+
+    public function buscarCantidadByCategory($category){
+        return "SELECT count(*) 
+                FROM Producto
+                WHERE FK_idCategoria = " . $category;
     }
 
     public function filtroPaginado($str, $pag, $cant){
@@ -66,10 +79,23 @@ class ProductoDAO{
                 LIMIT " . (($pag - 1)*$cant) . ", " . $cant;
     }
 
+    public function filtroPaginadoByCategoria($category, $str, $pag, $cant){
+        return "SELECT idProducto, nombre, foto, precio
+                FROM Producto 
+                WHERE Producto.nombre like '%". $str ."%' AND FK_idCategoria = " . $category . "
+                LIMIT " . (($pag - 1)*$cant) . ", " . $cant;
+    }
+
     public function filtroCantidad($str){
         return "SELECT count(*) 
                 FROM Producto
                 WHERE nombre like '%" . $str . "%'";
+    }
+
+    public function filtroCantidadByCategoria($category, $str){
+        return "SELECT count(*) 
+                FROM Producto
+                WHERE nombre like '%" . $str . "%' AND FK_idCategoria = " . $category . "";
     }
     
     public function getInfo(){
@@ -89,6 +115,11 @@ class ProductoDAO{
                     precio = ". $this -> precio .",
                     FK_idCategoria =". $this -> categoria. "
                 WHERE idProducto = ". $this -> idProducto;
+    }
+    public function searchItemById($idProducto){
+        return "SELECT idProducto, nombre, foto, descripcion, precio
+                FROM Producto
+                WHERE idProducto = " . $idProducto;
     }
 }
 

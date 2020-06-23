@@ -135,7 +135,7 @@ $pagination = $cantPag / $numReg;
             $.get("indexAJAX.php", json, function(data) {
                 res = JSON.parse(data);
                 //imprime los datos en la tabla
-                tablePrint(res.DataT);
+                tablePrint(res.DataT, res.DataL);
                 //Imprime paginación
                 paginationPrint(res.DataP, parseInt(res.Cpage));
             });
@@ -146,11 +146,11 @@ $pagination = $cantPag / $numReg;
     /*
      * Imprime los datos en la tabla
      */
-    function tablePrint(DataT) {
+    function tablePrint(DataT, DataL) {
         $("#tabla").empty();
 
         DataT.forEach(function(data) {
-            $("#tabla").append("<tr><td>" + data[0] + "</td><td>" + data[1] + "</td><td>"+ data[2] +"</td><td>"+ data[3] +"</td><td><a href='index.php?pid=" + res.DataL + "&idProducto=" + data[0] + "'><i class='far fa-edit'></i></a></td></tr>")
+            $("#tabla").append("<tr><td>" + data[0] + "</td><td>" + data[1] + "</td><td>"+ data[2] +"</td><td>"+ data[3] +"</td><td><a href='index.php?pid=" + DataL + "&idProducto=" + data[0] + "'><i class='far fa-edit'></i></a></td></tr>")
         });
     }
     /*

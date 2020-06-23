@@ -30,7 +30,8 @@ class ClienteDAO{
     public function getInfoBasic(){
 
         return "SELECT idCliente, nombre, apellido, email, clave, foto, estado 
-        FROM cliente ";
+        FROM cliente 
+        WHERE idCliente = ". $this -> idCliente;
 
     }
 }
