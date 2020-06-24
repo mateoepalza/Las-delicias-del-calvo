@@ -36,5 +36,12 @@ class IngredienteProductoDAO{
         return "INSERT INTO IngredienteProducto (FK_idProducto, FK_idIngrediente, cantidad)
                 VALUES ('" . $this -> producto . "','" . $this -> ingrediente . "','" . $this -> cantidad ."')";
     }
+
+    public function actualizar(){
+        return "UPDATE IngredienteProducto 
+                SET
+                    cantidad = '" . $this -> cantidad . "'
+                WHERE FK_idProducto = '" . $this -> producto . "' AND FK_idIngrediente = '" . $this -> ingrediente . "'";
+    }
 }
 ?>

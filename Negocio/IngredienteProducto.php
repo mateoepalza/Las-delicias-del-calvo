@@ -98,6 +98,18 @@ class IngredienteProducto{
         $this -> Conexion -> cerrar();
         return $res;
     }
+
+    /*
+     * Actualiza el producto en la base de datos
+     */
+    public function actualizar(){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> IngredienteProductoDAO -> actualizar() );
+        $res = $this -> Conexion -> filasAfectadas();
+        $this -> Conexion -> cerrar();
+        return $res;
+    }
+
 }
 
 ?>

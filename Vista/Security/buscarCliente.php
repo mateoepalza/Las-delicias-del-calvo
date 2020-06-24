@@ -225,7 +225,7 @@ $pagination = $cantPag / $numReg;
             className = "alert-danger";
         }
 
-        $("#alert-ajax").html(`<div class="alert ${className} alert-dismissible fade show" role="alert">
+        $("#alert-ajax").html(`<div class="alert ${className} alert-dismissible fade show" role="alert" style="text-align: center; position: fixed; width: 100%;">
                         <span id="alert-ajax-msj">${msj}</span>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
