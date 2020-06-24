@@ -7,6 +7,7 @@
     $cantPag = $_GET['cantPag'];
 
     $categoria = new Categoria();
+
     if($str != "0"){
         $data = $categoria -> filtroPaginado($str, $pagina, $cantPag);
         $resultado = $categoria -> filtroCantidad($str);

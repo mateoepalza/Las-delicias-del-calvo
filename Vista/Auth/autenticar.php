@@ -15,7 +15,7 @@
         if($clien -> getEstado() == 1){
             $_SESSION['id'] = $clien -> getIdCliente();
             $_SESSION['rol'] = 2;
-            echo "Entraaa";
+            $_SESSION['carrito'] = array();
             header('Location: index.php?pid='. base64_encode('Vista/Cliente/main.php'));
         }else if($clien -> getEstado() == -1){
             header('Location: index.php?error=2');

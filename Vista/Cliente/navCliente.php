@@ -1,8 +1,35 @@
 <?php
 
-$cliente = new Cliente($_SESSION['id']);
 
-$cliente->getInfoBasic();
+
+if(isset($_POST['carrito'])){
+
+    $idProducto = $_GET['idProducto'];
+    $cantProd = $_POST['cantidad'];
+    $bool = true;
+    $pos = 0;
+
+    for($i = 0; $i < count($_SESSION['carrito']); $i++){
+        if($_SESSION['carrito'][$i][0] == $idProducto){
+            $bool = false;
+            $pos = $i;
+        }
+    }
+
+    if($bool){
+        $carrito = array($idProducto, $cantProd);
+        array_push($_SESSION['carrito'], $carrito);
+    }else{
+        $_SESSION['carrito'][$pos][1] = $cantProd; 
+    }
+
+    $msj = "El producto ha sido añadido correctamente al carrito.";
+    $class = "alert-success";
+    include "Vista/Main/error.php";
+}
+
+$cliente = new Cliente($_SESSION['id']);
+$cliente -> getInfoBasic();
 
 $categoria = new Categoria();
 $categorias = $categoria->buscarTodo();
@@ -31,33 +58,11 @@ $categorias = $categoria->buscarTodo();
                 </div>
             </div>
             <div class="menu-right">
-                <a class="btn btn-outline-light" style="border:0px;"><i class="fas fa-cart-arrow-down"></i></a>    
+                <a class="btn btn-outline-light" style=" color: #000; border:0px;" href="index.php?pid=<?php echo base64_encode('Vista/Cliente/checkout.php') ?>"><i class="fas fa-cart-arrow-down"><?php echo (count($_SESSION['carrito']) > 0)? "<span class='num-products'>" . count($_SESSION['carrito']) . "</span>": ""; ?></i></a>    
             </div>
             <div class="menu-right">
                 <a class="btn btn-outline-primary" style="border:0px;" href="index.php?cerrarSesion=True"><i class="fas fa-sign-out-alt"></i></a>    
             </div>
-            
-            
-            
-            <!--<ul class="navbar-nav mr-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <?php echo ($cliente->getNombre() != "") ? $cliente->getNombre() . " " . $cliente->getApellido() : $cliente->getCorreo(); ?>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="btn btn-outline-light" style="border:0px;"><i class="fas fa-cart-arrow-down"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a class="btn btn-outline-primary" style="border:0px;" href="index.php?cerrarSesion=True"><i class="fas fa-sign-out-alt"></i></a>
-                </li>
-            </ul>-->
         </div>
     </div>
 
@@ -69,7 +74,7 @@ $categorias = $categoria->buscarTodo();
                 foreach($categorias as $cate){
                     ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?pid=<?php echo base64_encode("") ?>&idCategoria=<?php $cate -> getIdCategoria() ?>"><?php echo $cate -> getNombre() ?></a>
+                        <a class="nav-link" href="index.php?pid=<?php echo base64_encode("Vista/Producto/categorias.php") ?>&idCategoria=<?php echo $cate -> getIdCategoria() ?>"><?php echo $cate -> getNombre() ?></a>
                     </li>
                     <?php
                 }
