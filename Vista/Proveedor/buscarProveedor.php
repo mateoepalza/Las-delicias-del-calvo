@@ -3,9 +3,9 @@
 $pagina = 1;
 $numReg = 5;
 
-$Producto = new Producto();
-$resultados = $Producto -> buscarPaginado($pagina, $numReg);
-$cantPag = $Producto -> buscarCantidad();
+$Proveedor = new Proveedor();
+$resultados = $Proveedor -> buscarPaginado($pagina, $numReg);
+$cantPag = $Proveedor -> buscarCantidad();
 $pagination = $cantPag / $numReg;
 ?>
 <div class="container mt-5">
@@ -13,9 +13,9 @@ $pagination = $cantPag / $numReg;
         <div class="col-10">
             <div class="card">
                 <div class="card-header bg-dark d-flex flex-row justify-content-between">
-                    <span class="text-white">Busque un producto</span>
+                    <span class="text-white">Busque un proveedor</span>
                     <select id="select-cantidad">
-                        <option value="5" >5</option>
+                        <option value="5" selected>5</option>
                         <option value="10" >10</option>
                         <option value="15" >15</option>
                         <option value="25" >25</option>
@@ -28,10 +28,10 @@ $pagination = $cantPag / $numReg;
                     <table class="table">
                         <thead class="thead-dark">
                             <tr>
-                                <th>#</th>
+                                <th>nit</th>
                                 <th>Nombre</th>
-                                <th>Precio</th>
-                                <th>Categoria</th>
+                                <th>Telefono</th>
+                                <th>Dirección</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -39,11 +39,11 @@ $pagination = $cantPag / $numReg;
                             <?php
                             foreach ($resultados as $resultado) {
                                 echo "<tr>";
-                                echo "<td>" . $resultado -> getIdProducto() . "</td>";
+                                echo "<td>" . $resultado -> getNit() . "</td>";
                                 echo "<td>" . $resultado -> getNombre() . "</td>";
-                                echo "<td>" . $resultado -> getPrecio() . "</td>";
-                                echo "<td>" . $resultado -> getCategoria() . "</td>";
-                                echo "<td style='display: flex; flex-flow: row; justify-content: center; align-items:center;'><a href='index.php?pid=" . base64_encode("Vista/Producto/actualizarProducto.php") . "&idProducto=" . $resultado->getIdProducto() . "' style='margin: 0px 2px;'><i class='far fa-edit'></i></a><a href='index.php?pid=" . base64_encode("Vista/IngredienteProducto/adicionarIngrediente.php") . "&idProducto=" . $resultado->getIdProducto() . "' style='margin: 0px 2px;'><i class='far fa-plus-square'></i></a></td>";
+                                echo "<td>" . $resultado -> getTelefono() . "</td>";
+                                echo "<td>" . $resultado -> getDireccion() . "</td>";
+                                echo "<td><a href='index.php?pid=" . base64_encode("Vista/Proveedor/actualizarProveedor.php") . "&idProveedor=" . $resultado -> getIdProveedor() . "'><i class='far fa-edit'></i></a></td>";
                                 echo "</tr>";
                             }
                             ?>
@@ -82,7 +82,7 @@ $pagination = $cantPag / $numReg;
 
         $("#search").on('keyup', function() {
             json = {
-                "pid": "<?php echo base64_encode("Vista/Producto/Ajax/searchBar.php") ?>",
+                "pid": "<?php echo base64_encode("Vista/Proveedor/Ajax/searchBar.php") ?>",
                 "page": "1",
                 "cantPag" : $("#select-cantidad").val(),
                 "search": $(this).val()
@@ -105,13 +105,14 @@ $pagination = $cantPag / $numReg;
         
         $(".pagination").on('click', ".page-item-list", function(){
             json = {
-                "pid": "<?php echo base64_encode("Vista/Producto/Ajax/searchBar.php") ?>",
+                "pid": "<?php echo base64_encode("Vista/Proveedor/Ajax/searchBar.php") ?>",
                 "page": $(this).data("page"),
                 "cantPag" : $("#select-cantidad").val(),
                 "search": $("#search").val()
             };
 
             $.get("indexAJAX.php", json, function(data) {
+                console.log(data);
                 res = JSON.parse(data);
                 //imprime los datos en la tabla
                 tablePrint(res.DataT, res.DataL);
@@ -126,12 +127,11 @@ $pagination = $cantPag / $numReg;
 
         $("#select-cantidad").on('change', function(){
             json = {
-                "pid": "<?php echo base64_encode("Vista/Producto/Ajax/searchBar.php") ?>",
+                "pid": "<?php echo base64_encode("Vista/Proveedor/Ajax/searchBar.php") ?>",
                 "page": "1",
                 "cantPag" : $(this).val(),
                 "search": $("#search").val()
             };
-            console.log(json);
             $.get("indexAJAX.php", json, function(data) {
                 res = JSON.parse(data);
                 //imprime los datos en la tabla
@@ -150,7 +150,7 @@ $pagination = $cantPag / $numReg;
         $("#tabla").empty();
 
         DataT.forEach(function(data) {
-            $("#tabla").append("<tr><td>" + data[0] + "</td><td>" + data[1] + "</td><td>"+ data[2] +"</td><td>"+ data[3] +"</td><td style='display: flex; flex-flow: row; justify-content: center; align-items:center;'><a href='index.php?pid=" + DataL[0] + "&idProducto=" + data[0] + "' style='margin: 0px 2px;'><i class='far fa-edit'></i></a><a href='index.php?pid=" + DataL[1] + "&idProducto=" + data[0] + "' style='margin: 0px 2px;'><i class='far fa-plus-square'></i></a></td></tr>")
+            $("#tabla").append(`<tr><td>${data[1]}</td><td>${data[2]}</td><td>${data[3]}</td><td>${data[4]}</td><td><a href='index.php?pid=${DataL}&idProveedor=${data[0]}'><i class='far fa-edit'></i></a></td></tr>`)
         });
     }
     /*

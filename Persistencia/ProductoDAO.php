@@ -70,6 +70,7 @@ class ProductoDAO{
                     FK_idCategoria =". $this -> categoria. "
                 WHERE idProducto = ". $this -> idProducto;
     }
+
 }
 
 

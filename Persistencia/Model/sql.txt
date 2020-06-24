@@ -20,12 +20,6 @@ create table Cliente(
     activation varchar(50),
     primary key(idCliente)
 );
-create table fotoProducto(
-    idFotoProducto varchar(100) not null,
-    FK_idProducto int not null,
-    primary key(idFotoProducto, FK_idProducto),
-    Foreign Key (FK_idProducto) references Producto(idProducto)
-);
 create table Categoria(
     idCategoria int not null auto_increment,
     nombre varchar(50) not null,
@@ -41,17 +35,33 @@ create table Producto(
     primary key(idProducto),
     Foreign key (FK_idCategoria) references Categoria(idCategoria)
 );
-create table ingredientes(
+
+create table Proveedor(
+    idProveedor int not null auto_increment,
+    nit bigint unique not null,
+    nombre varchar(50) not null,
+    telefono int not null,
+    direccion varchar(100) not null,
+    primary key(idProveedor)
+);
+
+create table Ingrediente(
     idIngrediente int not null auto_increment,
     nombre varchar(50) not null,
-    primary key(idIngrediente)
+    cantidad int not null,
+    FK_idProveedor int not null,
+    primary key(idIngrediente),
+    Foreign key (FK_idProveedor) references Proveedor(idProveedor)
 );
-create table ProductoIngrediente(
+
+create table IngredienteProducto(
     FK_idProducto int not null,
     FK_idIngrediente int not null,
-    primary key(FK_idProducto, FK_idIngrediente)
+    cantidad int not null,
+    primary key(FK_idProducto, FK_idIngrediente),
+    Foreign key (FK_idProducto) references Producto(idProducto),
+    Foreign key (FK_idIngrediente) references Ingrediente(idIngrediente)
 );
-insert into Cliente (nombre, apellido, email, clave, estado) values ('Juanito', 'Perez', '456@456', md5('456'), -1);
 
 Ala
 aceites

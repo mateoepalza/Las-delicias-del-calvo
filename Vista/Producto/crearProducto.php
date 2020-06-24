@@ -65,6 +65,7 @@ $categoria = new Categoria();
 
 $resultados = $categoria->buscarTodo();
 
+
 ?>
 
 <div class="container mt-5">

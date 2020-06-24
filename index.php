@@ -6,6 +6,9 @@
     require_once "Negocio/Cliente.php";
     require_once "Negocio/Categoria.php";
     require_once "Negocio/Producto.php";
+    require_once "Negocio/Proveedor.php";
+    require_once "Negocio/Ingrediente.php";
+    require_once "Negocio/IngredienteProducto.php";
     
     $pid = null;
 

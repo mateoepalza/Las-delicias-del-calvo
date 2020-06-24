@@ -3,9 +3,9 @@
 $pagina = 1;
 $numReg = 5;
 
-$Producto = new Producto();
-$resultados = $Producto -> buscarPaginado($pagina, $numReg);
-$cantPag = $Producto -> buscarCantidad();
+$Ingrediente = new Ingrediente();
+$resultados = $Ingrediente -> buscarPaginado($pagina, $numReg);
+$cantPag = $Ingrediente -> buscarCantidad();
 $pagination = $cantPag / $numReg;
 ?>
 <div class="container mt-5">
@@ -28,10 +28,9 @@ $pagination = $cantPag / $numReg;
                     <table class="table">
                         <thead class="thead-dark">
                             <tr>
-                                <th>#</th>
                                 <th>Nombre</th>
-                                <th>Precio</th>
-                                <th>Categoria</th>
+                                <th>Cantidad</th>
+                                <th>Proveedor</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -39,11 +38,10 @@ $pagination = $cantPag / $numReg;
                             <?php
                             foreach ($resultados as $resultado) {
                                 echo "<tr>";
-                                echo "<td>" . $resultado -> getIdProducto() . "</td>";
                                 echo "<td>" . $resultado -> getNombre() . "</td>";
-                                echo "<td>" . $resultado -> getPrecio() . "</td>";
-                                echo "<td>" . $resultado -> getCategoria() . "</td>";
-                                echo "<td style='display: flex; flex-flow: row; justify-content: center; align-items:center;'><a href='index.php?pid=" . base64_encode("Vista/Producto/actualizarProducto.php") . "&idProducto=" . $resultado->getIdProducto() . "' style='margin: 0px 2px;'><i class='far fa-edit'></i></a><a href='index.php?pid=" . base64_encode("Vista/IngredienteProducto/adicionarIngrediente.php") . "&idProducto=" . $resultado->getIdProducto() . "' style='margin: 0px 2px;'><i class='far fa-plus-square'></i></a></td>";
+                                echo "<td>" . $resultado -> getCantidad() . "</td>";
+                                echo "<td>" . $resultado -> getProveedor() . "</td>";
+                                echo "<td><a href='index.php?pid=" . base64_encode("Vista/Ingrediente/actualizarIngrediente.php") . "&idIngrediente=" . $resultado -> getIdIngrediente() . "'><i class='far fa-edit'></i></a></td>";
                                 echo "</tr>";
                             }
                             ?>
@@ -82,7 +80,7 @@ $pagination = $cantPag / $numReg;
 
         $("#search").on('keyup', function() {
             json = {
-                "pid": "<?php echo base64_encode("Vista/Producto/Ajax/searchBar.php") ?>",
+                "pid": "<?php echo base64_encode("Vista/Ingrediente/Ajax/searchBar.php") ?>",
                 "page": "1",
                 "cantPag" : $("#select-cantidad").val(),
                 "search": $(this).val()
@@ -105,13 +103,14 @@ $pagination = $cantPag / $numReg;
         
         $(".pagination").on('click', ".page-item-list", function(){
             json = {
-                "pid": "<?php echo base64_encode("Vista/Producto/Ajax/searchBar.php") ?>",
+                "pid": "<?php echo base64_encode("Vista/Ingrediente/Ajax/searchBar.php") ?>",
                 "page": $(this).data("page"),
                 "cantPag" : $("#select-cantidad").val(),
                 "search": $("#search").val()
             };
 
             $.get("indexAJAX.php", json, function(data) {
+                console.log(data)
                 res = JSON.parse(data);
                 //imprime los datos en la tabla
                 tablePrint(res.DataT, res.DataL);
@@ -126,13 +125,14 @@ $pagination = $cantPag / $numReg;
 
         $("#select-cantidad").on('change', function(){
             json = {
-                "pid": "<?php echo base64_encode("Vista/Producto/Ajax/searchBar.php") ?>",
+                "pid": "<?php echo base64_encode("Vista/Ingrediente/Ajax/searchBar.php") ?>",
                 "page": "1",
                 "cantPag" : $(this).val(),
                 "search": $("#search").val()
             };
             console.log(json);
             $.get("indexAJAX.php", json, function(data) {
+                console.log(data);
                 res = JSON.parse(data);
                 //imprime los datos en la tabla
                 tablePrint(res.DataT, res.DataL);
@@ -150,7 +150,7 @@ $pagination = $cantPag / $numReg;
         $("#tabla").empty();
 
         DataT.forEach(function(data) {
-            $("#tabla").append("<tr><td>" + data[0] + "</td><td>" + data[1] + "</td><td>"+ data[2] +"</td><td>"+ data[3] +"</td><td style='display: flex; flex-flow: row; justify-content: center; align-items:center;'><a href='index.php?pid=" + DataL[0] + "&idProducto=" + data[0] + "' style='margin: 0px 2px;'><i class='far fa-edit'></i></a><a href='index.php?pid=" + DataL[1] + "&idProducto=" + data[0] + "' style='margin: 0px 2px;'><i class='far fa-plus-square'></i></a></td></tr>")
+            $("#tabla").append(`<tr><td>${data[1]}</td><td>${data[2]}</td><td>${data[3]}</td><td><a href='index.php?pid=${DataL}&idIngrediente=${data[0]}'><i class='far fa-edit'></i></a></td></tr>`)
         });
     }
     /*

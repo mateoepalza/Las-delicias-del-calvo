@@ -101,6 +101,10 @@ class Producto{
         $this -> Conexion -> cerrar();
     }
 
+    /*
+     * Función que inserta un nuevo producto
+     */
+
     public function insertar(){
         $this -> Conexion -> abrir();
         $this -> Conexion -> ejecutar( $this -> ProductoDAO -> insertar() );
@@ -194,6 +198,7 @@ class Producto{
         $this -> Conexion -> cerrar();
         return $res;
     }
+
 }
 
 

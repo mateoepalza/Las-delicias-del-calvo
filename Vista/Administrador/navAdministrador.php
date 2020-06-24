@@ -23,13 +23,21 @@ $admin->getInfoBasic();
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Categoria/crearCategoria.php")?>">Crear categoria</a>
                     <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Categoria/buscarCategoria.php")?>">Buscar categoria</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Ingrediente/crearIngrediente.php")?>">Crear ingrediente</a>
+                    <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Ingrediente/buscarIngrediente.php")?>">Buscar ingrediente</a>
                 </div>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Clientes</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Proveedores</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Proveedores</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Proveedor/crearProveedor.php") ?>">Crear proveedor </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Proveedor/buscarProveedor.php") ?>">Buscar proveedores</a>
+                </div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

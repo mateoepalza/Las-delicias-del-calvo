@@ -19,7 +19,7 @@
 
     $ajax = Array(
         "DataT" => $data,
-        "DataL" => base64_encode("Vista/Producto/actualizarProducto.php"),
+        "DataL" => array(base64_encode("Vista/Producto/actualizarProducto.php"), base64_encode("Vista/IngredienteProducto/adicionarIngrediente.php")),
         "Cpage" => $pagina,
         "DataP" => $cant
     );
