@@ -5,6 +5,8 @@
     $producto = new Producto($idProducto);
     $producto -> getInfo();
 
+    $InStock = $producto -> getStock();
+
 ?>
 
 <div>
@@ -20,6 +22,14 @@
             <div class="description border-bottom">
                 <span class="description-title"><?php echo $producto -> getNombre() ?></span>
                 <span class="description-price">$<?php echo number_format($producto -> getPrecio()) ?></span>
+                <?php
+                    if(!$InStock){
+                        ?>
+                            <span class="out-stock">Out of stock</span>
+                        <?php
+                    }
+                ?>
+                
             </div>
             <div class="description border-bottom">
                 <span class="description-desc-title">Descripción</span>
@@ -32,11 +42,11 @@
                         <div class="col-4">
                             <span>Cantidad</span>
                             <div> 
-                                <input name="cantidad" type="number" value="1" min="1" max="100" step="1"/>
+                                <input name="cantidad" type="number" value="1" min="1" max="100" step="1" <?php echo (!$InStock)? "disabled":""; ?>/>
                             </div>
                         </div>
                         <div class="col-8 d-flex flex-column justify-content-end">
-                            <input type="submit" name="carrito" class="form-control btn btn-primary" value="Añadir al carrito">
+                            <input type="submit" name="carrito" class="form-control btn btn-primary" value="Añadir al carrito" <?php echo (!$InStock)? "disabled":""; ?>>
                         </div>
                     </form>
                 </div>

@@ -6,24 +6,18 @@ if(isset($_POST['carrito'])){
 
     $idProducto = $_GET['idProducto'];
     $cantProd = $_POST['cantidad'];
-    $bool = true;
-    $pos = 0;
-
-    for($i = 0; $i < count($_SESSION['carrito']); $i++){
-        if($_SESSION['carrito'][$i][0] == $idProducto){
-            $bool = false;
-            $pos = $i;
-        }
-    }
+    
+    $carrito = new Carrito($idProducto, $cantProd);
+    $bool = $carrito -> checkCarrito();
 
     if($bool){
-        $carrito = array($idProducto, $cantProd);
-        array_push($_SESSION['carrito'], $carrito);
+        $alert = $carrito -> actualizarCantidad();
+        $msj = "La cantidad del producto ha sido actualizada en el carrito.";
     }else{
-        $_SESSION['carrito'][$pos][1] = $cantProd; 
+        $alert = $carrito -> agregarProducto();
+        $msj = "El producto ha sido añadido correctamente al carrito.";
     }
-
-    $msj = "El producto ha sido añadido correctamente al carrito.";
+    
     $class = "alert-success";
     include "Vista/Main/error.php";
 }
@@ -58,7 +52,7 @@ $categorias = $categoria->buscarTodo();
                 </div>
             </div>
             <div class="menu-right">
-                <a class="btn btn-outline-light" style=" color: #000; border:0px;" href="index.php?pid=<?php echo base64_encode('Vista/Cliente/checkout.php') ?>"><i class="fas fa-cart-arrow-down"><?php echo (count($_SESSION['carrito']) > 0)? "<span class='num-products'>" . count($_SESSION['carrito']) . "</span>": ""; ?></i></a>    
+                <a class="btn btn-outline-light" style=" color: #000; border:0px;" href="index.php?pid=<?php echo base64_encode('Vista/Checkout/checkout.php') ?>"><i class="fas fa-cart-arrow-down"><?php echo (count($_SESSION['carrito']) > 0)? "<span class='num-products'>" . count($_SESSION['carrito']) . "</span>": ""; ?></i></a>    
             </div>
             <div class="menu-right">
                 <a class="btn btn-outline-primary" style="border:0px;" href="index.php?cerrarSesion=True"><i class="fas fa-sign-out-alt"></i></a>    

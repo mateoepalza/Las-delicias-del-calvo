@@ -141,3 +141,8 @@
 .p-method-div{
     margin: 0px 0px 25px 15px;
 }
+.out-stock{
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: #F00;
+}

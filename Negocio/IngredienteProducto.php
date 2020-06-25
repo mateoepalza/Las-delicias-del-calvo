@@ -64,6 +64,35 @@ class IngredienteProducto{
         $this -> Conexion -> cerrar();
         return $resList;
     }
+    /*
+     * Busca todos los ingredientes asociados a un producto
+     */
+
+    public function buscarIngredientesProducto(){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar($this -> IngredienteProductoDAO -> buscarIngredientesProducto());
+        $resList = array();
+        while($res = $this -> Conexion -> extraer()){
+            array_push($resList, $res);
+        }
+        $this -> Conexion -> cerrar();
+        return $resList;
+    }
+
+    /*
+     * Pruenaaaaaaaaaaaaaaa
+     */
+
+    public function buscarIngredienteOb(){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> IngredienteProductoDAO -> buscarIngredienteOb());
+        $resList = array();
+        while($res = $this -> Conexion -> extraer()){
+            array_push($resList, new IngredienteProducto($res[0], $res[1], $res[2]));
+        }
+        $this -> Conexion -> cerrar();
+        return $resList;
+    }
 
     /*
      * Busca 

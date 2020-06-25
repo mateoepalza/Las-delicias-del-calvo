@@ -1,8 +1,9 @@
 <?php
-$productosCarrito = $_SESSION['carrito'];
-$producto = new Producto();
-$listaProductos =  $producto->searchCarritoItems($productosCarrito);
-$totalPrice = $producto -> getTotalPrice($listaProductos);
+
+$carrito = new Carrito();
+$listaProductos =  $carrito->searchCarritoItems();
+$totalPrice = $carrito->getTotalPriceList($listaProductos);
+
 ?>
 
 <div class="container mt-4">
@@ -19,17 +20,17 @@ $totalPrice = $producto -> getTotalPrice($listaProductos);
             ?>
                 <div class="row row-checkout-product border-bottom pt-5 pb-5">
                     <div class="col-3">
-                        <img src="<?php echo $prod[0] -> getFoto() ?>" width="100%">
+                        <img src="<?php echo $prod[0]->getFoto() ?>" width="100%">
                     </div>
                     <div class="col-3">
-                        <span class="checkout-p-title"><?php echo $prod[0] -> getNombre() ?></span>
-                        <span class="checkout-p-desc"><?php echo $prod[0] -> getDescripcion()?></span>
+                        <span class="checkout-p-title"><?php echo $prod[0]->getNombre() ?></span>
+                        <span class="checkout-p-desc"><?php echo $prod[0]->getDescripcion() ?></span>
                     </div>
                     <div class="col-3">
-                        <input class="spinner" name="cantidad" type="number" value="<?php echo $prod[1] ?>" data-id="<?php echo $prod[0] -> getIdProducto() ?>" min="1" max="100" step="1" />
+                        <input class="spinner" name="cantidad" type="number" value="<?php echo $prod[1] ?>" data-id="<?php echo $prod[0]->getIdProducto() ?>" min="1" max="100" step="1" />
                     </div>
-                    <div class="col-2">$<?php echo number_format($prod[0] -> getPrecio(), 2, ",", ".") ?></div>
-                    <div class="col-1" data-id="<?php echo $prod[0] -> getIdProducto() ?>">x</div>
+                    <div class="col-2">$<?php echo number_format($prod[0]->getPrecio(), 2, ",", ".") ?></div>
+                    <div class="col-1 close-product" data-id="<?php echo $prod[0]->getIdProducto() ?>" style="cursor:pointer;" >x</div>
                 </div>
 
             <?php
@@ -37,21 +38,6 @@ $totalPrice = $producto -> getTotalPrice($listaProductos);
 
             ?>
 
-            <div class="row row-checkout-product border-bottom">
-                <div class="col-3">
-                    <img src="static/img/productos/fresas.png" width="100%">
-                </div>
-                <div class="col-3">
-                    <span class="checkout-p-title">Hamburguesa doble queso</span>
-                    <span class="checkout-p-desc">hamburguesa con doblequeso, pepinillos, tomate, ...</span>
-                </div>
-                <div class="col-3">
-                    <input name="cantidad" type="number" value="1" min="1" max="100" step="1"/>
-                </div>
-                <div class="col-2">$145.000</div>
-                <div class="col-1">x</div>
-            </div>
-            
             <div class="row  d-flex flex-row justify-content-end mt-3">
                 <div class="col-4">
                     <div class="d-flex flex-row justify-content-between">
@@ -110,26 +96,71 @@ $totalPrice = $producto -> getTotalPrice($listaProductos);
 <script src="static/js/bootstrap-input-spinner.js"></script>
 <script>
     $(".spinner").inputSpinner();
-    $(function(){
-        $(".spinner").on('change', function(){
-            let json ={
-                "pid" : "<?php echo base64_encode('Vista/Producto/Ajax/checkoutSum.php')?>",
-                "idProducto" : $(this).data("id"),
-                "amount" : $(this).val()
+    $(function() {
+        $(".spinner").on('change', function() {
+            let json = {
+                "idProducto": $(this).data("id"),
+                "amount": $(this).val()
             }
 
-            $.get("indexAJAX.php", json, function(data){
+            $.post("indexAJAX.php?pid=<?php echo base64_encode('Vista/Checkout/Ajax/checkoutSum.php') ?>", json, function(data) {
                 console.log(data);
-                data = JSON.parse(data);
-                actualizarPrecios(data.data);
+                res = JSON.parse(data);
+                actualizarPrecios(res.data);
             });
 
         });
+
+        $(".close-product").on("click", function() {
+            let parent = $(this).parent();
+            let json = {
+                "idProducto": $(this).data("id")
+            };
+            console.log(json);
+            $.post("indexAJAX.php?pid=<?php echo base64_encode('Vista/Checkout/Ajax/deleteCheckout.php') ?>", json, function(data) {
+                console.log(data);
+                res = JSON.parse(data);
+
+                if (res.status) {
+                    borrarProducto(parent);
+                }else{
+                    crearAlert("alert-danger", res.msj);
+                }
+
+                actualizarPrecios(res.data.totalPrice);
+                actualizarCantCarrito(res.data.itemsCarrito);
+                
+
+            });
+        });
     });
 
+    function actualizarCantCarrito(cant){
+        if(cant != 0){
+            $(".num-products").text(cant);
+        }else{
+            $(".num-products").remove();
+        }
+        
+    }
 
-    function actualizarPrecios(precio){
+    function actualizarPrecios(precio) {
         $("#checkout-ck-value").text(`$${precio}`);
         $("#checkout-total-value").html(`$${precio}`);
+    }
+
+    function borrarProducto(elem) {
+        elem.remove();
+    }
+
+    function crearAlert(className, msj) {
+        $("#alert-ajax").html(
+            `<div class="alert ${className} alert-dismissible fade show" role="alert" style="text-align: center; position: fixed; width: 100%;">
+                <span id="alert-ajax-msj">${msj}</span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>`
+        );
     }
 </script>

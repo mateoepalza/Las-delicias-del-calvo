@@ -9,6 +9,7 @@
     require_once "Negocio/Proveedor.php";
     require_once "Negocio/Ingrediente.php";
     require_once "Negocio/IngredienteProducto.php";
+    require_once "Negocio/Carrito.php";
     
     $pid = null;
 

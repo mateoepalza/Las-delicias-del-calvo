@@ -116,10 +116,10 @@ class ProductoDAO{
                     FK_idCategoria =". $this -> categoria. "
                 WHERE idProducto = ". $this -> idProducto;
     }
-    public function searchItemById($idProducto){
+    public function searchItemById(){
         return "SELECT idProducto, nombre, foto, descripcion, precio
                 FROM Producto
-                WHERE idProducto = " . $idProducto;
+                WHERE idProducto = " . $this -> idProducto;
     }
 }
 

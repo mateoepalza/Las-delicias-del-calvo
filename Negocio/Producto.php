@@ -300,31 +300,103 @@ class Producto{
     /*
      * Busca todos los productos por medio de su id y devuelve los objetos en forma de lista
      */
-    public function searchCarritoItems($lista){
+    public function searchItemById(){
+
         $this -> Conexion -> abrir();
-
-        $resList = array();
-
-        foreach($lista as $item){
-            $this -> Conexion -> ejecutar( $this -> ProductoDAO -> searchItemById($item[0]));
-            $res = $this -> Conexion -> extraer();
-            array_push($resList, array(new Producto($res[0], $res[1], $res[2], $res[3], $res[4]), $item[1]));
-        }
+        $this -> Conexion -> ejecutar( $this -> ProductoDAO -> searchItemById());
+        $res = $this -> Conexion -> extraer();
+        $this -> idProducto = $res[0];
+        $this -> nombre = $res[1];
+        $this -> foto = $res[2];
+        $this -> descripcion = $res[3];
+        $this -> precio = $res[4];
         $this -> Conexion -> cerrar();
-
-        return $resList;
     }
 
     /*
-     * Hace el valor total de los productos que se encuentran en el carrito
+     * Search if a product is in stock 
      */
-    public function getTotalPrice($lista){
-        $suma = 0;
-        foreach($lista as $prod){
-            $suma += ($prod[0] -> getPrecio() * $prod[1]);
+
+    public function getStock(){
+        $carrito = new Carrito();
+        $InProd = new IngredienteProducto($this -> idProducto);
+        /*
+         * [[FK_idProducto, FK_idIngrediente , IngredienteProducto.cantidad , Ingrediente.cantidad ]]
+         */
+        $ingredientesProd = $InProd -> buscarIngredientesProducto();
+
+        $bool = true;
+
+        foreach($ingredientesProd as $item){
+            echo $item[2]. " - ". $item[3] . "<br>";
+            if($item[2] > $item[3]){
+                echo $item[1] . "<br>";
+                $bool = false;
+            }
         }
 
-        return $suma;
+        if($bool){
+
+            /*
+                 *  Me devuelve objetos de tipo ingrediente producto en la posicion 0 con [[FK_idProducto, FK_idIngrediente, cantidad], cantidad_session]
+                 */
+                $ingredientesUsadosCarrito = $carrito -> ingredientesUsados($ingredientesProd);
+                $resList = array();
+                foreach($ingredientesUsadosCarrito as $prodIngre){
+                    foreach($ingredientesProd as $newProd){
+                        foreach($prodIngre[0] as $itemCarrito){
+                            //var_dump($itemCarrito ->  getIngrediente());
+                            
+                            if($itemCarrito -> getIngrediente() == $newProd[1]){
+                                $boolean = true;
+                                for($i = 0; $i < count($resList); $i++){
+                                    if($resList[$i][0] == $newProd[1]){
+                                        $resList[$i][1] += $itemCarrito -> getCantidad()* $prodIngre[1];
+                                        $boolean = false;
+                                    }
+                                }
+                                if($boolean){
+                                    array_push($resList, array($itemCarrito -> getIngrediente(), $itemCarrito -> getCantidad()* $prodIngre[1]));
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+                /*
+                $ingredientesUsadosCarrito = $carrito -> ingredientesUsados($ingredientesProd);
+                $resList = array();
+                foreach($ingredientesUsadosCarrito as $prodIngre){
+                    foreach($ingredientesProd as $newProd){
+                        foreach($prodIngre[0] as $itemCarrito){
+                            //var_dump($itemCarrito ->  getIngrediente());
+                            
+                            if($itemCarrito -> getIngrediente() == $newProd[1]){
+                                array_push($resList, array($itemCarrito -> getIngrediente(), $itemCarrito -> getCantidad()* $prodIngre[1]));
+                            }
+                        }
+                    }
+                }
+                */
+                foreach($ingredientesProd as $prod){
+                    foreach($resList as $list)
+                    if($prod[1] == $list[0]){
+                        echo $list[1] + $prod[2]."<br>";
+                        if($prod[3] < ($list[1] + $prod[2])){ //acaa
+                            $bool = false;
+                            echo "ENTAAAAA";
+                        }
+                    }
+                }
+                echo('<pre>');
+                var_dump($resList);
+                echo('</pre>');
+                
+
+        }
+        
+        return $bool;
+
     }
 }
 

@@ -15,7 +15,7 @@
     
     if($res == 1 || $res == 0){
         $json['status'] = true;
-        $json['msj'] = "El ingrediente ha sido agregado satisfactoriamente";
+        $json['msj'] = "El ingrediente ha sido actualizado satisfactoriamente";
     }else{
         $json['status'] = false;
         $json['msj'] = "Ha ocurrido algo inesperado";
