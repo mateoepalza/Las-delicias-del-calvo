@@ -24,13 +24,14 @@ $totalPrice = $carrito->getTotalPriceList($listaProductos);
                     </div>
                     <div class="col-3">
                         <span class="checkout-p-title"><?php echo $prod[0]->getNombre() ?></span>
+
                         <span class="checkout-p-desc"><?php echo $prod[0]->getDescripcion() ?></span>
                     </div>
                     <div class="col-3">
                         <input class="spinner" name="cantidad" type="number" value="<?php echo $prod[1] ?>" data-id="<?php echo $prod[0]->getIdProducto() ?>" min="1" max="100" step="1" />
                     </div>
                     <div class="col-2">$<?php echo number_format($prod[0]->getPrecio(), 2, ",", ".") ?></div>
-                    <div class="col-1 close-product" data-id="<?php echo $prod[0]->getIdProducto() ?>" style="cursor:pointer;" >x</div>
+                    <div class="col-1 close-product" data-id="<?php echo $prod[0]->getIdProducto() ?>" style="cursor:pointer;">x</div>
                 </div>
 
             <?php
@@ -60,33 +61,35 @@ $totalPrice = $carrito->getTotalPriceList($listaProductos);
             <div class="p-4" style="background-color: #f9f9f9;">
                 <h2 class="mb-4" style="letter-spacing:2px;">Payment info.</h2>
                 <div>
-                    <span class="p-method-title">Payment method</span>
-                    <div class="p-method-div">
-                        <input type="radio">
-                        <label><i class="fas fa-credit-card"></i> Credir Card</label>
-                    </div>
-                    <span class="p-method-title">Name on card</span>
-                    <div class="p-method-div">
-                        <span>Jhon Carter</span>
-                    </div>
-                    <span class="p-method-title">Card Number</span>
-                    <div class="p-method-div">
-                        <span>&#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226; 5698</span>
-                    </div>
-                    <span class="p-method-title">Expiration Date</span>
-                    <div class="p-method-div">
-                        <div>
-                            <input type="date">
+                    <form action="index.php?pid=<?php echo base64_encode("Vista/CheckOut/checkout.php")?>" method="POST">
+                        <span class="p-method-title">Payment method</span>
+                        <div class="p-method-div">
+                            <input type="radio">
+                            <label><i class="fas fa-credit-card"></i> Credir Card</label>
                         </div>
-                    </div>
-                    <span class="p-method-title">CVV</span>
-                    <div class="p-method-div">
-                        <div>
-                            <input type="text">
+                        <span class="p-method-title">Name on card</span>
+                        <div class="p-method-div">
+                            <span>Jhon Carter</span>
                         </div>
-                    </div>
+                        <span class="p-method-title">Card Number</span>
+                        <div class="p-method-div">
+                            <span>&#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226; 5698</span>
+                        </div>
+                        <span class="p-method-title">Expiration Date</span>
+                        <div class="p-method-div">
+                            <div>
+                                <input type="date">
+                            </div>
+                        </div>
+                        <span class="p-method-title">CVV</span>
+                        <div class="p-method-div">
+                            <div>
+                                <input type="text">
+                            </div>
+                        </div>
 
-                    <input type="submit" class="btn btn-primary" value="Checkout" style="width: 100%">
+                        <input type="submit" id="btn-checkout" name="btnCheckout" class="btn btn-primary" value="Checkout" style="width: 100%">
+                    </form>
 
                 </div>
             </div>
@@ -98,6 +101,7 @@ $totalPrice = $carrito->getTotalPriceList($listaProductos);
     $(".spinner").inputSpinner();
     $(function() {
         $(".spinner").on('change', function() {
+            let obj = $(this);
             let json = {
                 "idProducto": $(this).data("id"),
                 "amount": $(this).val()
@@ -106,7 +110,13 @@ $totalPrice = $carrito->getTotalPriceList($listaProductos);
             $.post("indexAJAX.php?pid=<?php echo base64_encode('Vista/Checkout/Ajax/checkoutSum.php') ?>", json, function(data) {
                 console.log(data);
                 res = JSON.parse(data);
-                actualizarPrecios(res.data);
+                if (res.status) {
+                    actualizarPrecios(res.data.totalPrice);
+                    inStock();
+                } else {
+                    outStock(obj);
+                }
+
             });
 
         });
@@ -123,25 +133,37 @@ $totalPrice = $carrito->getTotalPriceList($listaProductos);
 
                 if (res.status) {
                     borrarProducto(parent);
-                }else{
+                } else {
                     crearAlert("alert-danger", res.msj);
                 }
 
                 actualizarPrecios(res.data.totalPrice);
                 actualizarCantCarrito(res.data.itemsCarrito);
-                
+
 
             });
         });
     });
 
-    function actualizarCantCarrito(cant){
-        if(cant != 0){
+    function inStock() {
+        $("#btn-checkout").prop("disabled", false);
+        $(".out-stock").remove();
+    }
+
+    function outStock(obj) {
+        if ($(".out-stock").length <= 0) {
+            obj.after(`<span class="out-stock">Out of stock</span>`);
+        }
+        $("#btn-checkout").prop('disabled', true);
+    }
+
+    function actualizarCantCarrito(cant) {
+        if (cant != 0) {
             $(".num-products").text(cant);
-        }else{
+        } else {
             $(".num-products").remove();
         }
-        
+
     }
 
     function actualizarPrecios(precio) {

@@ -47,6 +47,9 @@ class IngredienteProducto{
     public function setCantidad($cantidad){
         $this -> cantidad = $cantidad;
     }
+    public function setConexion($Conexion){
+        $this -> Conexion = $Conexion;
+    }
 
     /*Methods*/
 
@@ -137,6 +140,19 @@ class IngredienteProducto{
         $res = $this -> Conexion -> filasAfectadas();
         $this -> Conexion -> cerrar();
         return $res;
+    }
+
+    public function buscarCantIngredientes(){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> IngredienteProductoDAO -> buscarCantIngredientes());
+        $resList = array();
+
+        while($res = $this -> Conexion -> extraer()){
+            array_push($resList, new Ingrediente($res[0], "", $res[1]));
+        }
+        $this -> Conexion -> cerrar();
+
+        return $resList;
     }
 
 }

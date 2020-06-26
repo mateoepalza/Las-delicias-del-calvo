@@ -25,6 +25,14 @@ class IngredienteProductoDAO{
         WHERE FK_idProducto = ". $this -> producto;
     }
 
+    public function buscarCantIngredientes(){
+        return "SELECT FK_idIngrediente , Ingrediente.cantidad 
+        FROM IngredienteProducto
+        INNER JOIN Ingrediente
+                    ON FK_idIngrediente = idIngrediente
+        WHERE FK_idProducto = ". $this -> producto;
+    }
+
     public function buscarIngredientesProducto(){
         return "SELECT FK_idProducto, FK_idIngrediente , IngredienteProducto.cantidad , Ingrediente.cantidad 
                 FROM IngredienteProducto

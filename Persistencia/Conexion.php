@@ -28,6 +28,22 @@ class Conexion{
     public function filasAfectadas(){
         return $this -> mysqli -> affected_rows;
     }
+
+    public function getLastID(){
+        return $this -> mysqli -> insert_id;
+    }
+
+    public function startTransaction(){
+        $this -> mysqli -> begin_transaction(MYSQLI_TRANS_START_READ_ONLY);
+    }
+
+    public function commitTransaction(){
+        $this -> mysqli -> commit();
+    }
+
+    public function rollbackTransaction(){
+        $this -> mysqli -> rollback();
+    }
 }
 
 ?>

@@ -39,7 +39,22 @@ class Carrito {
         $this -> cantidad = $cantidad;
     }
 
+    public function setConexion($Conexion){
+        $this -> Conexion = $Conexion;
+    }
+
     /* Methods */
+
+    /*
+     *
+     */
+
+    public function vaciarCarro(){
+        unset($_SESSION['carrito']);
+        $_SESSION['carrito'] = array();
+
+        var_dump($_SESSION['carrito']);
+    }
 
     /*
      * Mira si el producto ya existe en el carrito
@@ -158,6 +173,68 @@ class Carrito {
             $InPro = new IngredienteProducto($item[0]);
             $listaIngredienteCarrito = $InPro -> buscarIngredienteOb();
             array_push($resList, array($listaIngredienteCarrito, $item[1]));
+        }
+
+        return $resList;
+
+    }
+
+    /*
+     * Buscar producto en carrito
+     */
+
+    public function buscarProductoCarrito(){
+        $carrito = $_SESSION['carrito'];
+
+        $resList = array();
+
+        foreach($carrito as $item){
+            if($item[0] == $this -> producto){
+                $resList[0] = $item[0];
+                $resList[1] = $item[1];
+            }
+        }
+
+        return $resList;
+    }
+
+    /*
+     * Hace una copia de los items en el carrito con un valor actualizado para revisar si hay en stock o no
+     */
+
+    public function copyTryCarrito(){
+
+        $carrito = $_SESSION['carrito'];
+
+        $resList = array();
+
+        foreach($carrito as $item){
+            if($item[0] == $this -> producto){
+                $item[1] = $this -> cantidad;
+                array_push($resList, $item);
+            }else{
+                array_push($resList, $item);
+            }
+        }
+        return $resList;
+    }
+
+    /*
+     * lista -> ingredientes en array FK_idProducto, FK_idIngrediente , IngredienteProducto.cantidad , Ingrediente.cantidad 
+     *  $ingre -> FK_idProducto, FK_idIngrediente , cantidad 
+     */
+
+    public function checkIngredientesUsados($carrito){
+
+        $resList = array();
+
+        foreach($carrito as $item){
+            $InPro = new IngredienteProducto($item[0]);
+            $listaIngredienteCarrito = $InPro -> buscarIngredienteOb();
+            for($i = 0; $i < count($listaIngredienteCarrito); $i++){
+                $listaIngredienteCarrito[$i] -> setCantidad($listaIngredienteCarrito[$i] -> getCantidad() *  $item[1]);
+                array_push($resList, $listaIngredienteCarrito[$i]);
+            }
         }
 
         return $resList;

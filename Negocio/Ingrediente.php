@@ -46,18 +46,25 @@ class Ingrediente{
 
     public function setIdIngrediente($idIngrediente){
         $this -> idIngrediente = $idIngrediente;
+        $this -> IngredienteDAO -> setIdIngrediente($idIngrediente);
     }
 
     public function setNombre($nombre){
         $this -> nombre = $nombre;
+        $this -> IngredienteDAO -> setNombre($nombre);
     }
 
     public function setCantidad($cantidad){
         $this -> cantidad = $cantidad;
+        $this -> IngredienteDAO -> setCantidad($cantidad);
     }
 
     public function setProveedor($proveedor){
         $this -> proveedor = $proveedor;
+        $this -> IngredienteDAO -> setProveedor($proveedor);
+    }
+    public function setConexion($Conexion){
+        $this -> Conexion = $Conexion;
     }
     
     /*Methods*/
@@ -108,6 +115,19 @@ class Ingrediente{
     public function actualizarIngrediente(){
         $this -> Conexion -> abrir();
         $this -> Conexion -> ejecutar( $this -> IngredienteDAO -> actualizarIngrediente());
+        $res = $this -> Conexion -> filasAfectadas();
+        $this -> Conexion -> cerrar();
+        return $res;
+    }
+
+    /*
+     * Función que actualiza toda la información del ingrediente
+     */
+
+    public function actualizarCantidad(){
+        $this -> Conexion -> abrir();
+        echo $this -> IngredienteDAO -> actualizarCantidad();
+        $this -> Conexion -> ejecutar( $this -> IngredienteDAO -> actualizarCantidad());
         $res = $this -> Conexion -> filasAfectadas();
         $this -> Conexion -> cerrar();
         return $res;

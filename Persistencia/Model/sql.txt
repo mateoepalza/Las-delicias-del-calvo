@@ -63,6 +63,25 @@ create table IngredienteProducto(
     Foreign key (FK_idIngrediente) references Ingrediente(idIngrediente)
 );
 
+create table factura(
+    idFactura int not null auto_increment,
+    fecha date not null,
+    valor float not null,
+    FK_idCliente int not null,
+    primary key(idFactura),
+    Foreign key (FK_idCliente) references Cliente(idCliente) 
+);
+
+create table FacturaProducto(
+    FK_idFactura int not null,
+    FK_idProducto int not null,
+    cantidad int not null,
+    precio float not null,
+    primary key(FK_idFactura, FK_idProducto),
+    Foreign key (FK_idFactura) references Factura(idFactura),
+    Foreign key (FK_idProducto) references Producto(idProducto)
+);
+
 Ala
 aceites
 

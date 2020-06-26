@@ -92,6 +92,9 @@ class Cliente{
     public function setActivacion($activacion){
         $this -> Activacion = $activacion;
     }
+    public function setConexion($Conexion){
+        $this -> conexion = $Conexion;
+    }
     /* 
     *   Functions
     */

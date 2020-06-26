@@ -69,6 +69,10 @@ class Proveedor{
         $this -> direccion = $direccion;
     }
 
+    public function setConexion($Conexion){
+        $this -> Conexion = $Conexion;
+    }
+
     /*Methods*/
 
     /*

@@ -26,6 +26,9 @@
         public function setNombre($nombre){
             $this -> nombre = $nombre;
         }
+        public function setConexion($Conexion){
+            $this -> Conexion = $Conexion;
+        }
 
         /*GETS*/
 

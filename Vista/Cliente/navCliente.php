@@ -1,7 +1,7 @@
 <?php
-
-
-
+/*
+ * Agregar al carrito
+ */
 if(isset($_POST['carrito'])){
 
     $idProducto = $_GET['idProducto'];
@@ -20,6 +20,24 @@ if(isset($_POST['carrito'])){
     
     $class = "alert-success";
     include "Vista/Main/error.php";
+}
+
+if(isset($_POST['btnCheckout'])){
+
+    $factura = new Factura();
+    $res = $factura -> pago();
+
+    if($res){
+        header("Location: index.php?pid=". base64_encode("Vista/Factura/clienteFactura.php"));
+        $msj = "La cantidad del producto ha sido actualizada en el carrito.";
+        $class = "alert-success";
+    }else{
+        $msj = "El producto ha sido añadido correctamente al carrito.";
+        $class = "alert-danger";
+    }
+    
+    include "Vista/Main/error.php";
+
 }
 
 $cliente = new Cliente($_SESSION['id']);

@@ -2,6 +2,9 @@
 
     $idProducto = $_GET['idProducto'];
 
+    $carrito = new Carrito($idProducto);
+    $cantidadProducto = $carrito -> buscarProductoCarrito();
+
     $producto = new Producto($idProducto);
     $producto -> getInfo();
 
@@ -18,8 +21,8 @@
         <div class="col-12 col-md-7 col-lg-6">
             <img src="<?php echo $producto -> getFoto() ?>" width="100%">
         </div>
-        <div class="col-12 col-md-5 col-lg-6">
-            <div class="description border-bottom">
+        <div class="col-12 col-md-5 col-lg-6 ">
+            <div class="description border-bottom container-out">
                 <span class="description-title"><?php echo $producto -> getNombre() ?></span>
                 <span class="description-price">$<?php echo number_format($producto -> getPrecio()) ?></span>
                 <?php
@@ -42,11 +45,11 @@
                         <div class="col-4">
                             <span>Cantidad</span>
                             <div> 
-                                <input name="cantidad" type="number" value="1" min="1" max="100" step="1" <?php echo (!$InStock)? "disabled":""; ?>/>
+                                <input id="in-cantidad" name="cantidad" type="number" value="<?php echo (count($cantidadProducto)  != 0)? $cantidadProducto[1]: "1";  ?>" min="1" max="100" step="1" data-id="<?php echo $idProducto ?>" <?php echo (!$InStock)? "disabled":""; ?>/>
                             </div>
                         </div>
                         <div class="col-8 d-flex flex-column justify-content-end">
-                            <input type="submit" name="carrito" class="form-control btn btn-primary" value="Añadir al carrito" <?php echo (!$InStock)? "disabled":""; ?>>
+                            <input id="agregarCarrito" type="submit" name="carrito" class="form-control btn btn-primary" value="Añadir al carrito" <?php echo (!$InStock)? "disabled":""; ?>>
                         </div>
                     </form>
                 </div>
@@ -56,6 +59,39 @@
 
 </div>
 <script src="static/js/bootstrap-input-spinner.js"></script>
-<script>
+<script type="text/javascript">
     $("input[type='number']").inputSpinner();
+    $(function(){
+        $("#in-cantidad").on('change', function(){
+            let json = {
+                "idProducto" : $(this).data("id"),
+                "cantidad" : $(this).val()
+            };
+            console.log(json);
+            $.post('indexAJAX.php?pid=<?php echo base64_encode("Vista/Checkout/Ajax/descripProdOutStock.php") ?>', json, function(data){
+                console.log(data);
+                res = JSON.parse(data);
+                if(res.status){
+                    inStock();
+                }else{
+                    outStock();
+                }
+            });
+        });
+    });
+
+    function outStock(){
+        if($(".out-stock").length <= 0){
+            $(".container-out").append(`<span class="out-stock">Out of stock</span>`);
+        }
+        $("#agregarCarrito").prop('disabled', true);
+        //$("#in-cantidad").prop("disabled", true);
+    }
+    
+    function inStock(){
+        $(".out-stock").remove();
+        $("#agregarCarrito").prop('disabled', false);
+        //$("#in-cantidad").prop("disabled", false);
+    }
+
 </script>

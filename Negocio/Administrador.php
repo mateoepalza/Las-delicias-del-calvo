@@ -76,6 +76,9 @@ class Administrador{
     public function setFoto($foto){
         $this -> Foto = $foto;
     }
+    public function setConexion($Conexion){
+        $this -> conexion = $Conexion;
+    }
     /* 
     *   Functions
     */

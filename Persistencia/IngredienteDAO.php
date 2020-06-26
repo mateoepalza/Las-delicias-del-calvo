@@ -15,6 +15,22 @@ class IngredienteDAO{
         $this -> proveedor = $proveedor;
     }
 
+    public function setIdIngrediente($idIngrediente){
+        $this -> idIngrediente = $idIngrediente;
+    }
+
+    public function setNombre($nombre){
+        $this -> nombre = $nombre;
+    }
+
+    public function setCantidad($cantidad){
+        $this -> cantidad = $cantidad;
+    }
+
+    public function setProveedor($proveedor){
+        $this -> proveedor = $proveedor;
+    }
+
     public function insertar(){
         return "INSERT INTO Ingrediente (nombre, cantidad, FK_idProveedor) 
                 VALUES ('" . $this -> nombre . "','" . $this -> cantidad . "','" . $this -> proveedor . "')";
@@ -61,6 +77,13 @@ class IngredienteDAO{
                     cantidad = '" . $this -> cantidad . "',
                     FK_idProveedor = '" . $this -> proveedor . "'
                 WHERE idIngrediente = ". $this -> idIngrediente;
+    }
+
+    public function actualizarCantidad(){
+        return "UPDATE Ingrediente 
+            SET
+                cantidad = '" . $this -> cantidad . "' 
+            WHERE idIngrediente = ". $this -> idIngrediente;
     }
 
     public function buscarTodo(){
