@@ -1,19 +1,16 @@
 <?php 
 
 
-    $str = $_GET['search'];
+    $str = $_POST['search'];
 
-    $pagina = $_GET['page'];
-    $cantPag = $_GET['cantPag'];
+    $pagina = $_POST['page'];
+    $cantPag = $_POST['cantPag'];
 
     $producto = new Producto();
-    if($str != "0"){
-        $data = $producto -> filtroPaginado($str, $pagina, $cantPag);
-        $resultado = $producto -> filtroCantidad($str);
-    }else{
-        $data = $producto -> buscarAPaginado($pagina, $cantPag);
-        $resultado = $producto -> buscarCantidad();
-    }
+    
+    $data = $producto -> filtroPaginado($str, $pagina, $cantPag);
+    $resultado = $producto -> filtroCantidad($str);
+    
     
     $cant = $resultado/$cantPag;
 

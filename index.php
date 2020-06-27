@@ -12,6 +12,7 @@
     require_once "Negocio/Carrito.php";
     require_once "Negocio/Factura.php";
     require_once "Negocio/FacturaProducto.php";
+    require_once "Negocio/Inventarista.php";
     
     $pid = null;
 
@@ -37,6 +38,9 @@
                 include "Vista/Cliente/navCliente.php";
                 include $pid;
                 include "Vista/Cliente/footerCliente.php";
+            }else if($_SESSION['rol'] == 3){
+                include "Vista/Inventarista/navInventarista.php";
+                include $pid;
             }else{
                 include "Vista/Main/mainPage.php";/*Toca cambiarlo*/
             }

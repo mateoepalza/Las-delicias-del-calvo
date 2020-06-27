@@ -8,6 +8,9 @@ require_once "Negocio/Proveedor.php";
 require_once "Negocio/Ingrediente.php";
 require_once "Negocio/IngredienteProducto.php";
 require_once "Negocio/Carrito.php";
+require_once "Negocio/Inventarista.php";
+require_once "Negocio/Factura.php";
+require_once "Negocio/FacturaProducto.php";
 
 if ($_GET['pid']) {
     $pid = base64_decode($_GET['pid']);

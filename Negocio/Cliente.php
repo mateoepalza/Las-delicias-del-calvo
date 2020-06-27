@@ -205,7 +205,7 @@ class Cliente{
         /* Actualzar OBJ*/
         $this -> nombre = $res[1];
         $this -> apellido = $res[2];
-        $this -> email = $res[3];
+        $this -> correo = $res[3];
         $this -> clave = $res[4];
         $this -> foto = $res[5];
         $this -> estado = $res[6];

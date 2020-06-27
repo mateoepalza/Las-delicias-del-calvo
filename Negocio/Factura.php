@@ -58,6 +58,17 @@ class Factura{
 
     /*Methods*/
 
+    public function getInfoBasic(){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> FacturaDAO -> getInfoBasic());
+        $res = $this -> Conexion -> extraer();
+        $this -> idFactura = $res[0];
+        $this -> fecha = $res[1];
+        $this -> valor = $res[2];
+        $this -> cliente = $res[3];
+        $this -> Conexion -> cerrar();
+    }
+
     public function pago(){
 
         $producto = new Producto();
@@ -81,6 +92,59 @@ class Factura{
         $res = $this -> Conexion -> filasAfectadas();
         $this -> Conexion -> cerrar();
         return $res;
+    }
+
+    /*
+     * Función que busca por paginación y devuelve n objetos de tipo Producto en un array
+     */
+    public function buscarPaginado($pag, $cant){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> FacturaDAO -> buscarPaginado($pag, $cant));
+        $resList = Array();
+        while($res = $this -> Conexion -> extraer()){
+            array_push($resList, new Factura($res[0], $res[1], $res[2], $res[3]));
+        }
+        $this -> Conexion -> cerrar();
+
+        return $resList;
+    }
+
+    /*
+     * Busca la cantidad de registros sin ningun filtro
+     */
+    public function buscarCantidad(){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> FacturaDAO -> buscarCantidad());
+        $res = $this -> Conexion -> extraer();
+        $this -> Conexion -> cerrar();
+        return $res[0];
+    }
+
+    /*
+     * Función que busca por paginación, filtro de palabra y devuelve la información en un array
+     */
+    public function filtroPaginado($str, $pag, $cant){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> FacturaDAO -> filtroPaginado($str, $pag, $cant));
+        $resList = Array();
+        while($res = $this -> Conexion -> extraer()){
+            array_push($resList, $res);
+        }
+        $this -> Conexion -> cerrar();
+
+        return $resList;
+    }
+
+    /*
+     * Busca la cantidad de registros con filtro de palabra
+     */
+    public function filtroCantidad($str){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> FacturaDAO -> filtroCantidad($str));
+        $res = $this -> Conexion -> extraer();
+        $this -> Conexion -> cerrar();
+
+        return $res[0];
     }
 
 }

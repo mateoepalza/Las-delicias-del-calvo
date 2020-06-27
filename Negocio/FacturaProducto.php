@@ -67,6 +67,17 @@ class FacturaProducto{
         return $res;
     }
 
+    public function getProductosFactura(){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> FacturaProductoDAO -> getProductosFactura() );
+        $resList = array();
+        while($res = $this -> Conexion -> extraer()){
+            array_push($resList, new FacturaProducto($res[0], $res[1], $res[2], $res[3]));
+        }
+        $this -> Conexion -> cerrar();
+        return $resList;
+    }
+
 }
 
 ?>

@@ -57,7 +57,7 @@ $pagination = $cantPag / $numReg;
                                 <span class="page-link">Previous</span>
                             </li>
                             <?php
-                            for ($i = 0; $i <= $pagination; $i++) {
+                            for ($i = 0; $i < $pagination; $i++) {
                             ?>
                                 <li class="page-item page-item-list page-numbers <?php echo (($i+1) == $pagina)? "active" : ""; ?>" data-page="<?php echo ($i + 1);?>"><a class="page-link" href="#" ><?php echo ($i + 1); ?></a></li>
                             <?php
@@ -82,13 +82,12 @@ $pagination = $cantPag / $numReg;
 
         $("#search").on('keyup', function() {
             json = {
-                "pid": "<?php echo base64_encode("Vista/Producto/Ajax/searchBar.php") ?>",
                 "page": "1",
                 "cantPag" : $("#select-cantidad").val(),
                 "search": $(this).val()
             };
 
-            $.get("indexAJAX.php", json, function(data) {
+            $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Producto/Ajax/searchBar.php") ?>", json, function(data) {
                 console.log(data);
                 res = JSON.parse(data);
                 // Imprime los datos de la tabla
@@ -105,13 +104,12 @@ $pagination = $cantPag / $numReg;
         
         $(".pagination").on('click', ".page-item-list", function(){
             json = {
-                "pid": "<?php echo base64_encode("Vista/Producto/Ajax/searchBar.php") ?>",
                 "page": $(this).data("page"),
                 "cantPag" : $("#select-cantidad").val(),
                 "search": $("#search").val()
             };
 
-            $.get("indexAJAX.php", json, function(data) {
+            $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Producto/Ajax/searchBar.php") ?>", json, function(data) {
                 res = JSON.parse(data);
                 //imprime los datos en la tabla
                 tablePrint(res.DataT, res.DataL);
@@ -126,13 +124,13 @@ $pagination = $cantPag / $numReg;
 
         $("#select-cantidad").on('change', function(){
             json = {
-                "pid": "<?php echo base64_encode("Vista/Producto/Ajax/searchBar.php") ?>",
                 "page": "1",
                 "cantPag" : $(this).val(),
                 "search": $("#search").val()
             };
             console.log(json);
-            $.get("indexAJAX.php", json, function(data) {
+            $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Producto/Ajax/searchBar.php") ?>", json, function(data) {
+                console.log(data);
                 res = JSON.parse(data);
                 //imprime los datos en la tabla
                 tablePrint(res.DataT, res.DataL);

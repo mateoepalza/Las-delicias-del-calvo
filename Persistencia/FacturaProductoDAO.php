@@ -20,5 +20,13 @@ class FacturaProductoDAO{
                 VALUES ('" . $this -> factura . "','" . $this -> producto . "','" . $this -> cantidad . "','" . $this -> precio . "')";
     }
 
+    public function getProductosFactura(){
+        return "SELECT FK_idFactura, Producto.nombre, cantidad, FacturaProducto.precio
+                FROM FacturaProducto
+                INNER JOIN Producto
+                ON FK_idProducto = idProducto
+                WHERE FK_idFactura = " . $this -> factura;
+    }
+
 }
 ?>

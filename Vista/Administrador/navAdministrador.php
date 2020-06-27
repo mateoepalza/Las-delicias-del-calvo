@@ -29,7 +29,7 @@ $admin->getInfoBasic();
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Clientes</a>
+                <a class="nav-link" href="index.php?pid=<?php echo base64_encode("Vista/Factura/buscarFactura.php")?>">Facturas</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Proveedores</a>
@@ -46,7 +46,7 @@ $admin->getInfoBasic();
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Security/buscarCliente.php") ?>">Clientes</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/") ?>">Proveedores</a>
+                    <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Security/buscarInventarista.php") ?>">Inventarista</a>
                 </div>
             </li>
         </ul>

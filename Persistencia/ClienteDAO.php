@@ -30,7 +30,7 @@ class ClienteDAO{
     public function getInfoBasic(){
 
         return "SELECT idCliente, nombre, apellido, email, clave, foto, estado 
-        FROM cliente 
+        FROM Cliente 
         WHERE idCliente = ". $this -> idCliente;
 
     }
@@ -56,7 +56,7 @@ class ClienteDAO{
     public function filtroCantidad($str){
         return "SELECT count(*) 
                 FROM Cliente
-                WHERE Cliente.nombre like '%" . $str . "%'";
+                WHERE Cliente.nombre like '%". $str ."%' OR Cliente.apellido like '%" . $str . "%' OR Cliente.email like '%" . $str . "%'";
     }
 
     public function updateEstado(){

@@ -55,7 +55,7 @@ $pagination = $cantPag / $numReg;
                                 <span class="page-link">Previous</span>
                             </li>
                             <?php
-                            for ($i = 0; $i <= $pagination; $i++) {
+                            for ($i = 0; $i < $pagination; $i++) {
                             ?>
                                 <li class="page-item page-item-list page-numbers <?php echo (($i+1) == $pagina)? "active" : ""; ?>" data-page="<?php echo ($i + 1);?>"><a class="page-link" href="#" ><?php echo ($i + 1); ?></a></li>
                             <?php
