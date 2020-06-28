@@ -13,6 +13,7 @@
     require_once "Negocio/Factura.php";
     require_once "Negocio/FacturaProducto.php";
     require_once "Negocio/Inventarista.php";
+    require_once "Negocio/Correo.php";
     
     $pid = null;
 
@@ -26,7 +27,7 @@
 
     include "Vista/Main/head.php";
     
-    $enter = Array('Vista/Auth/autenticar.php');
+    $enter = Array('Vista/Auth/autenticar.php', 'Vista/Auth/clienteActivarCuenta.php');
 
     if(isset($pid)){
 

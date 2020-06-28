@@ -12,17 +12,17 @@ if (isset($_POST['actualizarInventarista'])) {
 
     $inventarista = new Inventarista($idInventarista, $nombre, $apellido, $email, $clave, "", $estado);
 
-    if($clave != ""){
-        $res = $inventarista -> actualizarCClave();
-    }else{
-        $res = $inventarista -> actualizar();
+    if ($clave != "") {
+        $res = $inventarista->actualizarCClave();
+    } else {
+        $res = $inventarista->actualizar();
     }
-    
+
     if ($res == 1) {
         $msj = "El inventarista se ha actualizado satisfactoriamente.";
         $class = "alert-success";
-    } else if($res == 0){
-        $msj = "No se ha modificado ningun valor.";
+    } else if ($res == 0) {
+        $msj = "No hubo ningún cambio.";
         $class = "alert-warning";
     } else {
         $msj = "Ocurrió algo inesperado, intente de nuevo.";
@@ -36,13 +36,16 @@ if (isset($_POST['actualizarInventarista'])) {
 }
 ?>
 
-<div class="container mt-5">
+<div class="container mt-5 mb-5">
     <div class="row justify-content-center">
         <h1>Actualizar Inventarista</h1>
     </div>
     <div class="row justify-content-center mt-5">
         <div class="col-8">
             <div class="card">
+                <div class="card-header">
+                    Actualizar un inventarista
+                </div>
                 <div class="card-body">
                     <form novalidate class="needs-validation" action="index.php?pid=<?php echo base64_encode("Vista/Inventarista/actualizarInventarista.php") ?>&idInventarista=<?php echo $inventarista->getIdInventarista() ?>" method="POST">
                         <div class="form-group">
@@ -58,7 +61,7 @@ if (isset($_POST['actualizarInventarista'])) {
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <input class="form-control" name="apellido" type="text"  value="<?php echo $inventarista->getApellido() ?>" required>
+                                    <input class="form-control" name="apellido" type="text" value="<?php echo $inventarista->getApellido() ?>" required>
                                     <div class="invalid-feedback">
                                         Por favor ingrese el apellido.
                                     </div>
@@ -70,10 +73,13 @@ if (isset($_POST['actualizarInventarista'])) {
                         </div>
                         <div class="form-group">
                             <label>Estado</label>
-                            <select name="estado" class="form-control">
+                            <select name="estado" class="form-control" required>
                                 <option value="1" <?php ($inventarista->getEstado() == 1) ? "selected" : ""; ?>>Activado</option>
                                 <option value="0" <?php ($inventarista->getEstado() == 0) ? "selected" : ""; ?>>Bloqueado</option>
                             </select>
+                            <div class="valid-feedback">
+                                ¡Enhorabuena!
+                            </div>
                         </div>
                         <div class="form-group">
                             <label>Email</label>

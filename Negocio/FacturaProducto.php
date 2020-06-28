@@ -78,6 +78,14 @@ class FacturaProducto{
         return $resList;
     }
 
+    public function cantProductosFacturas(){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> FacturaProductoDAO -> cantProductosFacturas());
+        $res = $this -> Conexion -> extraer();
+        $this -> Conexion -> cerrar();
+        return $res[0];
+    }
+
 }
 
 ?>

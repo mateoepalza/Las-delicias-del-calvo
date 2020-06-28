@@ -110,7 +110,7 @@ $pagination = $cantPag / $numReg;
                 console.log(data);
                 res = JSON.parse(data);
                 //imprime los datos en la tabla
-                tablePrint(res.DataT);
+                tablePrint(res.DataT, res.DataL);
                 //Imprime paginación
                 paginationPrint(res.DataP, parseInt(res.Cpage));
             });
@@ -131,7 +131,7 @@ $pagination = $cantPag / $numReg;
             $.get("indexAJAX.php", json, function(data) {
                 res = JSON.parse(data);
                 //imprime los datos en la tabla
-                tablePrint(res.DataT);
+                tablePrint(res.DataT, res.DataL);
                 //Imprime paginación
                 paginationPrint(res.DataP, parseInt(res.Cpage));
             });

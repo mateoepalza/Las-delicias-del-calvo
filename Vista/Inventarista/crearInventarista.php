@@ -22,13 +22,16 @@ if (isset($_POST['crearInventarista'])) {
     include "Vista/Main/error.php";
 }
 ?>
-<div class="container mt-5">
+<div class="container mt-5 mb-5">
     <div class="row justify-content-center">
         <h1>Crear Inventarista</h1>
     </div>
     <div class="row justify-content-center mt-5">
         <div class="col-8">
             <div class="card">
+                <div class="card-header">
+                    Crear un nuevo inventarista
+                </div>
                 <div class="card-body">
                 <form novalidate class="needs-validation" action="index.php?pid=<?php echo base64_encode("Vista/Inventarista/crearInventarista.php") ?>" method="POST">
                         <div class="form-group">
@@ -97,23 +100,3 @@ if (isset($_POST['crearInventarista'])) {
         </div>
     </div>
 </div>
-<script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function() {
-        'use strict';
-        window.addEventListener('load', function() {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
-</script>

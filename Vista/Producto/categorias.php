@@ -17,7 +17,6 @@ $pagination = $cantPag / $numReg;
     <div class="row d-flex flex-row justify-content-center">
 
         <h1><?php echo $categoria->getNombre() ?></h1>
-        <input id="search-product" class="form-control" type="search">
 
     </div>
     <div class="row product-container mt-4">
@@ -46,7 +45,7 @@ $pagination = $cantPag / $numReg;
                         <span class="page-link">Previous</span>
                     </li>
                     <?php
-                    for ($i = 0; $i <= $pagination; $i++) {
+                    for ($i = 0; $i < $pagination; $i++) {
                     ?>
                         <li class="page-item page-item-list page-numbers <?php echo (($i + 1) == $pagina) ? "active" : ""; ?>" data-page="<?php echo ($i + 1); ?>"><a class="page-link" href="#"><?php echo ($i + 1); ?></a></li>
                     <?php

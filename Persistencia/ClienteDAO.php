@@ -27,6 +27,29 @@ class ClienteDAO{
                 WHERE email = '" . $this -> correo . "' AND clave ='" . md5($this -> clave) . "'";
     }
 
+    public function registrar($codigoActivacion){
+        return "INSERT INTO Cliente (nombre, apellido, email, clave, estado, activation)
+                VALUES ('" . $this -> nombre . "', '" . $this -> apellido . "', '" . $this -> correo . "', '" . md5($this -> clave)  . "', '-1', '" . md5($codigoActivacion) . "')";
+    }
+
+    public function existeCorreo(){
+        return "SELECT idCliente
+                FROM Cliente
+                WHERE email = '" . $this -> correo . "'";
+    }
+
+    public function verificarActivacion($codigoActivacion){
+        return "SELECT idCliente 
+                FROM cliente 
+                WHERE email = '" . $this -> correo . "' AND activation = '" . md5($codigoActivacion) . "'";
+    }
+
+    public function activacion(){
+        return "UPDATE Cliente 
+                SET estado = 1 
+                WHERE email = '" . $this -> correo . "'";
+    }
+
     public function getInfoBasic(){
 
         return "SELECT idCliente, nombre, apellido, email, clave, foto, estado 

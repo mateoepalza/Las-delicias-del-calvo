@@ -146,3 +146,29 @@
     letter-spacing: 2px;
     color: #F00;
 }
+.tableHistorial{
+    width: 100%;
+    letter-spacing: 1px;
+}
+
+.tableHistorial > thead > tr > th, .tableHistorial > tbody > tr > td{
+    color: #969595;
+    font-weight: normal;
+}
+
+.tableHistorial > tbody > tr > td:first-child{
+    color: #57595A;
+}
+
+.tableHistorial tr {
+    border-top: 1px solid #ececec;
+    border-bottom: 1px solid #ececec;
+}
+
+th, td {
+    padding: 15px;
+}
+
+.tableHistorial > tbody > tr:hover{
+    background-color: #F6F8FA;
+}

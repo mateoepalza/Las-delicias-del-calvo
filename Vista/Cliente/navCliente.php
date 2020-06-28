@@ -2,46 +2,45 @@
 /*
  * Agregar al carrito
  */
-if(isset($_POST['carrito'])){
+if (isset($_POST['carrito'])) {
 
     $idProducto = $_GET['idProducto'];
     $cantProd = $_POST['cantidad'];
-    
-    $carrito = new Carrito($idProducto, $cantProd);
-    $bool = $carrito -> checkCarrito();
 
-    if($bool){
-        $alert = $carrito -> actualizarCantidad();
+    $carrito = new Carrito($idProducto, $cantProd);
+    $bool = $carrito->checkCarrito();
+
+    if ($bool) {
+        $alert = $carrito->actualizarCantidad();
         $msj = "La cantidad del producto ha sido actualizada en el carrito.";
-    }else{
-        $alert = $carrito -> agregarProducto();
+    } else {
+        $alert = $carrito->agregarProducto();
         $msj = "El producto ha sido añadido correctamente al carrito.";
     }
-    
+
     $class = "alert-success";
     include "Vista/Main/error.php";
 }
 
-if(isset($_POST['btnCheckout'])){
+if (isset($_POST['btnCheckout'])) {
 
     $factura = new Factura();
-    $res = $factura -> pago();
+    $res = $factura->pago();
 
-    if($res){
-        header("Location: index.php?pid=". base64_encode("Vista/Factura/clienteFactura.php"));
+    if ($res) {
+        header("Location: index.php?pid=" . base64_encode("Vista/Factura/clienteFactura.php"));
         $msj = "La cantidad del producto ha sido actualizada en el carrito.";
         $class = "alert-success";
-    }else{
+    } else {
         $msj = "El producto ha sido añadido correctamente al carrito.";
         $class = "alert-danger";
     }
-    
-    include "Vista/Main/error.php";
 
+    include "Vista/Main/error.php";
 }
 
 $cliente = new Cliente($_SESSION['id']);
-$cliente -> getInfoBasic();
+$cliente->getInfoBasic();
 
 $categoria = new Categoria();
 $categorias = $categoria->buscarTodo();
@@ -51,7 +50,13 @@ $categorias = $categoria->buscarTodo();
 <div class="container-fluid bg-white">
     <div class="row" style="height:100px;">
 
-        <div class="col-lg-3 col-md-4 col-sm-1 col-1 ">
+        <div class="col-lg-3 col-md-4 col-sm-1 col-1 d-flex flex-column justify-content-center align-items-center">
+            <div class="input-group" style="width:225px">
+                <input id="search-product" class="form-control" type="search" width="200px">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="validatedInputGroupSelect"><i class="fas fa-search"></i></label>
+                </div>
+            </div>
 
         </div>
         <div id="logoImg" class="col-lg-6 col-md-4 col-sm-5 col-3 ">
@@ -63,17 +68,17 @@ $categorias = $categoria->buscarTodo();
                     <?php echo ($cliente->getNombre() != "") ? $cliente->getNombre() . " " . $cliente->getApellido() : $cliente->getCorreo(); ?>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Cliente/clienteHistorial.php") ?>">Historial de compras</a>
+                    <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("") ?>">Another action</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("") ?>">Something else here</a>
                 </div>
             </div>
             <div class="menu-right">
-                <a class="btn btn-outline-light" style=" color: #000; border:0px;" href="index.php?pid=<?php echo base64_encode('Vista/Checkout/checkout.php') ?>"><i class="fas fa-cart-arrow-down"><?php echo (count($_SESSION['carrito']) > 0)? "<span class='num-products'>" . count($_SESSION['carrito']) . "</span>": ""; ?></i></a>    
+                <a class="btn btn-outline-light" style=" color: #000; border:0px;" href="index.php?pid=<?php echo base64_encode('Vista/Checkout/checkout.php') ?>"><i class="fas fa-cart-arrow-down"><?php echo (count($_SESSION['carrito']) > 0) ? "<span class='num-products'>" . count($_SESSION['carrito']) . "</span>" : ""; ?></i></a>
             </div>
             <div class="menu-right">
-                <a class="btn btn-outline-primary" style="border:0px;" href="index.php?cerrarSesion=True"><i class="fas fa-sign-out-alt"></i></a>    
+                <a class="btn btn-outline-primary" style="border:0px;" href="index.php?cerrarSesion=True"><i class="fas fa-sign-out-alt"></i></a>
             </div>
         </div>
     </div>
@@ -82,14 +87,14 @@ $categorias = $categoria->buscarTodo();
 <nav id="navMain" class="navbar-expand-md border-top border-bottom">
     <div class="collapse navbar-collapse">
         <ul class="navbar-nav m-auto">
-            <?php 
-                foreach($categorias as $cate){
-                    ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php?pid=<?php echo base64_encode("Vista/Producto/categorias.php") ?>&idCategoria=<?php echo $cate -> getIdCategoria() ?>"><?php echo $cate -> getNombre() ?></a>
-                    </li>
-                    <?php
-                }
+            <?php
+            foreach ($categorias as $cate) {
+            ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?pid=<?php echo base64_encode("Vista/Producto/categorias.php") ?>&idCategoria=<?php echo $cate->getIdCategoria() ?>"><?php echo $cate->getNombre() ?></a>
+                </li>
+            <?php
+            }
             ?>
         </ul>
     </div>

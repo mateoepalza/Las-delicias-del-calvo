@@ -117,6 +117,59 @@ class Cliente{
         $this -> conexion -> cerrar();
     }
 
+    /**
+     * Buscar si un correo ya existe
+     */
+
+    public function existeCorreo(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar( $this -> ClienteDAO -> existeCorreo());
+        $this -> conexion -> cerrar();
+        return $this -> conexion -> numFilas();
+    }
+
+    /**
+     * Registro de un nuevo cliente
+     */
+
+    public function registrar(){
+        $this -> conexion -> abrir();
+        $codigoActivacion = rand(1000,9999);
+        $this -> conexion -> ejecutar( $this -> ClienteDAO -> registrar($codigoActivacion));
+        $res = $this -> conexion -> filasAfectadas();
+        $this -> conexion -> cerrar();       
+        $url = "http://127.0.0.1/Las-delicias-del-calvo/index.php?pid=" . base64_encode("Vista/Auth/clienteActivarCuenta.php") . "&email=" . base64_encode($this -> correo) . "&cod=" . base64_encode($codigoActivacion);
+        //echo $url;
+        /*$correo = new Correo(
+            $this -> correo, 
+            "deliciasCalvo@chefBogota.com",
+            "Delicias del calvo - recuerde ingresar apara poder activar su cuenta con nosotros",
+            "Recuerde activar su cuenta con nosotros, por favor vaya a la siguiente dirección " . $url, 
+            "deliciasCalvo@chefBogota.com",
+            "deliciasCalvo@chef.com"
+        );
+        $correo -> send();*/
+        return $res;
+    }
+
+    /**
+     * Activar cuenta de cliente
+     */
+    public function verificarActivacion($codActivacion){
+        $this-> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> ClienteDAO -> verificarActivacion($codActivacion));
+        if($this -> conexion -> numFilas()){
+            $this -> conexion -> ejecutar( $this -> ClienteDAO -> activacion());
+            $this -> conexion -> cerrar();
+            return true;
+        }else{
+            $this -> conexion -> cerrar();
+            return false;
+        }
+
+        
+    }
+
     /*
      * Función que busca por paginación y devuelve n objetos de tipo Producto en un array
      */

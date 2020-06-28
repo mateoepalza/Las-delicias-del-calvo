@@ -28,5 +28,11 @@ class FacturaProductoDAO{
                 WHERE FK_idFactura = " . $this -> factura;
     }
 
+    public function cantProductosFacturas(){
+        return "SELECT count(*)
+                FROM FacturaProducto
+                WHERE FK_idFactura = " . $this -> factura;
+    }
+
 }
 ?>
