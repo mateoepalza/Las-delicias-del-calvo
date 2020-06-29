@@ -38,6 +38,12 @@ class ClienteDAO{
                 WHERE email = '" . $this -> correo . "'";
     }
 
+    public function checkClave(){
+        return "SELECT idCliente
+                FROM Cliente
+                WHERE idCliente = '" . $this -> idCliente . "' AND clave = '" . md5($this -> clave) . "'";
+    }
+
     public function verificarActivacion($codigoActivacion){
         return "SELECT idCliente 
                 FROM cliente 
@@ -87,5 +93,47 @@ class ClienteDAO{
                 SET
                     estado = ". $this -> estado . "
                 WHERE idCliente = " . $this -> idCliente;
+    }
+
+    public function insertar(){
+        return "INSERT INTO Cliente (nombre, apellido, email, clave, estado) 
+                VALUES ('" . $this -> nombre ."', '" . $this -> apellido  ."', '" . $this -> correo  ."', '" . md5($this -> clave)  ."', '" . $this -> estado  ."')";
+    }
+
+    public function actualizar(){
+        return "UPDATE Cliente
+                SET
+                    nombre = '" . $this -> nombre . "',
+                    apellido = '" . $this -> apellido . "',
+                    email = '" . $this -> correo . "',
+                    estado = '" . $this -> estado . "'
+                WHERE idCliente = ". $this -> idCliente;
+    }
+
+    public function actualizarBasic(){
+        return "UPDATE Cliente
+                SET
+                    nombre = '" . $this -> nombre . "',
+                    apellido = '" . $this -> apellido . "',
+                    email = '" . $this -> correo . "'
+                WHERE idCliente = ". $this -> idCliente;
+    }
+
+    public function actualizarClave($nuevaClave){
+        return "UPDATE Cliente
+                SET
+                    clave = '" . md5($nuevaClave) . "'
+                WHERE idCliente = " . $this -> idCliente;
+    }
+
+    public function actualizarCClave(){
+        return "UPDATE Cliente
+                SET
+                    nombre = '" . $this -> nombre . "',
+                    apellido = '" . $this -> apellido . "',
+                    email = '" . $this -> correo . "',
+                    estado = '" . $this -> estado . "',
+                    clave = '" . md5($this -> clave) . "'
+                WHERE idCliente = ". $this -> idCliente;
     }
 }

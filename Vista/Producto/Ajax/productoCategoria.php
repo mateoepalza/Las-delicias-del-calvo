@@ -1,9 +1,9 @@
 <?php 
 
 
-    $str = $_GET['search'];
-    $category = $_GET['category'];
-    $pagina = $_GET['page'];
+    $str = $_POST['search'];
+    $category = $_POST['category'];
+    $pagina = $_POST['page'];
     $cantPag = 5;
 
     $producto = new Producto();

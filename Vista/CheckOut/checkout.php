@@ -4,6 +4,9 @@ $carrito = new Carrito();
 $listaProductos =  $carrito->searchCarritoItems();
 $totalPrice = $carrito->getTotalPriceList($listaProductos);
 
+$Cliente = new Cliente($_SESSION['id']);
+$Cliente->getInfoBasic();
+
 ?>
 
 <div class="container mt-4">
@@ -61,34 +64,62 @@ $totalPrice = $carrito->getTotalPriceList($listaProductos);
             <div class="p-4" style="background-color: #f9f9f9;">
                 <h2 class="mb-4" style="letter-spacing:2px;">Payment info.</h2>
                 <div>
-                    <form action="index.php?pid=<?php echo base64_encode("Vista/CheckOut/checkout.php")?>" method="POST">
-                        <span class="p-method-title">Payment method</span>
-                        <div class="p-method-div">
-                            <input type="radio">
-                            <label><i class="fas fa-credit-card"></i> Credir Card</label>
+                    <form novalidate class="needs-validation" action="index.php?pid=<?php echo base64_encode("Vista/CheckOut/checkout.php") ?>" method="POST">
+                        <div class="form-group">
+                            <span class="p-method-title">Payment method</span>
+                            <div class="custom-control custom-radio p-method-radio">
+                                <input type="radio" class="form-check-input" name="paymentMethod" required>
+                                <label><i class="fas fa-credit-card"></i> Credir Card</label>
+                            </div>
+                            <div class="custom-control custom-radio p-method-div p-method-radio">
+                                <input type="radio" class="form-check-input" name="paymentMethod" required>
+                                <label><i class="fab fa-cc-paypal"></i> Paypal</label>
+                                <div class="invalid-feedback">
+                                    Por favor seleccione un estado.
+                                </div>
+                                <div class="valid-feedback">
+                                    ¡Enhorabuena!
+                                </div>
+                            </div>
+
+
                         </div>
-                        <span class="p-method-title">Name on card</span>
-                        <div class="p-method-div">
-                            <span>Jhon Carter</span>
-                        </div>
-                        <span class="p-method-title">Card Number</span>
-                        <div class="p-method-div">
-                            <span>&#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226; 5698</span>
-                        </div>
-                        <span class="p-method-title">Expiration Date</span>
-                        <div class="p-method-div">
-                            <div>
-                                <input type="date">
+                        <div class="form-group">
+                            <span class="p-method-title">Name on card</span>
+                            <div class="p-method-div">
+                                <span><?php echo ($Cliente->getNombre() == "") ? $Cliente->getCorreo() : $Cliente->getNombre() . " " . $Cliente->getApellido(); ?></span>
                             </div>
                         </div>
-                        <span class="p-method-title">CVV</span>
-                        <div class="p-method-div">
-                            <div>
-                                <input type="text">
+                        <div class="form-group">
+                            <span class="p-method-title">Card Number</span>
+                            <div class="p-method-div">
+                                <span>&#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226; 5698</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <span class="p-method-title">Expiration Date</span>
+                            <div class="p-method-div">
+                                <div>
+                                    <input type="month" class="form-control" required>
+                                    <div class="invalid-feedback">
+                                        Por favor seleccione un estado.
+                                    </div>
+                                    <div class="valid-feedback">
+                                        ¡Enhorabuena!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <span class="p-method-title">CVV</span>
+                            <div class="p-method-div">
+                                <div>
+                                    <input class="form-control" type="number" min="100" max="999" required>
+                                </div>
                             </div>
                         </div>
 
-                        <input type="submit" id="btn-checkout" name="btnCheckout" class="btn btn-primary" value="Checkout" style="width: 100%">
+                        <button type="submit" id="btn-checkout" name="btnCheckout" class="btn btn-primary w-100">Pagar</button>
                     </form>
 
                 </div>

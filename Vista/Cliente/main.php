@@ -71,65 +71,6 @@ $productosDest= $producto ->getDestProducts();
         <?php
         }
         ?>
-        <!--<div class="product">
-            <a href="index.php?pid=<?php echo base64_encode("Vista/Producto/descripProducto.php") ?>&idProducto=1" class="img-producto">
-                <img src="static/img/Productos/fresas.png" class="img-fluid img-portfolio img-hover">
-            </a>
-            <h4 class="product-title">Hamburguesa</h4>
-            <div class="product-info">
-                <span class="precio-descrip">Desde </span>
-                <span class="precio-producto">$16.000</span>
-            </div>
-        </div>
-        <div class="product">
-            <a href="#" class="img-producto">
-                <img src="static/img/Productos/maracuya.png" class="img-fluid img-portfolio img-hover">
-            </a>
-            <h4 class="product-title">Hamburguesa</h4>
-            <div class="product-info">
-                <span class="precio-descrip">Desde </span>
-                <span class="precio-producto">$16.000</span>
-            </div>
-        </div>
-        <div class="product">
-            <a href="#" class="img-producto">
-                <img src="static/img/Productos/fresas.png" class="img-fluid img-portfolio img-hover">
-            </a>
-            <h4 class="product-title">Hamburguesa</h4>
-            <div class="product-info">
-                <span class="precio-descrip">Desde </span>
-                <span class="precio-producto">$16.000</span>
-            </div>
-        </div>
-        <div class="product">
-            <a href="#" class="img-producto">
-                <img src="static/img/Productos/maracuya.png" class="img-fluid img-portfolio img-hover">
-            </a>
-            <h4 class="product-title">Hamburguesa</h4>
-            <div class="product-info">
-                <span class="precio-descrip">Desde </span>
-                <span class="precio-producto">$16.000</span>
-            </div>
-        </div>
-        <div class="product">
-            <a href="#" class="img-producto">
-                <img src="static/img/Productos/fresas.png" class="img-fluid img-portfolio img-hover">
-            </a>
-            <h4 class="product-title">Hamburguesa</h4>
-            <div class="product-info">
-                <span class="precio-descrip">Desde </span>
-                <span class="precio-producto">$16.000</span>
-            </div>
-        </div>
-        <div class="product">
-            <a href="#" class="img-producto">
-                <img src="static/img/Productos/maracuya.png" class="img-fluid img-portfolio img-hover">
-            </a>
-            <h4 class="product-title">Hamburguesa</h4>
-            <div class="product-info">
-                <span class="precio-descrip">Desde </span>
-                <span class="precio-producto">$16.000</span>
-            </div>
-        </div>-->
+        
     </div>
 </div>

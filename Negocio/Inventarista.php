@@ -101,6 +101,21 @@ class Inventarista
 
     /* methods */
 
+    /**
+     * Check clave
+     */
+
+    public function checkClave(){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar($this -> InventaristaDAO -> checkClave());    
+        $this -> Conexion -> cerrar();
+        if($this -> Conexion -> numFilas() == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function autenticar(){
         $this->Conexion->abrir();
         $this->Conexion->ejecutar($this->InventaristaDAO->autenticar());
@@ -128,9 +143,9 @@ class Inventarista
         $this->idInventarista = $res[0];
         $this->nombre = $res[1];
         $this->apellido = $res[2];
-        $this -> correo = $res[3];
-        $this->foto = $res[4];
-        $this->estado = $res[5];
+        $this->correo = $res[3];
+        $this->foto = $res[5];
+        $this->estado = $res[6];
 
         $this->Conexion->cerrar();
 
@@ -228,6 +243,17 @@ class Inventarista
     public function insertar(){
         $this -> Conexion -> abrir();
         $this -> Conexion -> ejecutar( $this -> InventaristaDAO -> insertar());
+        $res = $this -> Conexion -> filasAfectadas();
+        $this -> Conexion -> cerrar();
+        return $res;
+    }
+
+    /**
+     * Actualiza la contraseña del cliente
+     */
+    public function actualizarClave($nuevaClave){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar($this -> InventaristaDAO -> actualizarClave($nuevaClave));
         $res = $this -> Conexion -> filasAfectadas();
         $this -> Conexion -> cerrar();
         return $res;

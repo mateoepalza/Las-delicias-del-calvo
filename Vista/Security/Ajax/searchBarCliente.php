@@ -1,27 +1,22 @@
-<?php 
+<?php
 
 
-    $str = $_GET['search'];
+$str = $_POST['search'];
 
-    $pagina = $_GET['page'];
-    $cantPag = $_GET['cantPag'];
+$pagina = $_POST['page'];
+$cantPag = $_POST['cantPag'];
 
-    $cliente = new Cliente();
-    if($str != "0"){
-        $data = $cliente -> filtroPaginado($str, $pagina, $cantPag);
-        $resultado = $cliente -> filtroCantidad($str);
-    }else{
-        $data = $cliente -> buscarAPaginado($pagina, $cantPag);
-        $resultado = $cliente -> buscarCantidad($str);
-    }
-    
-    $cant = $resultado/$cantPag;
+$cliente = new Cliente();
+$data = $cliente->filtroPaginado($str, $pagina, $cantPag);
+$resultado = $cliente->filtroCantidad($str);
 
-    $ajax = Array(
-        "DataT" => $data,
-        "DataL" => base64_encode("Vista/Producto/.php"),
-        "Cpage" => $pagina,
-        "DataP" => $cant
-    );
-    echo json_encode($ajax);
+$cant = $resultado / $cantPag;
+
+$ajax = array(
+    "DataT" => $data,
+    "DataL" => base64_encode("Vista/Cliente/actualizarCliente.php"),
+    "Cpage" => $pagina,
+    "DataP" => $cant
+);
+echo json_encode($ajax);
 ?>

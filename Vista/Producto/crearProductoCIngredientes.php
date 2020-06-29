@@ -125,9 +125,9 @@ $listaIngredientes = $Ingrediente->buscarTodo();
                 "idProducto": $(this).data("idproducto"),
                 "idIngrediente": $(this).data("idingrediente")
             };
-            console.log(json);
+            
             $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/IngredienteProducto/Ajax/borrarIngrediente.php") ?>", json, function(data) {
-                console.log(data);
+                
                 res = JSON.parse(data);
 
                 if (res.msj) {
@@ -146,7 +146,7 @@ $listaIngredientes = $Ingrediente->buscarTodo();
                 "idIngrediente": $("#select-ingrediente").val(),
                 "cantidad": $("#ingrediente-cantidad").val()
             };
-            console.log(json);
+            
             $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/IngredienteProducto/Ajax/agregarIngrediente.php") ?>", json, function(data) {
 
                 res = JSON.parse(data);
@@ -190,7 +190,7 @@ $listaIngredientes = $Ingrediente->buscarTodo();
     }
 
     function crearIngredienteUI(data) {
-        console.log(data);
+        
         $(`<div class="card bg-light mb-3 m-3" style="max-width: 18rem;">
                 <div class="card-header d-flex flex-row justify-content-end"><span class="close-ingrediente" style="cursor:pointer;" data-idproducto="${data[0]}" data-idingrediente="${data[1]}">x</span></div>
                 <div class="card-body">

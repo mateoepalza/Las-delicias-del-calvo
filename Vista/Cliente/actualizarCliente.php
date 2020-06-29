@@ -1,8 +1,8 @@
 <?php
 
-$idInventarista = $_GET['idInventarista'];
+$idCliente = $_GET['idCliente'];
 
-if (isset($_POST['actualizarInventarista'])) {
+if (isset($_POST['actualizarCliente'])) {
 
     $nombre = $_POST['nombre'];
     $apellido = $_POST['apellido'];
@@ -10,16 +10,16 @@ if (isset($_POST['actualizarInventarista'])) {
     $clave = $_POST['clave'];
     $estado = $_POST['estado'];
 
-    $inventarista = new Inventarista($idInventarista, $nombre, $apellido, $email, $clave, "", $estado);
+    $cliente = new Cliente($idCliente, $nombre, $apellido, $email, $clave, "", $estado);
 
     if ($clave != "") {
-        $res = $inventarista->actualizarCClave();
+        $res = $cliente->actualizarCClave();
     } else {
-        $res = $inventarista->actualizar();
+        $res = $cliente->actualizar();
     }
 
     if ($res == 1) {
-        $msj = "El inventarista se ha actualizado satisfactoriamente.";
+        $msj = "El cliente se ha actualizado satisfactoriamente.";
         $class = "alert-success";
     } else if ($res == 0) {
         $msj = "No hubo ningún cambio.";
@@ -31,28 +31,28 @@ if (isset($_POST['actualizarInventarista'])) {
 
     include "Vista/Main/error.php";
 } else {
-    $inventarista = new Inventarista($idInventarista);
-    $inventarista->getInfoBasic();
+    $cliente = new Cliente($idCliente);
+    $cliente -> getInfoBasic();
 }
 ?>
 
 <div class="container mt-5 mb-5">
     <div class="row justify-content-center">
-        <h1>Actualizar Inventarista</h1>
+        <h1>Actualizar Cliente</h1>
     </div>
     <div class="row justify-content-center mt-5">
         <div class="col-8">
             <div class="card">
                 <div class="card-header">
-                    Actualizar un inventarista
+                    Actualizar un cliente
                 </div>
                 <div class="card-body">
-                    <form novalidate class="needs-validation" action="index.php?pid=<?php echo base64_encode("Vista/Inventarista/actualizarInventarista.php") ?>&idInventarista=<?php echo $inventarista->getIdInventarista() ?>" method="POST">
+                    <form novalidate class="needs-validation" action="index.php?pid=<?php echo base64_encode("Vista/Cliente/actualizarCliente.php") ?>&idCliente=<?php echo $cliente->getIdCliente() ?>" method="POST">
                         <div class="form-group">
                             <label>Nombre Completo</label>
                             <div class="row">
                                 <div class="col-6">
-                                    <input class="form-control" name="nombre" type="text" value="<?php echo $inventarista->getNombre() ?>" required>
+                                    <input class="form-control" name="nombre" type="text" value="<?php echo $cliente->getNombre() ?>" placeholder="Ingrese su nombre" required>
                                     <div class="invalid-feedback">
                                         Por favor ingrese el nombre.
                                     </div>
@@ -61,7 +61,7 @@ if (isset($_POST['actualizarInventarista'])) {
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <input class="form-control" name="apellido" type="text" value="<?php echo $inventarista->getApellido() ?>" required>
+                                    <input class="form-control" name="apellido" type="text" value="<?php echo $cliente->getApellido() ?>" placeholder="Ingrese su apellido" required>
                                     <div class="invalid-feedback">
                                         Por favor ingrese el apellido.
                                     </div>
@@ -74,8 +74,9 @@ if (isset($_POST['actualizarInventarista'])) {
                         <div class="form-group">
                             <label>Estado</label>
                             <select name="estado" class="form-control" required>
-                                <option value="1" <?php echo ($inventarista->getEstado() == 1) ? "selected" : ""; ?>>Activado</option>
-                                <option value="0" <?php echo ($inventarista->getEstado() == 0) ? "selected" : ""; ?>>Bloqueado</option>
+                                <option value="1" <?php echo ($cliente->getEstado() == 1) ? "selected" : ""; ?>>Activado</option>
+                                <option value="0" <?php echo ($cliente->getEstado() == 0) ? "selected" : ""; ?>>Bloqueado</option>
+                                <option value="-1" <?php echo ($cliente->getEstado() == -1) ? "selected" : ""; ?>>Desactivado</option>
                             </select>
                             <div class="valid-feedback">
                                 ¡Enhorabuena!
@@ -83,7 +84,7 @@ if (isset($_POST['actualizarInventarista'])) {
                         </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <input class="form-control" name="email" type="email" value="<?php echo $inventarista->getCorreo() ?>" required>
+                            <input class="form-control" name="email" type="email" value="<?php echo $cliente->getCorreo() ?>"  placeholder="Ingrese su correo" required>
                             <div class="invalid-feedback">
                                 Por favor ingrese el correo.
                             </div>
@@ -96,7 +97,7 @@ if (isset($_POST['actualizarInventarista'])) {
                             <input class="form-control" name="clave" type="password" value="">
                         </div>
                         <div>
-                            <button class="btn btn-primary w-100" name="actualizarInventarista" type="submit"> Actualizar </button>
+                            <button class="btn btn-primary w-100" name="actualizarCliente" type="submit">Actualizar cliente </button>
                         </div>
                     </form>
                 </div>

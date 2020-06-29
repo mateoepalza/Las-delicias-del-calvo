@@ -96,8 +96,81 @@ class Cliente{
         $this -> conexion = $Conexion;
     }
     /* 
-    *   Functions
+    *   methods
     */
+
+
+    /**
+     * Insertar un nuevo Inventarisa
+     */
+    public function insertar(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar( $this -> ClienteDAO -> insertar());
+        $res = $this -> conexion -> filasAfectadas();
+        $this -> conexion -> cerrar();
+        return $res;
+    }
+
+    /*
+     * Actualiza la información del objeto sin actualizar la contraseña
+     */
+    public function actualizar(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar( $this -> ClienteDAO -> actualizar());
+        $res = $this -> conexion -> filasAfectadas();
+        $this -> conexion -> cerrar();
+        return $res;
+    }
+
+    /*
+     * Actualiza la información básica del objeto sin actualizar la contraseña
+     */
+    public function actualizarBasic(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar( $this -> ClienteDAO -> actualizarBasic());
+        $res = $this -> conexion -> filasAfectadas();
+        $this -> conexion -> cerrar();
+        return $res;
+    }
+
+    /**
+     * Actualiza la contraseña del cliente
+     */
+
+    public function actualizarClave($nuevaClave){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> ClienteDAO -> actualizarClave($nuevaClave));
+        $res = $this -> conexion -> filasAfectadas();
+        $this -> conexion -> cerrar();
+        return $res;
+    }
+
+    /**
+     * Actualiza la información del objeto actualizando la contraseña
+     */
+    public function actualizarCClave(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar( $this -> ClienteDAO -> actualizarCClave());
+        $res = $this -> conexion -> filasAfectadas();
+        $this -> conexion -> cerrar();
+        return $res;
+    }
+
+    /**
+     * Check clave
+     */
+
+    public function checkClave(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> ClienteDAO -> checkClave());    
+        $this -> conexion -> cerrar();
+        if($this -> conexion -> numFilas() == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function autenticar(){
         $this -> conexion -> abrir();
         $this -> conexion -> ejecutar( $this -> ClienteDAO -> autenticar());
@@ -166,8 +239,6 @@ class Cliente{
             $this -> conexion -> cerrar();
             return false;
         }
-
-        
     }
 
     /*

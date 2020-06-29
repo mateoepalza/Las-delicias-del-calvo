@@ -33,6 +33,19 @@ class AdministradorDAO{
                 FROM Administrador
                 WHERE idAdministrador = " . $this -> idAdministrador;
     }
+
+    public function checkClave(){
+        return "SELECT idAdministrador
+                FROM Administrador
+                WHERE idAdministrador = '" . $this -> idAdministrador . "' AND clave = '" . md5($this -> clave) . "'";
+    }
+
+    public function actualizarClave($nuevaClave){
+        return "UPDATE Administrador
+                SET
+                    clave = '" . md5($nuevaClave) . "'
+                WHERE idAdministrador = " . $this -> idAdministrador;
+    }
 }
 
 ?>

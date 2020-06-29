@@ -35,7 +35,7 @@
         }
 
         public function getInfoBasic(){
-            return "SELECT idInventarista, nombre, apellido, email, clave, foto 
+            return "SELECT idInventarista, nombre, apellido, email, clave, foto, estado 
                     FROM Inventarista 
                     WHERE idInventarista = ". $this -> idInventarista;
         }
@@ -76,7 +76,8 @@
                     SET
                         nombre = '" . $this -> nombre . "',
                         apellido = '" . $this -> apellido . "',
-                        email = '" . $this -> correo . "'
+                        email = '" . $this -> correo . "',
+                        estado = '" . $this -> estado . "'
                     WHERE idInventarista = ". $this -> idInventarista;
         }
 
@@ -86,6 +87,7 @@
                         nombre = '" . $this -> nombre . "',
                         apellido = '" . $this -> apellido . "',
                         email = '" . $this -> correo . "',
+                        estado = '" . $this -> estado . "',
                         clave = '" . md5($this -> clave) . "'
                     WHERE idInventarista = ". $this -> idInventarista;
         }
@@ -93,6 +95,19 @@
         public function insertar(){
             return "INSERT INTO Inventarista (nombre, apellido, email, clave, estado) 
                     VALUES ('" . $this -> nombre ."', '" . $this -> apellido  ."', '" . $this -> correo  ."', '" . md5($this -> clave)  ."', '" . $this -> estado  ."')";
+        }
+
+        public function checkClave(){
+            return "SELECT idInventarista
+                    FROM Inventarista
+                    WHERE idInventarista = '" . $this -> idInventarista . "' AND clave = '" . md5($this -> clave) . "'";
+        }
+
+        public function actualizarClave($nuevaClave){
+            return "UPDATE Inventarista
+                    SET
+                        clave = '" . md5($nuevaClave) . "'
+                    WHERE idInventarista = " . $this -> idInventarista;
         }
 
     }

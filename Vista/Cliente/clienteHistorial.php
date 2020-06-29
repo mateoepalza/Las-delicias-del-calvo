@@ -111,7 +111,7 @@ $pagination = $cantPag / $numReg;
             };
 
             $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Cliente/Ajax/searchBarFacturaCliente.php") ?>", json, function(data) {
-                console.log(data);
+                
                 res = JSON.parse(data);
                 // Imprime los datos de la tabla
                 tablePrint(res.DataT, res.DataL);
@@ -139,7 +139,7 @@ $pagination = $cantPag / $numReg;
             };
 
             $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Cliente/Ajax/searchBarFacturaCliente.php") ?>", json, function(data) {
-                console.log(data);
+                
                 res = JSON.parse(data);
                 //imprime los datos en la tabla
                 tablePrint(res.DataT, res.DataL);
@@ -158,9 +158,9 @@ $pagination = $cantPag / $numReg;
                 "cantPag": "5",
                 "search": $("#search-product").val()
             };
-            console.log(json);
+            
             $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Cliente/Ajax/searchBarFacturaCliente.php") ?>", json, function(data) {
-                console.log(data);
+                
                 res = JSON.parse(data);
                 //imprime los datos en la tabla
                 tablePrint(res.DataT, res.DataL);

@@ -1,6 +1,6 @@
 <?php 
-$idCliente = $_GET['idCliente'];
-$estado = $_GET['estado'];
+$idCliente = $_POST['idCliente'];
+$estado = $_POST['estado'];
 
 $cliente = new Cliente($idCliente,"","","","","",$estado);
 

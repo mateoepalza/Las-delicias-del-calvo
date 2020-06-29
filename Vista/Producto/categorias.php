@@ -71,14 +71,13 @@ $pagination = $cantPag / $numReg;
             clearTimeout(timeout)
             timeout = setTimeout(() => {
                 json = {
-                    "pid": "<?php echo base64_encode("Vista/Producto/Ajax/productoCategoria.php") ?>",
                     "page": "1",
                     "search": $(this).val(),
                     "category": <?php echo $category ?>
                 };
 
-                $.get("indexAJAX.php", json, function(data) {
-                    console.log(data);
+                $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Producto/Ajax/productoCategoria.php") ?>", json, function(data) {
+
                     res = JSON.parse(data);
                     // Imprime los datos de la tabla
                     tablePrint(res.DataT, res.DataL);
@@ -97,14 +96,12 @@ $pagination = $cantPag / $numReg;
 
         $(".pagination").on('click', ".page-item-list", function() {
             json = {
-                "pid": "<?php echo base64_encode("Vista/Producto/Ajax/productoCategoria.php") ?>",
                 "page": $(this).data("page"),
                 "search": $("#search-product").val(),
                 "category": <?php echo $category ?>
             };
 
-            $.get("indexAJAX.php", json, function(data) {
-                console.log(data);
+            $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Producto/Ajax/productoCategoria.php") ?>", json, function(data) {
                 res = JSON.parse(data);
                 //imprime los datos en la tabla
                 tablePrint(res.DataT, res.DataL);

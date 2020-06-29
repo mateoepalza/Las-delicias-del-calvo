@@ -3,7 +3,7 @@ $invent = new Inventarista($_SESSION['id']);
 $invent->getInfoBasic();
 
 ?>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position: sticky; top: 0px; z-index: 15;">
     <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -62,9 +62,18 @@ $invent->getInfoBasic();
                 </div>
             </li>
         </ul>
-        <div>
-            <span class="mr-4" style="color:#FFF"> <?php echo ($invent->getNombre() != "") ? $invent->getNombre() . " " . $invent->getApellido() : $invet->getCorreo();   ?> </span>
-            <a class="btn btn-outline-light" href="index.php?cerrarSesion=True">cerrar Sesion</a>
+        
+        <div class="menu-right nav-item dropdown">
+                <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <?php echo ($invent->getNombre() != "") ? $invent->getNombre() . " " . $invent->getApellido() : $invent->getCorreo(); ?>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Inventarista/cambiarClaveInventarista.php") ?>">Cambiar contraseña</a>
+                </div>
+            </div>
+            <div class="menu-right">
+                <a class="btn btn-outline-light" style="border:0px;" href="index.php?cerrarSesion=True"><i class="fas fa-sign-out-alt"></i></a>
+            </div>
         </div>
     </div>
 </nav>

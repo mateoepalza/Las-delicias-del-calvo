@@ -2,9 +2,9 @@
     /*
      * Obtener variables
      */
-    $str = $_GET['search'];
-    $pagina = $_GET['page'];
-    $cantPag = $_GET['cantPag'];
+    $str = $_POST['search'];
+    $pagina = $_POST['page'];
+    $cantPag = $_POST['cantPag'];
 
     /*
      * Crear el objeto y realizar la consulta

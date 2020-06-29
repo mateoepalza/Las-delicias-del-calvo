@@ -28,7 +28,7 @@ if (isset($_POST['btnCheckout'])) {
     $res = $factura->pago();
 
     if ($res) {
-        header("Location: index.php?pid=" . base64_encode("Vista/Factura/clienteFactura.php"));
+        header("Location: index.php?pid=" . base64_encode("Vista/Factura/buscarFactura.php"));
         $msj = "La cantidad del producto ha sido actualizada en el carrito.";
         $class = "alert-success";
     } else {
@@ -52,7 +52,7 @@ $categorias = $categoria->buscarTodo();
 
         <div class="col-lg-3 col-md-4 col-sm-1 col-1 d-flex flex-column justify-content-center align-items-center">
             <div class="input-group" style="width:225px">
-                <input id="search-product" class="form-control" type="search" width="200px">
+                <input id="search-product" class="form-control" type="search" placeholder="Buscar" width="200px">
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="validatedInputGroupSelect"><i class="fas fa-search"></i></label>
                 </div>
@@ -69,9 +69,9 @@ $categorias = $categoria->buscarTodo();
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Cliente/clienteHistorial.php") ?>">Historial de compras</a>
-                    <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("") ?>">Another action</a>
+                    <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Cliente/infoPersonal.php") ?>">Información personal</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("") ?>">Something else here</a>
+                    <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Cliente/cambiarClaveCliente.php") ?>">Cambiar contraseña</a>
                 </div>
             </div>
             <div class="menu-right">
@@ -84,18 +84,48 @@ $categorias = $categoria->buscarTodo();
     </div>
 
 </div>
-<nav id="navMain" class="navbar-expand-md border-top border-bottom">
-    <div class="collapse navbar-collapse">
-        <ul class="navbar-nav m-auto">
-            <?php
-            foreach ($categorias as $cate) {
-            ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php?pid=<?php echo base64_encode("Vista/Producto/categorias.php") ?>&idCategoria=<?php echo $cate->getIdCategoria() ?>"><?php echo $cate->getNombre() ?></a>
-                </li>
-            <?php
-            }
-            ?>
-        </ul>
+<div class="container-fluid border-top border-bottom" id="navMain">
+    <div class="row justify-content-center">
+        <div class="col-10 navScroll">
+            <nav class="navbar-expand-md ">
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav m-auto">
+                        <?php
+                        foreach ($categorias as $cate) {
+                        ?>
+                            <li class="nav-item d-flex principal-link flex-column justify-content-center">
+                                <a class="nav-link" href="index.php?pid=<?php echo base64_encode("Vista/Producto/categorias.php") ?>&idCategoria=<?php echo $cate->getIdCategoria() ?>"><?php echo $cate->getNombre() ?></a>
+                            </li>
+                        <?php
+                        }
+                        ?>
+                    </ul>
+                </div>
+            </nav>
+        </div>
     </div>
-</nav>
+</div>
+<script>
+    let scrY = 0;
+    let bool = true;
+
+
+    
+
+
+    $('.navScroll').bind('mousewheel DOMMouseScroll', function(e) {
+    var scrollTo = null;
+    
+    if (e.type == 'mousewheel') {
+        scrollTo = (e.originalEvent.wheelDelta * -1);
+    }
+    else if (e.type == 'DOMMouseScroll') {
+        scrollTo = 40 * e.originalEvent.detail;
+    }
+
+    if (scrollTo) {
+        e.preventDefault();
+        $(this).scrollLeft(scrollTo + $(this).scrollLeft());
+    }
+});
+</script>

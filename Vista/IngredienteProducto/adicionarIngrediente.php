@@ -15,26 +15,26 @@ $listaProdIngredientes = $InPr->buscarIngredientes();
         <h1>Ingredientes</h1>
     </div>
     <div class="row justify-content-center mt-4 pb-5 border-bottom">
-        <div class="col-4">
-            <div>
-                <label>Seleccione el ingrediente</label>
-                <select id="select-ingrediente" class="form-control">
-                    <option selected disabled>--Seleccione el ingrediente--</option>
-                    <?php
-                    foreach ($listaIngredientes as $item) {
-                    ?>
-                        <option value="<?php echo $item->getIdIngrediente() ?>"><?php echo $item->getNombre() ?></option>
-                    <?php
-                    }
-                    ?>
-                </select>
-            </div>
+        <div class="col-4 d-flex flex-column justify-content-between">
+
+            <label>Seleccione el ingrediente</label>
+            <select id="select-ingrediente" class="form-control">
+                <option selected disabled>--Seleccione el ingrediente--</option>
+                <?php
+                foreach ($listaIngredientes as $item) {
+                ?>
+                    <option value="<?php echo $item->getIdIngrediente() ?>"><?php echo $item->getNombre() ?></option>
+                <?php
+                }
+                ?>
+            </select>
+
         </div>
-        <div class="col-4">
-            <div>
-                <label>Ingrese la cantidad de unidades</label>
-                <input type="number" min="1" max="50" step="1" id="ingrediente-cantidad" class="form-control" placeholder="Cantidad">
-            </div>
+        <div class="col-4 d-flex flex-column justify-content-between">
+
+            <label>Ingrese la cantidad de unidades</label>
+            <input type="number" min="1" max="50" step="1" id="ingrediente-cantidad" class="form-control" placeholder="Cantidad">
+
         </div>
         <div class="col-4 d-flex flex-column justify-content-end">
             <input type="hidden" id="idProductHidden" value="<?php echo $idProducto ?>">
@@ -68,7 +68,7 @@ $listaProdIngredientes = $InPr->buscarIngredientes();
 <script src="static/js/bootstrap-input-spinner.js"></script>
 <script type="text/javascript">
     $(function() {
-        
+
         /*
          * Evento de buscar en la tabla
          */
@@ -120,7 +120,7 @@ $listaProdIngredientes = $InPr->buscarIngredientes();
              * Cojo el elemento de cantidad
              */
             let elem = $(this).siblings(".updateQuantity");
-            
+
             json = {
                 "idProducto": $(this).data("idproducto"),
                 "idIngrediente": $(this).data("idingrediente"),
@@ -128,7 +128,7 @@ $listaProdIngredientes = $InPr->buscarIngredientes();
             };
 
             $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/IngredienteProducto/Ajax/actualizarIngrediente.php") ?>", json, function(data) {
-                
+
                 res = JSON.parse(data);
                 if (res.status) {
                     crearAlert("alert-success", res.msj);
@@ -145,10 +145,10 @@ $listaProdIngredientes = $InPr->buscarIngredientes();
         elem.remove();
     }
 
-    function limpiarCampos(){
+    function limpiarCampos() {
         $("#ingrediente-cantidad").val("");
         $("#select-ingrediente > option:first-child").prop("selected", true);
-        
+
     }
 
     function crearIngredienteUI(data) {

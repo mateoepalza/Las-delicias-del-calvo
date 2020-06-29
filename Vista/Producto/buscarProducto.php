@@ -8,12 +8,15 @@ $resultados = $Producto -> buscarPaginado($pagina, $numReg);
 $cantPag = $Producto -> buscarCantidad();
 $pagination = $cantPag / $numReg;
 ?>
-<div class="container mt-5">
+<div class="container mt-5 mb-5">
     <div class="row justify-content-center">
+        <h1>Buscar producto</h1>
+    </div>
+    <div class="row justify-content-center mt-5">
         <div class="col-10">
             <div class="card">
                 <div class="card-header bg-dark d-flex flex-row justify-content-between">
-                    <span class="text-white">Busque un producto</span>
+                    <a href="index.php?pid=<?php echo base64_encode("Vista/Producto/crearProducto.php") ?>"><button type="button" class="btn btn-outline-light">Crear nuevo</button></a>
                     <select id="select-cantidad">
                         <option value="5" >5</option>
                         <option value="10" >10</option>
@@ -88,7 +91,7 @@ $pagination = $cantPag / $numReg;
             };
 
             $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Producto/Ajax/searchBar.php") ?>", json, function(data) {
-                console.log(data);
+                
                 res = JSON.parse(data);
                 // Imprime los datos de la tabla
                 tablePrint(res.DataT, res.DataL);
@@ -128,9 +131,9 @@ $pagination = $cantPag / $numReg;
                 "cantPag" : $(this).val(),
                 "search": $("#search").val()
             };
-            console.log(json);
+            
             $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Producto/Ajax/searchBar.php") ?>", json, function(data) {
-                console.log(data);
+                
                 res = JSON.parse(data);
                 //imprime los datos en la tabla
                 tablePrint(res.DataT, res.DataL);

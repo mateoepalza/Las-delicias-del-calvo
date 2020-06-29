@@ -1,9 +1,9 @@
 <?php 
 
-    $str = $_GET['search'];
+    $str = $_POST['search'];
 
-    $pagina = $_GET['page'];
-    $cantPag = $_GET['cantPag'];
+    $pagina = $_POST['page'];
+    $cantPag = $_POST['cantPag'];
 
     $ingrediente = new Ingrediente();
     

@@ -67,9 +67,9 @@
                 "idProducto" : $(this).data("id"),
                 "cantidad" : $(this).val()
             };
-            console.log(json);
+            
             $.post('indexAJAX.php?pid=<?php echo base64_encode("Vista/Checkout/Ajax/descripProdOutStock.php") ?>', json, function(data){
-                console.log(data);
+                
                 res = JSON.parse(data);
                 if(res.status){
                     inStock();

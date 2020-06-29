@@ -9,7 +9,7 @@ if(isset($_POST['btn-registrar'])){
 
     if($cliente -> existeCorreo()){
 
-        $msj = "Ocurrió algo inesperado.";
+        $msj = "El correo proporcionado ya se encuentra en uso.";
         $class = "alert-danger";
 
     }else{
@@ -128,12 +128,12 @@ if (isset($_GET['error'])) {
             <li class="nav-item active">
                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
+            <!--<li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
+            </li>-->
         </ul>
         <div class="">
             <div id="signIn" class="btn btn-sm btn-outline-light">Log In</div>

@@ -110,6 +110,31 @@ class Administrador{
         /* FIN Actualzar OBJ*/
         $this -> conexion -> cerrar();
     }
+
+    /**
+     * Actualiza la contraseña del cliente
+     */
+    public function actualizarClave($nuevaClave){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> AdministradorDAO -> actualizarClave($nuevaClave));
+        $res = $this -> conexion -> filasAfectadas();
+        $this -> conexion -> cerrar();
+        return $res;
+    }
+
+    /**
+     * Check clave
+     */
+    public function checkClave(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> AdministradorDAO -> checkClave());    
+        $this -> conexion -> cerrar();
+        if($this -> conexion -> numFilas() == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
 
 ?>

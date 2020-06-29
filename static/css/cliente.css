@@ -50,6 +50,26 @@
     position: sticky;
     z-index: 12;
 }
+.navScroll{
+    /*overflow-y: hidden;*/
+    overflow-x: scroll;
+}
+.principal-link{
+    text-decoration: none;
+    background-image: linear-gradient(#007bff, #007bff);
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 2px;
+    transition: background-size .3s;
+}
+.principal-link:hover{
+    background-size: 100% 2px;
+}
+.navScroll::-webkit-scrollbar{
+    width: 8px;     
+    height: 8px;    
+    display: none;  
+}
 #logoImg{
     padding: 10px;
     background-image: url('../img/logoB.png');
@@ -134,12 +154,15 @@
     padding: 15px 0px 15px 0px;
 }
 .p-method-title{
-    font-size: 14px;
+    font-size: 16 px;
     letter-spacing: 1px;
     color: #9e9e9e;
 }
+.p-method-radio{
+    margin-left: 15px;
+}
 .p-method-div{
-    margin: 0px 0px 25px 15px;
+    margin-bottom: 25px;
 }
 .out-stock{
     font-size: 20px;

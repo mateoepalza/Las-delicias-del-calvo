@@ -8,8 +8,11 @@ $resultados = $Inventarista->buscarPaginado($pagina, $numReg);
 $cantPag = $Inventarista->buscarCantidad();
 $pagination = $cantPag / $numReg;
 ?>
-<div class="container mt-5">
+<div class="container mt-5 mb-5">
     <div class="row justify-content-center">
+        <h1>Buscar Inventarista</h1>
+    </div>
+    <div class="row justify-content-center mt-5">
         <div class="col-10">
             <div class="card">
                 <div class="card-header bg-dark d-flex flex-row justify-content-between">
@@ -79,8 +82,6 @@ $pagination = $cantPag / $numReg;
     </div>
 </div>
 <script type="text/javascript">
-    
-
     $(function() {
         /*
          * Evento de buscar en la tabla
@@ -228,7 +229,7 @@ $pagination = $cantPag / $numReg;
             className = "alert-danger";
         }
 
-        $("#alert-ajax").html(`<div class="alert ${className} alert-dismissible fade show" role="alert" style="text-align: center; position: fixed; width: 100%;">
+        $("#alert-ajax").html(`<div class="alert ${className} alert-dismissible fade show" role="alert" style="top: 0px;position: fixed; z-index:20; margin-top : 50px; transform: translateX(-50%); margin-left: 50%">
                         <span id="alert-ajax-msj">${msj}</span>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>

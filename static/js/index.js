@@ -20,8 +20,13 @@ $(function () {
 		});
 	});
 	$(".hidden").mouseup(function(e) {
-        if(e.target.className == "hidden"){
-            $(".hidden").fadeOut();
-        }
+		if(e.target.className == "hidden" ){
+			$(".hidden").fadeOut();
+		}
+	});
+	$(".hidden-registrar").mouseup(function(e) {
+		if(e.target.className == "hidden-registrar" ){
+			$(".hidden-registrar").fadeOut();
+		}
 	});
 });
