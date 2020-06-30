@@ -7,24 +7,40 @@ if (isset($_POST['carrito'])) {
     $idProducto = $_GET['idProducto'];
     $cantProd = $_POST['cantidad'];
 
-    $carrito = new Carrito($idProducto, $cantProd);
-    $bool = $carrito->checkCarrito();
+    $carrito = dSerializeC();
+    $bool = $carrito -> checkCarrito($idProducto);
+
+    $class = "alert-success";
 
     if ($bool) {
-        $alert = $carrito->actualizarCantidad();
-        $msj = "La cantidad del producto ha sido actualizada en el carrito.";
+
+        $alert = $carrito -> actualizarCantidadProducto($idProducto, $cantProd);
+
+        if($alert){
+            $msj = "La cantidad del producto ha sido actualizada en el carrito.";
+        }else{
+            $msj = "La cantidad del producto no sido actualizada en el carrito.";
+            $class = "alert-danger";
+        }
+        
     } else {
-        $alert = $carrito->agregarProducto();
+        $carrito -> agregarProductoCarrito($idProducto, $cantProd);
         $msj = "El producto ha sido añadido correctamente al carrito.";
     }
 
-    $class = "alert-success";
+    serializeC($carrito);
+
     include "Vista/Main/error.php";
 }
 
-if (isset($_POST['btnCheckout'])) {
 
-    $factura = new Factura();
+$carrito = dSerializeC();
+$itemsCarrito = $carrito -> cantidadItems();
+
+if (isset($_POST['btnCheckout'])) {
+    $date = new DateTime();
+
+    $factura = new Factura("",$date -> format('Y-m-d H:i:s'), $carrito -> getTotalPriceList(), $_SESSION['id']);
     $res = $factura->pago();
 
     if ($res) {
@@ -32,12 +48,13 @@ if (isset($_POST['btnCheckout'])) {
         $msj = "La cantidad del producto ha sido actualizada en el carrito.";
         $class = "alert-success";
     } else {
-        $msj = "El producto ha sido añadido correctamente al carrito.";
+        $msj = "Hubo un problema con el pago, intenta de nuevo.";
         $class = "alert-danger";
     }
 
     include "Vista/Main/error.php";
 }
+serializeC($carrito);
 
 $cliente = new Cliente($_SESSION['id']);
 $cliente->getInfoBasic();
@@ -75,7 +92,7 @@ $categorias = $categoria->buscarTodo();
                 </div>
             </div>
             <div class="menu-right">
-                <a class="btn btn-outline-light" style=" color: #000; border:0px;" href="index.php?pid=<?php echo base64_encode('Vista/Checkout/checkout.php') ?>"><i class="fas fa-cart-arrow-down"><?php echo (count($_SESSION['carrito']) > 0) ? "<span class='num-products'>" . count($_SESSION['carrito']) . "</span>" : ""; ?></i></a>
+                <a class="btn btn-outline-light" style=" color: #000; border:0px;" href="index.php?pid=<?php echo base64_encode('Vista/Checkout/checkout.php') ?>"><i class="fas fa-cart-arrow-down"><?php echo ($itemsCarrito > 0) ? "<span class='num-products'>" . $itemsCarrito . "</span>" : ""; ?></i></a>
             </div>
             <div class="menu-right">
                 <a class="btn btn-outline-primary" style="border:0px;" href="index.php?cerrarSesion=True"><i class="fas fa-sign-out-alt"></i></a>

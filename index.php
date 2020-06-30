@@ -14,6 +14,8 @@
     require_once "Negocio/FacturaProducto.php";
     require_once "Negocio/Inventarista.php";
     require_once "Negocio/Correo.php";
+    //Check
+    require_once "Helpers/serialize.php";
     
     $pid = null;
 

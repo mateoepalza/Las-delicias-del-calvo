@@ -114,6 +114,7 @@ class Ingrediente{
 
     public function actualizarIngrediente(){
         $this -> Conexion -> abrir();
+        echo "<br>".$this -> IngredienteDAO -> actualizarIngrediente()."<br>";
         $this -> Conexion -> ejecutar( $this -> IngredienteDAO -> actualizarIngrediente());
         $res = $this -> Conexion -> filasAfectadas();
         $this -> Conexion -> cerrar();

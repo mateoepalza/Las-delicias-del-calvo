@@ -17,7 +17,7 @@
         if($clien -> getEstado() == 1){
             $_SESSION['id'] = $clien -> getIdCliente();
             $_SESSION['rol'] = 2;
-            $_SESSION['carrito'] = array();
+            $_SESSION['carrito'] = createCarrito();
             header('Location: index.php?pid='. base64_encode('Vista/Cliente/main.php'));
         }else if($clien -> getEstado() == -1){
             header('Location: index.php?error=2');

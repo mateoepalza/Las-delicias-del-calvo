@@ -3,8 +3,8 @@
     $idProducto = $_POST['idProducto'];
     $cantidad = $_POST['cantidad'];
 
-    $producto = new Producto($idProducto);
-    $bool = $producto -> getStockItemCart($cantidad);
+    $carrito = dSerializeC();
+    $bool = $carrito -> getStockAjax($idProducto, $cantidad);
 
 
 

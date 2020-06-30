@@ -2,13 +2,13 @@
 
     $idProducto = $_GET['idProducto'];
 
-    $carrito = new Carrito($idProducto);
-    $cantidadProducto = $carrito -> buscarProductoCarrito();
+    $carrito = dSerializeC();
+    $cantidadProducto = $carrito -> buscarCantidadProductoCarrito($idProducto);
 
     $producto = new Producto($idProducto);
     $producto -> getInfo();
 
-    $InStock = $producto -> getStock();
+    $InStock = $carrito -> getStock($idProducto, 1);
 
 ?>
 
@@ -45,7 +45,7 @@
                         <div class="col-4">
                             <span>Cantidad</span>
                             <div> 
-                                <input id="in-cantidad" name="cantidad" type="number" value="<?php echo (count($cantidadProducto)  != 0)? $cantidadProducto[1]: "1";  ?>" min="1" max="100" step="1" data-id="<?php echo $idProducto ?>" <?php echo (!$InStock)? "disabled":""; ?>/>
+                                <input id="in-cantidad" name="cantidad" type="number" value="<?php echo $cantidadProducto ?>" min="1" max="100" step="1" data-id="<?php echo $idProducto ?>" <?php echo (!$InStock)? "disabled":""; ?>/>
                             </div>
                         </div>
                         <div class="col-8 d-flex flex-column justify-content-end">
@@ -69,7 +69,7 @@
             };
             
             $.post('indexAJAX.php?pid=<?php echo base64_encode("Vista/Checkout/Ajax/descripProdOutStock.php") ?>', json, function(data){
-                
+                console.log(data);
                 res = JSON.parse(data);
                 if(res.status){
                     inStock();

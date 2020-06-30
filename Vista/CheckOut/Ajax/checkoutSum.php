@@ -3,8 +3,8 @@
 $idProducto = $_POST['idProducto'];
 $amount = $_POST['amount'];
 
-$producto = new Producto($idProducto);
-$bool = $producto -> getStockItemCart($amount);
+$carrito = dSerializeC();
+$bool = $carrito -> getStockAjax($idProducto, $amount);
 
 $json = array(
     "status" => $bool,
@@ -14,12 +14,8 @@ $json = array(
 
 
 if($bool){
-
-    $carrito = new Carrito($idProducto, $amount);
-
-    $carrito -> actualizarCantidad();
-    $listaProductos =  $carrito -> searchCarritoItems();
-    $totalPrice = $carrito -> getTotalPriceList($listaProductos);
+    $carrito -> actualizarCantidadProducto($idProducto, $amount);
+    $totalPrice = $carrito -> getTotalPriceList();
 
     $json['msj'] = "La adición ha sido exitosa";
     $json['data'] = array(
@@ -28,12 +24,13 @@ if($bool){
 
 }else{
     $json['msj'] = "El producto está agotado";
-    $json['data'] = array();
     $json['data'] = array(
         "totalPrice" => 0
     );
 
 }
+
+serializeC($carrito);   
 
 echo json_encode($json);
 

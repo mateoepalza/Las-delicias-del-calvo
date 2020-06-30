@@ -71,18 +71,42 @@ class Factura{
 
     public function pago(){
 
-        $producto = new Producto();
-        $resCheck = $producto -> checkOut();
+        $bool = false;
+        $carrito = dSerializeC();
+        $resCheck = $carrito -> checkOut();
         if($resCheck){
-            $resCheck = $producto -> transaction();
-            if($resCheck){
-                $carrito  = new Carrito();
-                $carrito -> vaciarCarro();
+            
+            $res = $this -> crearFactura();
+            if($res == 1){
+                $bool = $this -> agregarProductosFactura($carrito -> getListProducto());
+                if(!$bool){
+                    echo "Entraaa";
+                    $resCheck = $carrito -> transaction();
+                    if(!$resCheck){
+                        $carrito -> vaciarCarrito();
+                        $bool = true;
+                    }
+                }   
+            }
+        }
+        serializeC($carrito);
+
+        return $bool;
+
+    }
+
+    public function agregarProductosFactura($listProductos){
+        $bool = false;
+        foreach($listProductos as $prod){
+            $newFP = new FacturaProducto($this -> idFactura, $prod[0]-> getIdProducto(), $prod[1], $prod[0] -> getPrecio());
+            $res = $newFP -> agregar();
+            if($res != 1){
+                $bool = true;
             }
         }
 
-        return $resCheck;
-
+        return $bool;
+        
     }
 
     public function crearFactura(){

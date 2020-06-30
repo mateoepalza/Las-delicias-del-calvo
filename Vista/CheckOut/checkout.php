@@ -1,8 +1,9 @@
 <?php
 
-$carrito = new Carrito();
-$listaProductos =  $carrito->searchCarritoItems();
-$totalPrice = $carrito->getTotalPriceList($listaProductos);
+$carrito = dSerializeC();
+$listaProductos =  $carrito -> searchCarritoItems();
+$totalPrice = $carrito -> getTotalPriceList();
+serializeC($carrito);
 
 $Cliente = new Cliente($_SESSION['id']);
 $Cliente->getInfoBasic();
@@ -81,8 +82,6 @@ $Cliente->getInfoBasic();
                                     ¡Enhorabuena!
                                 </div>
                             </div>
-
-
                         </div>
                         <div class="form-group">
                             <span class="p-method-title">Name on card</span>

@@ -2,18 +2,16 @@
 
 $idProducto = $_POST['idProducto'];
 
-$carrito = new Carrito($idProducto);
-
-$res = $carrito -> eliminarCarrito();
-$listaProductos =  $carrito -> searchCarritoItems();
-$totalPrice = $carrito -> getTotalPriceList($listaProductos);
-$itemsCarrito = $carrito -> totalItemsCarrito();
-
+$carrito = dSerializeC();
+$res = $carrito -> eliminarCarrito($idProducto);
+$totalPrice = $carrito -> getTotalPriceList();
+$itemsCarrito = $carrito -> cantidadItems();
+serializeC($carrito);
 $json = array(
     "status" => $res,
     "msj" => "",
     "data" => array(
-            "totalPrice" => $totalPrice,
+            "totalPrice" => number_format($totalPrice, 2, ",", "."),
             "itemsCarrito" => $itemsCarrito
         )
 );
