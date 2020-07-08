@@ -37,7 +37,7 @@ if (isset($_POST['actualizarProveedor'])) {
         <h1>Actualizar Proveedor</h1>
     </div>
     <div class="row justify-content-center mt-5">
-        <div class="col-8">
+        <div class="col-11 col-md-12 col-lg-9 col-xl-8">
             <div class="card">
                 <div class="card-header">
                     Actualice el proveedor

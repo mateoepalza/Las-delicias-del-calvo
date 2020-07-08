@@ -60,7 +60,6 @@ class FacturaProducto{
 
     public function agregar(){
         $this -> Conexion -> abrir();
-        echo "<br>".$this -> FacturaProductoDAO -> agregar()."<br>";
         $this -> Conexion -> ejecutar($this -> FacturaProductoDAO -> agregar());
         $res = $this -> Conexion -> filasAfectadas();
         $this -> Conexion -> cerrar();

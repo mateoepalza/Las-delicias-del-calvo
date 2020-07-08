@@ -13,7 +13,7 @@ $pagination = $cantPag / $numReg;
         <h1>Buscar Proveedor</h1>
     </div>
     <div class="row justify-content-center mt-5">
-        <div class="col-10">
+        <div class="col-12 col-md-12 col-lg-11 col-xl-10">
             <div class="card">
                 <div class="card-header bg-dark d-flex flex-row justify-content-between">
                     <a href="index.php?pid=<?php echo base64_encode("Vista/Proveedor/crearProveedor.php") ?>"><button type="button" class="btn btn-outline-light">Crear nuevo</button></a>
@@ -28,30 +28,32 @@ $pagination = $cantPag / $numReg;
                     <input id="search" type="search" placeholder="search">
                 </div>
                 <div class="card-body">
-                    <table class="table">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>nit</th>
-                                <th>Nombre</th>
-                                <th>Telefono</th>
-                                <th>Dirección</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="tabla">
-                            <?php
-                            foreach ($resultados as $resultado) {
-                                echo "<tr>";
-                                echo "<td>" . $resultado->getNit() . "</td>";
-                                echo "<td>" . $resultado->getNombre() . "</td>";
-                                echo "<td>" . $resultado->getTelefono() . "</td>";
-                                echo "<td>" . $resultado->getDireccion() . "</td>";
-                                echo "<td><a href='index.php?pid=" . base64_encode("Vista/Proveedor/actualizarProveedor.php") . "&idProveedor=" . $resultado->getIdProveedor() . "'><i class='far fa-edit'></i></a></td>";
-                                echo "</tr>";
-                            }
-                            ?>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive-md">
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>nit</th>
+                                    <th>Nombre</th>
+                                    <th>Telefono</th>
+                                    <th>Dirección</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla">
+                                <?php
+                                foreach ($resultados as $resultado) {
+                                    echo "<tr>";
+                                    echo "<td>" . $resultado->getNit() . "</td>";
+                                    echo "<td>" . $resultado->getNombre() . "</td>";
+                                    echo "<td>" . $resultado->getTelefono() . "</td>";
+                                    echo "<td>" . $resultado->getDireccion() . "</td>";
+                                    echo "<td><a href='index.php?pid=" . base64_encode("Vista/Proveedor/actualizarProveedor.php") . "&idProveedor=" . $resultado->getIdProveedor() . "'><i class='far fa-edit'></i></a></td>";
+                                    echo "</tr>";
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="card-footer d-flex flex-row justify-content-center ">
                     <nav aria-label="...">

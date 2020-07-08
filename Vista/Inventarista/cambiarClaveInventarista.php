@@ -37,7 +37,7 @@ if (isset($_POST['cambiarClave'])) {
         <h1>Actualizar Contraseña</h1>
     </div>
     <div class="row d-flex justify-content-center mt-5">
-        <div class="col-8">
+        <div class="col-11 col-md-12 col-lg-9 col-xl-8">
             <div class="card">
                 <div class="card-header">
                     Actualice su contraseña

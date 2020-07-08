@@ -13,7 +13,7 @@ $pagination = $cantPag / $numReg;
         <h1>Buscar Factura</h1>
     </div>
     <div class="row justify-content-center mt-5">
-        <div class="col-10">
+        <div class="col-12 col-md-12 col-lg-11 col-xl-10">
             <div class="card">
                 <div class="card-header bg-dark d-flex flex-row justify-content-between">
                     <span class="text-white">Busque una factura</span>
@@ -28,30 +28,32 @@ $pagination = $cantPag / $numReg;
                     <input id="search" type="search" placeholder="search">
                 </div>
                 <div class="card-body">
-                    <table class="table">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>#</th>
-                                <th>Fecha</th>
-                                <th>Cliente</th>
-                                <th>Valor</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="tabla">
-                            <?php
-                            foreach ($resultados as $resultado) {
-                                echo "<tr>";
-                                echo "<td>" . $resultado->getIdFactura() . "</td>";
-                                echo "<td>" . $resultado->getFecha() . "</td>";
-                                echo "<td>" . $resultado->getCliente() . "</td>";
-                                echo "<td>" . $resultado->getValor() . "</td>";
-                                echo "<td style='display: flex; flex-flow: row; justify-content: center; align-items:center;'><a href='#' id='moreInfoBtn' data-toggle='modal' data-target='#moreInfo' data-id='" . $resultado->getIdFactura() . "' style='margin: 0px 2px;'><i class='fas fa-info-circle'></i></a></td>";
-                                echo "</tr>";
-                            }
-                            ?>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive-sm">
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Fecha</th>
+                                    <th>Cliente</th>
+                                    <th>Valor</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla">
+                                <?php
+                                foreach ($resultados as $resultado) {
+                                    echo "<tr>";
+                                    echo "<td>" . $resultado->getIdFactura() . "</td>";
+                                    echo "<td>" . $resultado->getFecha() . "</td>";
+                                    echo "<td>" . $resultado->getCliente() . "</td>";
+                                    echo "<td>" . $resultado->getValor() . "</td>";
+                                    echo "<td style='display: flex; flex-flow: row; justify-content: center; align-items:center;'><a href='#' id='moreInfoBtn' data-toggle='modal' data-target='#moreInfo' data-id='" . $resultado->getIdFactura() . "' style='margin: 0px 2px;'><i class='fas fa-info-circle'></i></a></td>";
+                                    echo "</tr>";
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="card-footer d-flex flex-row justify-content-center ">
                     <nav aria-label="...">

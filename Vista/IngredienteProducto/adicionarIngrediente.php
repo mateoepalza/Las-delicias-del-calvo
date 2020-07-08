@@ -9,12 +9,22 @@ $InPr = new IngredienteProducto($idProducto);
 $listaProdIngredientes = $InPr->buscarIngredientes();
 
 ?>
-
+<style>
+    @media screen and (max-width: 770px){
+        .menu-row-up{
+            flex-direction: column;
+        }
+        .menu-row-up > div{
+            max-width: initial !important;
+            margin: 10px 0px;
+        }
+    }
+</style>
 <div class="container mt-5">
     <div class="row justify-content-center">
         <h1>Ingredientes</h1>
     </div>
-    <div class="row justify-content-center mt-4 pb-5 border-bottom">
+    <div class="menu-row-up row justify-content-center mt-4 pb-5 border-bottom">
         <div class="col-4 d-flex flex-column justify-content-between">
 
             <label>Seleccione el ingrediente</label>

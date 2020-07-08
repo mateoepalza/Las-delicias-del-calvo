@@ -17,25 +17,25 @@ $Cliente->getInfoBasic();
 
     </div>
     <div class="row product-container mt-3">
-        <div class="col-8">
+        <div class="col-12  col-xl-8">
             <?php
 
             foreach ($listaProductos as $prod) {
             ?>
-                <div class="row row-checkout-product border-bottom pt-5 pb-5">
-                    <div class="col-3">
+                <div class="row row-checkout-product border-bottom pt-5 pb-5 d-flex justify-content-center">
+                    <div class="col-10 col-md-3">
                         <img src="<?php echo $prod[0]->getFoto() ?>" width="100%">
                     </div>
-                    <div class="col-3">
+                    <div class="col-10 col-md-3">
                         <span class="checkout-p-title"><?php echo $prod[0]->getNombre() ?></span>
 
                         <span class="checkout-p-desc"><?php echo $prod[0]->getDescripcion() ?></span>
                     </div>
-                    <div class="col-3">
+                    <div class="col-5 col-md-3">
                         <input class="spinner" name="cantidad" type="number" value="<?php echo $prod[1] ?>" data-id="<?php echo $prod[0]->getIdProducto() ?>" min="1" max="100" step="1" />
                     </div>
-                    <div class="col-2">$<?php echo number_format($prod[0]->getPrecio(), 2, ",", ".") ?></div>
-                    <div class="col-1 close-product" data-id="<?php echo $prod[0]->getIdProducto() ?>" style="cursor:pointer;">x</div>
+                    <div class="col-5 col-md-2">$<?php echo number_format($prod[0]->getPrecio(), 2, ",", ".") ?></div>
+                    <div class="col-10 col-md-1 close-product align-items-end" data-id="<?php echo $prod[0]->getIdProducto() ?>" style="cursor:pointer;">x</div>
                 </div>
 
             <?php
@@ -44,7 +44,7 @@ $Cliente->getInfoBasic();
             ?>
 
             <div class="row  d-flex flex-row justify-content-end mt-3">
-                <div class="col-4">
+                <div class="col-12 col-md-4">
                     <div class="d-flex flex-row justify-content-between">
                         <span class="checkout-check-title">Subtotal</span>
                         <span id="checkout-ck-value" class="checkout-check-value">$<?php echo number_format($totalPrice, 2, ",", ".") ?></span>
@@ -59,9 +59,8 @@ $Cliente->getInfoBasic();
                     </div>
                 </div>
             </div>
-
         </div>
-        <div class="col-4">
+        <div class="payment-info col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4">
             <div class="p-4" style="background-color: #f9f9f9;">
                 <h2 class="mb-4" style="letter-spacing:2px;">Payment info.</h2>
                 <div>
@@ -118,7 +117,7 @@ $Cliente->getInfoBasic();
                             </div>
                         </div>
 
-                        <button type="submit" id="btn-checkout" name="btnCheckout" class="btn btn-primary w-100">Pagar</button>
+                        <button type="submit" id="btn-checkout" name="btnCheckout" class="btn btn-primary w-100" <?php echo (count($listaProductos) > 0)? "": "disabled"; ?>>Pagar</button>
                     </form>
 
                 </div>
@@ -163,13 +162,14 @@ $Cliente->getInfoBasic();
 
                 if (res.status) {
                     borrarProducto(parent);
+
                 } else {
                     crearAlert("alert-danger", res.msj);
                 }
 
                 actualizarPrecios(res.data.totalPrice);
                 actualizarCantCarrito(res.data.itemsCarrito);
-
+                toggleBotonCheckout(res.data.itemsCarrito.length);
 
             });
         });
@@ -214,5 +214,13 @@ $Cliente->getInfoBasic();
                 </button>
             </div>`
         );
+    }
+
+    function toggleBotonCheckout($cantidad){
+        if($cantidad > 0){
+            $("#btn-checkout").prop("disabled", "false");
+        }else{
+            $("#btn-checkout").prop("disabled", "true");
+        }
     }
 </script>

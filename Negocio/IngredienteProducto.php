@@ -155,6 +155,14 @@ class IngredienteProducto{
         return $resList;
     }
 
+    public function cantIngredientesProducto(){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar($this -> IngredienteProductoDAO -> cantIngredientesProducto() );
+        $res = $this -> Conexion -> extraer();
+        $this -> Conexion -> cerrar();
+        return $res[0];
+    }
+
 }
 
 ?>

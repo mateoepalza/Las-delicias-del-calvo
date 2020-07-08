@@ -54,7 +54,9 @@ if (isset($_POST['btnCheckout'])) {
 
     include "Vista/Main/error.php";
 }
-serializeC($carrito);
+
+$carrito = dSerializeC();
+$itemsCarrito = $carrito -> cantidadItems();
 
 $cliente = new Cliente($_SESSION['id']);
 $cliente->getInfoBasic();
@@ -65,9 +67,9 @@ $categorias = $categoria->buscarTodo();
 ?>
 <link rel="stylesheet" href="static/css/cliente.css">
 <div class="container-fluid bg-white">
-    <div class="row" style="height:100px;">
+    <div class="row"">
 
-        <div class="col-lg-3 col-md-4 col-sm-1 col-1 d-flex flex-column justify-content-center align-items-center">
+        <div class="logo-pos col-xl-3 col-md-4 col-sm-12 col-12 d-flex flex-column justify-content-center align-items-center">
             <div class="input-group" style="width:225px">
                 <input id="search-product" class="form-control" type="search" placeholder="Buscar" width="200px">
                 <div class="input-group-prepend">
@@ -76,10 +78,10 @@ $categorias = $categoria->buscarTodo();
             </div>
 
         </div>
-        <div id="logoImg" class="col-lg-6 col-md-4 col-sm-5 col-3 ">
-
+        <div class=" d-flex p-2 flex-row justify-content-center align-items-center col-xl-6 col-md-4 col-sm-5 col-4">
+            <a href="index.php?pid=<?php echo base64_encode("Vista/Cliente/main.php") ?>"><img src="static/img/logoB.png" height="80px"></a>
         </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-8 row d-flex flex-row justify-content-center align-items-center ">
+        <div class="col-xl-3 col-md-4 col-sm-6 col-8 row d-flex flex-row justify-content-center align-items-center ">
             <div class="menu-right">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <?php echo ($cliente->getNombre() != "") ? $cliente->getNombre() . " " . $cliente->getApellido() : $cliente->getCorreo(); ?>
@@ -104,20 +106,20 @@ $categorias = $categoria->buscarTodo();
 <div class="container-fluid border-top border-bottom" id="navMain">
     <div class="row justify-content-center">
         <div class="col-10 navScroll">
-            <nav class="navbar-expand-md ">
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav m-auto">
+            <nav class="navbar navCliente navbar-expand-md ">
+                
+                    <ul class="navulCliente m-auto">
                         <?php
                         foreach ($categorias as $cate) {
                         ?>
                             <li class="nav-item d-flex principal-link flex-column justify-content-center">
-                                <a class="nav-link" href="index.php?pid=<?php echo base64_encode("Vista/Producto/categorias.php") ?>&idCategoria=<?php echo $cate->getIdCategoria() ?>"><?php echo $cate->getNombre() ?></a>
+                                <a class="nav-link nav-link-color" href="index.php?pid=<?php echo base64_encode("Vista/Producto/categorias.php") ?>&idCategoria=<?php echo $cate->getIdCategoria() ?>"><?php echo $cate->getNombre() ?></a>
                             </li>
                         <?php
                         }
                         ?>
                     </ul>
-                </div>
+                
             </nav>
         </div>
     </div>
@@ -126,7 +128,9 @@ $categorias = $categoria->buscarTodo();
     let scrY = 0;
     let bool = true;
 
-
+    $(function(){
+        $('.navScroll').scrollLeft(100);
+    })
     
 
 

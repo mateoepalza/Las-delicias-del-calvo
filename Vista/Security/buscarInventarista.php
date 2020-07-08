@@ -13,7 +13,7 @@ $pagination = $cantPag / $numReg;
         <h1>Buscar Inventarista</h1>
     </div>
     <div class="row justify-content-center mt-5">
-        <div class="col-10">
+        <div class="col-12 col-md-12 col-lg-11 col-xl-10">
             <div class="card">
                 <div class="card-header bg-dark d-flex flex-row justify-content-between">
                     <a href="index.php?pid=<?php echo base64_encode("Vista/Inventarista/crearInventarista.php") ?>"><button type="button" class="btn btn-outline-light">Crear nuevo</button></a>
@@ -28,35 +28,37 @@ $pagination = $cantPag / $numReg;
                     <input id="search" type="search" placeholder="search">
                 </div>
                 <div class="card-body">
-                    <table class="table">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Apellido</th>
-                                <th>Email</th>
-                                <th>Estado</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="tabla">
-                            <?php
-                            foreach ($resultados as $resultado) {
-                            ?>
+                    <div class="table-responsive-lg">
+                        <table class="table">
+                            <thead class="thead-dark">
                                 <tr>
-                                    <td><?php echo $resultado->getNombre() ?></td>
-                                    <td><?php echo $resultado->getApellido() ?></td>
-                                    <td><?php echo $resultado->getCorreo() ?></td>
-                                    <td> <select class='select-estado form-control' data-id='<?php echo $resultado->getIdInventarista() ?>'>
-                                            <option value='1' <?php echo ($resultado->getEstado() == 1) ? "selected" : ""; ?>>Activo</option>
-                                            <option value='0' <?php echo ($resultado->getEstado() == 0) ? "selected" : ""; ?>>Bloqueado</option>
-                                        </select></td>
-                                    <td><a href='index.php?pid=<?php echo base64_encode("Vista/Inventarista/actualizarInventarista.php") ?>&idInventarista=<?php echo $resultado->getIdInventarista() ?>'><i class='far fa-edit'></i></a></td>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Email</th>
+                                    <th>Estado</th>
+                                    <th></th>
                                 </tr>
-                            <?php
-                            }
-                            ?>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody id="tabla">
+                                <?php
+                                foreach ($resultados as $resultado) {
+                                ?>
+                                    <tr>
+                                        <td><?php echo $resultado->getNombre() ?></td>
+                                        <td><?php echo $resultado->getApellido() ?></td>
+                                        <td><?php echo $resultado->getCorreo() ?></td>
+                                        <td> <select class='select-estado form-control' data-id='<?php echo $resultado->getIdInventarista() ?>' style="min-width:126px;">
+                                                <option value='1' <?php echo ($resultado->getEstado() == 1) ? "selected" : ""; ?>>Activo</option>
+                                                <option value='0' <?php echo ($resultado->getEstado() == 0) ? "selected" : ""; ?>>Bloqueado</option>
+                                            </select></td>
+                                        <td><a href='index.php?pid=<?php echo base64_encode("Vista/Inventarista/actualizarInventarista.php") ?>&idInventarista=<?php echo $resultado->getIdInventarista() ?>'><i class='far fa-edit'></i></a></td>
+                                    </tr>
+                                <?php
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="card-footer d-flex flex-row justify-content-center ">
                     <nav aria-label="...">

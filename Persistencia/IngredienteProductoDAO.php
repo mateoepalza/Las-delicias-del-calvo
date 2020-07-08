@@ -65,5 +65,11 @@ class IngredienteProductoDAO{
                     cantidad = '" . $this -> cantidad . "'
                 WHERE FK_idProducto = '" . $this -> producto . "' AND FK_idIngrediente = '" . $this -> ingrediente . "'";
     }
+
+    public function cantIngredientesProducto(){
+        return "SELECT count(FK_idProducto)
+                FROM IngredienteProducto
+                WHERE FK_idProducto = ". $this -> producto;
+    }
 }
 ?>

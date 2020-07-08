@@ -51,7 +51,7 @@ $pagination = $cantPag / $numReg;
                     <?php
                     }
                     ?>
-                    <li class="page-item page-item-list" id="page-next" data-page="<?php echo ($pagina + 1) ?>">
+                    <li class="page-item page-item-list <?php echo ($pagination > 1)? "" : "disabled"?>" id="page-next" data-page="<?php echo ($pagina + 1) ?>">
                         <a class="page-link" href="#">Next</a>
                     </li>
                 </ul>
@@ -102,6 +102,7 @@ $pagination = $cantPag / $numReg;
             };
 
             $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Producto/Ajax/productoCategoria.php") ?>", json, function(data) {
+                console.log(data);
                 res = JSON.parse(data);
                 //imprime los datos en la tabla
                 tablePrint(res.DataT, res.DataL);

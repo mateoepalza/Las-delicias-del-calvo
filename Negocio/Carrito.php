@@ -430,17 +430,17 @@ class Carrito {
     public function transaction(){
         $listIngredientesCarrito = $this -> getListIngredientesCarritoItems($this -> listProducto);
 
-        echo "\n-------------------------------\n";
+        /*echo "\n-------------------------------\n";
         foreach($listIngredientesCarrito as $arr){
             echo $arr[0] -> getIngrediente() . " - " . $arr[1]  . "\n";
-        }
+        }*/
 
         $ingredientes = $this -> ingredientesACompararArray($listIngredientesCarrito);
 
-        echo "\n-------------------------------\n";
+        /*echo "\n-------------------------------\n";
         foreach($ingredientes as $arr){
                 echo $arr -> getIdIngrediente() . " - " . $arr -> getCantidad() . "\n";
-        }
+        }*/
 
         return $this -> remainCantidadIngredientes($ingredientes, $listIngredientesCarrito);
     }

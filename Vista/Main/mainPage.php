@@ -187,8 +187,8 @@ if (isset($_GET['error'])) {
 </div>
 <div class="container mt-5 mb-5">
     <div class="row">
-        <div class="col-sm-6  col-lg-4 mb-5 d-flex flex-column align-items-center">
-            <div class="mb-4 d-flex flex-column justify-content-center align-items-end" style="width : 300px; height: 300px; border-radius: 200px; background: red; overflow: hidden; position: relative">
+        <div class="col-sm-6  col-lg-4 mb-5 d-flex flex-column align-items-center justify-content-center">
+            <div class="mb-4 d-flex flex-column justify-content-center align-items-end" style="width : 260px; height: 260px; border-radius: 200px; background: red; overflow: hidden; position: relative">
                 <img src="static/img/bg3.jpg" height="100%" style="position: absolute">
             </div>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ea alias excepturi praesentium iure odit provident dolorum, maiores qui reiciendis nesciunt, dignissimos ratione. Aliquid sapiente et atque fuga libero possimus.</p>
@@ -198,7 +198,7 @@ if (isset($_GET['error'])) {
         </div>
         <div class="col-sm-6  col-lg-4 mb-5 d-flex flex-column align-items-center">
 
-            <div class="mb-4 d-flex flex-column justify-content-center" style="width : 300px; height: 300px; border-radius: 200px; background: red; overflow: hidden; position: relative">
+            <div class="mb-4 d-flex flex-column justify-content-center" style="width : 260px; height: 260px; border-radius: 200px; background: red; overflow: hidden; position: relative">
                 <img src="static/img/bg2.jpg" height="100%" style="position: absolute">
             </div>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ea alias excepturi praesentium iure odit provident dolorum, maiores qui reiciendis nesciunt, dignissimos ratione. Aliquid sapiente et atque fuga libero possimus.</p>
@@ -208,7 +208,7 @@ if (isset($_GET['error'])) {
         </div>
         <div class="col-sm-6  col-lg-4 mb-5 d-flex flex-column align-items-center">
 
-            <div class="mb-4 d-flex flex-column justify-content-center" style="width : 300px; height: 300px; border-radius: 200px; background: red; overflow: hidden; position: relative">
+            <div class="mb-4 d-flex flex-column justify-content-center" style="width : 260px; height: 260px; border-radius: 200px; background: red; overflow: hidden; position: relative">
                 <img src="static/img/bg1.jpg" height="100%" style="position: absolute">
             </div>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ea alias excepturi praesentium iure odit provident dolorum, maiores qui reiciendis nesciunt, dignissimos ratione. Aliquid sapiente et atque fuga libero possimus.</p>
@@ -217,7 +217,7 @@ if (isset($_GET['error'])) {
             </div>
         </div>
         <div class="col-sm-6  col-lg-4 mb-5 d-flex flex-column align-items-center">
-            <div class="mb-4 d-flex flex-column justify-content-center align-items-end" style="width : 300px; height: 300px; border-radius: 200px; background: red; overflow: hidden; position: relative">
+            <div class="mb-4 d-flex flex-column justify-content-center" style="width : 260px; height: 260px; border-radius: 200px; background: red; overflow: hidden; position: relative">
                 <img src="static/img/bg3.jpg" height="100%" style="position: absolute">
             </div>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ea alias excepturi praesentium iure odit provident dolorum, maiores qui reiciendis nesciunt, dignissimos ratione. Aliquid sapiente et atque fuga libero possimus.</p>
@@ -227,7 +227,7 @@ if (isset($_GET['error'])) {
         </div>
         <div class="col-sm-6  col-lg-4 mb-5 d-flex flex-column align-items-center">
 
-            <div class="mb-4 d-flex flex-column justify-content-center" style="width : 300px; height: 300px; border-radius: 200px; background: red; overflow: hidden; position: relative">
+            <div class="mb-4 d-flex flex-column justify-content-center" style="width : 260px; height: 260px; border-radius: 200px; background: red; overflow: hidden; position: relative">
                 <img src="static/img/bg2.jpg" height="100%" style="position: absolute">
             </div>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ea alias excepturi praesentium iure odit provident dolorum, maiores qui reiciendis nesciunt, dignissimos ratione. Aliquid sapiente et atque fuga libero possimus.</p>
@@ -237,7 +237,7 @@ if (isset($_GET['error'])) {
         </div>
         <div class="col-sm-6 col-lg-4 mb-5 d-flex flex-column align-items-center">
 
-            <div class="mb-4 d-flex flex-column justify-content-center" style="width : 300px; height: 300px; border-radius: 200px; background: red; overflow: hidden; position: relative">
+            <div class="mb-4 d-flex flex-column justify-content-center" style="width : 260px; height: 260px; border-radius: 200px; background: red; overflow: hidden; position: relative">
                 <img src="static/img/bg1.jpg" height="100%" style="position: absolute">
             </div>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ea alias excepturi praesentium iure odit provident dolorum, maiores qui reiciendis nesciunt, dignissimos ratione. Aliquid sapiente et atque fuga libero possimus.</p>

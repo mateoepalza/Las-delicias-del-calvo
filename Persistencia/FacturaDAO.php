@@ -25,7 +25,7 @@ class FacturaDAO{
     }
 
     public function buscarPaginado($pag, $cant){
-        return "SELECT idFactura, fecha, valor, Cliente.nombre 
+        return "SELECT idFactura, fecha, valor, concat(Cliente.nombre,' ', Cliente.apellido) 
                 FROM Factura 
                 INNER JOIN Cliente 
                 ON FK_idCliente = idCliente 
@@ -38,11 +38,11 @@ class FacturaDAO{
     }
 
     public function filtroPaginado($str, $pag, $cant){
-        return "SELECT idFactura, fecha, valor,  Cliente.nombre 
+        return "SELECT idFactura, fecha, valor,  concat(Cliente.nombre,' ', Cliente.apellido) 
                 FROM Factura
                 INNER JOIN Cliente 
                 ON FK_idCliente = idCliente 
-                WHERE idFactura like '%". $str ."%' OR valor like '%". $str ."%' OR Cliente.nombre like '%". $str ."%' OR fecha like '%". $str ."%'
+                WHERE idFactura like '%". $str ."%' OR valor like '%". $str ."%' OR concat(Cliente.nombre,' ', Cliente.apellido) like '%". $str ."%' OR fecha like '%". $str ."%'
                 LIMIT " . (($pag - 1)*$cant) . ", " . $cant;
     }
 
@@ -51,7 +51,7 @@ class FacturaDAO{
                 FROM Factura
                 INNER JOIN Cliente 
                 ON FK_idCliente = idCliente 
-                WHERE idFactura like '%". $str ."%' OR valor like '%". $str ."%' OR Cliente.nombre like '%". $str ."%' OR fecha like '%". $str ."%'";
+                WHERE idFactura like '%". $str ."%' OR valor like '%". $str ."%' OR concat(Cliente.nombre,' ', Cliente.apellido) like '%". $str ."%' OR fecha like '%". $str ."%'";
     }
 
     public function buscarPaginadoCliente($pag, $cant){
@@ -72,7 +72,7 @@ class FacturaDAO{
                 FROM Factura
                 INNER JOIN Cliente 
                 ON FK_idCliente = idCliente 
-                WHERE (idFactura like '%". $str ."%' OR valor like '%". $str ."%' OR Cliente.nombre like '%". $str ."%' OR fecha like '%". $str ."%') AND FK_idCliente = '" . $this -> cliente . "'
+                WHERE (idFactura like '%". $str ."%' OR valor like '%". $str ."%' OR concat(Cliente.nombre,' ', Cliente.apellido) like '%". $str ."%' OR fecha like '%". $str ."%') AND FK_idCliente = '" . $this -> cliente . "'
                 LIMIT " . (($pag - 1)*$cant) . ", " . $cant;
     }
 
@@ -81,7 +81,7 @@ class FacturaDAO{
                 FROM Factura
                 INNER JOIN Cliente 
                 ON FK_idCliente = idCliente 
-                WHERE (idFactura like '%". $str ."%' OR valor like '%". $str ."%' OR Cliente.nombre like '%". $str ."%' OR fecha like '%". $str ."%') AND FK_idCliente = '" . $this -> cliente . "' ";
+                WHERE (idFactura like '%". $str ."%' OR valor like '%". $str ."%' OR concat(Cliente.nombre,' ', Cliente.apellido) like '%". $str ."%' OR fecha like '%". $str ."%') AND FK_idCliente = '" . $this -> cliente . "' ";
     }
 
 }

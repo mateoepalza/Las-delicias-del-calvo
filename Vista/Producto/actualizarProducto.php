@@ -25,12 +25,9 @@ if (isset($_POST['sent'])) {
             $msj = "El tipo de archivo no es valido o el tamañano es demasiado grande";
         } else {
             if (move_uploaded_file($temp, $url)) {
-                chmod('static/img/Productos/' . $archivo, 0777);
-
+                
                 if (file_exists($oldUrl)) {
-                    chmod('static/img/Productos', 0777);
-                    chmod($oldUrl, 0777);
-                    unlink($oldUrl);
+                    unlink(trim($oldUrl));
                 }
 
                 $producto = new Producto($idProducto, $nombre, $url, $descripcion, $precio, $categoria);
@@ -93,7 +90,7 @@ $resultados = $categoria->buscarTodo();
         <h1>Actualizar Producto</h1>
     </div>
     <div class="row justify-content-center mt-5">
-        <div class="col-8">
+        <div class="col-11 col-md-12 col-lg-9 col-xl-8">
             <div class="card">
                 <div class="card-header">
                     Actualice un producto

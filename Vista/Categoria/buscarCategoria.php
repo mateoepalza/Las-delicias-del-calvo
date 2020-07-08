@@ -13,7 +13,7 @@ $pagination = $cantPag / $numReg;
         <h1>Buscar Categoría</h1>
     </div>
     <div class="row justify-content-center mt-5">
-        <div class="col-10">
+        <div class="col-12 col-md-12 col-lg-11 col-xl-10">
             <div class="card">
                 <div class="card-header bg-dark d-flex flex-row justify-content-between">
                     <a href="index.php?pid=<?php echo base64_encode("Vista/Categoria/crearCategoria.php") ?>"><button type="button" class="btn btn-outline-light">Crear nuevo</button></a>

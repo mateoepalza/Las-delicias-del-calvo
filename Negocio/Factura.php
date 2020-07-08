@@ -80,7 +80,6 @@ class Factura{
             if($res == 1){
                 $bool = $this -> agregarProductosFactura($carrito -> getListProducto());
                 if(!$bool){
-                    echo "Entraaa";
                     $resCheck = $carrito -> transaction();
                     if(!$resCheck){
                         $carrito -> vaciarCarrito();
@@ -89,6 +88,7 @@ class Factura{
                 }   
             }
         }
+        
         serializeC($carrito);
 
         return $bool;

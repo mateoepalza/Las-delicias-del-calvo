@@ -114,7 +114,6 @@ class Ingrediente{
 
     public function actualizarIngrediente(){
         $this -> Conexion -> abrir();
-        echo "<br>".$this -> IngredienteDAO -> actualizarIngrediente()."<br>";
         $this -> Conexion -> ejecutar( $this -> IngredienteDAO -> actualizarIngrediente());
         $res = $this -> Conexion -> filasAfectadas();
         $this -> Conexion -> cerrar();
@@ -127,7 +126,6 @@ class Ingrediente{
 
     public function actualizarCantidad(){
         $this -> Conexion -> abrir();
-        echo $this -> IngredienteDAO -> actualizarCantidad();
         $this -> Conexion -> ejecutar( $this -> IngredienteDAO -> actualizarCantidad());
         $res = $this -> Conexion -> filasAfectadas();
         $this -> Conexion -> cerrar();
@@ -165,7 +163,6 @@ class Ingrediente{
      */
     public function filtroPaginado($str, $pag, $cant){
         $this -> Conexion -> abrir();
-        //echo $this -> IngredienteDAO -> filtroPaginado($str, $pag, $cant);
         $this -> Conexion -> ejecutar( $this -> IngredienteDAO -> filtroPaginado($str, $pag, $cant));
         $resList = Array();
         while($res = $this -> Conexion -> extraer()){
