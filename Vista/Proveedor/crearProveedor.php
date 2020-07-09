@@ -11,6 +11,34 @@ if (isset($_POST['sent'])) {
     $alert = $proveedor->insertar();
 
     if ($alert == 1) {
+        /**
+         * Creo un objeto para retornar el dia y la hora
+         */
+        $date = new DateTime();
+
+        if ($_SESSION['rol'] == 1) {
+            /**
+             * Creo el objeto de log
+             */
+            $logAdmin = new LogAdmin("", $date->format('Y-m-d H:i:s'), LogHCrearProveedor($nit, $nombre, $telefono, $direccion), 8, getBrowser(), getOS(), $_SESSION['id']);
+            /**
+             * Inserto el registro del log
+             */
+            $logAdmin->insertar();
+
+        } else if ($_SESSION['rol'] == 3) {
+
+            /**
+             * Creo el objeto de log
+             */
+            $LogInventarista = new LogInventarista("", $date->format('Y-m-d H:i:s'), LogHCrearProveedor($nit, $nombre, $telefono, $direccion), 8, getBrowser(), getOS(), $_SESSION['id']);
+            /**
+             * Inserto el registro del log
+             */
+            $LogInventarista -> insertar();
+
+        }
+
         $msj = "El proveedor fue almacenado correctamente";
         $class = "alert-success";
     } else {

@@ -14,7 +14,12 @@
     require_once "Negocio/FacturaProducto.php";
     require_once "Negocio/Inventarista.php";
     require_once "Negocio/Correo.php";
+    require_once "Negocio/LogAdmin.php";
+    require_once "Negocio/LogInventarista.php";
+    require_once "Negocio/LogCliente.php";
+    require_once "Negocio/Accion.php";
     //Check
+    require_once "Helpers/logHelper.php";
     require_once "Helpers/serialize.php";
     
     $pid = null;

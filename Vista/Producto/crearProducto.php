@@ -43,10 +43,56 @@ if (isset($_POST['sent'])) {
             $msj = "El tipo de archivo no es valido o el tamañano es demasiado grande";
         } else {
             if (move_uploaded_file($temp, $url)) {
+
                 chmod('static/img/Productos/' . $archivo, 0777);
                 $producto = new Producto("", $nombre, $url, $descripcion, $precio, $categoria);
                 $resInsert = $producto->insertar();
+
                 if ($resInsert == 1) {
+                    /**
+                     * Agrego el log del administrador y del Inventarista
+                     */
+                    /**
+                     * Creo un objeto para retornar el dia y la hora
+                     */
+                    $date = new DateTime();
+                    /**
+                     * Creo un objeto categoría
+                     */
+                    $catlog = new Categoria($categoria);
+                    /**
+                     * Busco el nombre de la categoría
+                     */
+                    $catlog->buscarxID();
+
+                    if ($_SESSION['rol'] == 1) {
+                        /**
+                         * Creo el objeto de log
+                         */
+                        $logAdmin = new LogAdmin("", $date->format('Y-m-d H:i:s'), LogHCrearProducto($nombre, $url, $descripcion, $precio, $catlog->getNombre()), 1, getBrowser(), getOS(), $_SESSION['id']);
+                        /**
+                         * Inserto el registro del log
+                         */
+                        $logAdmin->insertar();
+
+                        /**
+                         * Log para el Inventarista
+                         */
+                    } else if ($_SESSION['rol'] == 3) {
+                        /**
+                         * Creo el objeto de log
+                         */
+                        $logInventarista = new LogInventarista("", $date->format('Y-m-d H:i:s'), LogHCrearProducto($nombre, $url, $descripcion, $precio, $catlog->getNombre()), 1, getBrowser(), getOS(), $_SESSION['id']);
+                        /**
+                         * Inserto el registro del log
+                         */
+                        $logInventarista->insertar();
+
+                        /**
+                         * Log para el Inventarista
+                         */
+                    }
+
                     $class = "alert-success";
                     $msj = "El producto se ha guardado correctamente";
                 } else {
@@ -131,7 +177,13 @@ $resultados = $categoria->buscarTodo();
                         </div>
                         <div class="form-group">
                             <label>Imagen</label>
-                            <input class="form-control" style="border:0px;" name="archivo" type="file">
+                            <input class="form-control" style="border:0px;" name="archivo" type="file" required>
+                            <div class="invalid-feedback">
+                                Por favor ingrese la foto del producto.
+                            </div>
+                            <div class="valid-feedback">
+                                ¡Enhorabuena!
+                            </div>
                         </div>
                         <div class="form-group">
                             <button class="btn btn-primary w-100" name="sent" type="submit">Crear</button>

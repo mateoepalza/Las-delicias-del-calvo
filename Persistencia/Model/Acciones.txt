@@ -1,0 +1,23 @@
+1 - Administrador
+2 - Cliente
+3 - Inventarista
+
+/*Acciones Adinistrador*/
+insert into Accion (nombre) values ('Crear producto');
+insert into Accion (nombre) values ('Actualizar producto');
+insert into Accion (nombre) values ('Agregar ingredientes a producto');
+insert into Accion (nombre) values ('Crear categoria');
+insert into Accion (nombre) values ('Actualizar categoria');
+insert into Accion (nombre) values ('Crear ingrediente');
+insert into Accion (nombre) values ('Actualizar ingrediente');
+insert into Accion (nombre) values ('Crear proveedor');
+insert into Accion (nombre) values ('Actualizar proveedor');
+insert into Accion (nombre) values ('Crear cliente');
+insert into Accion (nombre) values ('Actualizar cliente');
+insert into Accion (nombre) values ('Crear inventarista');
+insert into Accion (nombre) values ('Actualizar inventarista');
+insert into Accion (nombre) values ('Actualizar estado cliente');
+insert into Accion (nombre) values ('Actualizar estado proveedor');
+insert into Accion (nombre) values ('Actualizar contraseña administrador');
+insert into Accion (nombre) values ('Log in');
+insert into Accion (nombre) values ('Log out');

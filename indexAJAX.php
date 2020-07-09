@@ -11,6 +11,10 @@ require_once "Negocio/Carrito.php";
 require_once "Negocio/Inventarista.php";
 require_once "Negocio/Factura.php";
 require_once "Negocio/FacturaProducto.php";
+require_once "Negocio/LogAdmin.php";
+require_once "Negocio/LogInventarista.php";
+//Check
+require_once "Helpers/logHelper.php";
 
 if ($_GET['pid']) {
     $pid = base64_decode($_GET['pid']);

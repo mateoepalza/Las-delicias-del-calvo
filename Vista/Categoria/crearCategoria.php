@@ -8,6 +8,41 @@ if (isset($_POST['sent'])) {
     $res = $categoria->insertar();
 
     if ($res == 1) {
+        /**
+         * Creo un objeto para retornar el dia y la hora
+         */
+        $date = new DateTime();
+        if ($_SESSION['rol'] == 1) {
+
+            /**
+             * Creo el objeto de log
+             */
+            $logAdmin = new LogAdmin("", $date->format('Y-m-d H:i:s'), LogHCrearCategoria($nombre), 4, getBrowser(), getOS(), $_SESSION['id']);
+            /**
+             * Inserto el registro del log
+             */
+            $logAdmin->insertar();
+
+            /**
+             * Log para el Inventarista
+             */
+        } else if ($_SESSION['rol'] == 3) {
+
+            /**
+             * Creo el objeto de log
+             */
+            $logInventarista = new LogInventarista("", $date->format('Y-m-d H:i:s'), LogHCrearCategoria($nombre), 4, getBrowser(), getOS(), $_SESSION['id']);
+            /**
+             * Inserto el registro del log
+             */
+            $logInventarista->insertar();
+
+            /**
+             * Log para el Inventarista
+             */
+
+        }
+
         $msj = "La categoria se ha creado satisfactoriamente";
         $class = "alert-success";
     } else {

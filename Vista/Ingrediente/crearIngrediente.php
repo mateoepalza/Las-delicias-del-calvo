@@ -10,6 +10,47 @@ if (isset($_POST['crear-ingrediente'])) {
     $alert = $ingrediente->insertar();
 
     if ($alert == 1) {
+        /**
+         * Creo un objeto para retornar el dia y la hora
+         */
+        $date = new DateTime();
+        /**
+         * Creo un objeto Proveedor
+         */
+        $proveedor = new Proveedor($FK_idProveedor);
+        /**
+         * Busco el nombre de la Proveedor
+         */
+        $proveedor->getInfo();
+
+        if ($_SESSION['rol'] == 1) {
+            /**
+             * Creo el objeto de log
+             */
+            $logAdmin = new LogAdmin("", $date->format('Y-m-d H:i:s'), LogHCrearIngrediente($nombre, $cantidad, $proveedor->getNombre()), 6, getBrowser(), getOS(), $_SESSION['id']);
+            /**
+             * Inserto el registro del log
+             */
+            $logAdmin->insertar();
+
+            /**
+             * Log para el Inventarista
+             */
+        } else if ($_SESSION['rol'] == 3) {
+            /**
+             * Creo el objeto de log
+             */
+            $logInventarista = new LogInventarista("", $date->format('Y-m-d H:i:s'), LogHCrearIngrediente($nombre, $cantidad, $proveedor->getNombre()), 6, getBrowser(), getOS(), $_SESSION['id']);
+            /**
+             * Inserto el registro del log
+             */
+            $logInventarista->insertar();
+
+            /**
+             * Log para el Inventarista
+             */
+        }
+
         $msj = "El ingrediente fue almacenado satisfactoriamente";
         $class = "alert-success";
     } else {

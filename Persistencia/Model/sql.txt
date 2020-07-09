@@ -93,15 +93,50 @@ create table Inventarista(
     primary key(idInventarista)
 );
 
-create table accion(
+create table Accion(
     idAccion int not null auto_increment,
     nombre varchar(100) not null,
     primary key(idAccion)
 );
 
 create table LogAdministrador(
-    
-)
+    idLogAdministrador int not null auto_increment,
+    fecha datetime not null,
+    informacion text not null,
+    FK_idAccion int not null,
+    browser varchar(50) not null,
+    os varchar(50) not null,
+    FK_idAdministrador int not null,
+    primary key(idLogAdministrador),
+    Foreign key (FK_idAccion) references Accion(idAccion),
+    Foreign key (FK_idAdministrador) references Administrador(idAdministrador)
+);
+
+create table LogInventarista(
+    idLogInventarista int not null auto_increment,
+    fecha datetime not null,
+    informacion text not null,
+    FK_idAccion int not null,
+    browser varchar(50) not null,
+    os varchar(50) not null,
+    FK_idInventarista int not null,
+    primary key(idLogInventarista),
+    Foreign key (FK_idAccion) references Accion(idAccion),
+    Foreign key (FK_idInventarista) references Inventarista(idInventarista)
+);
+
+create table LogCliente(
+    idLogCliente int not null auto_increment,
+    fecha datetime not null,
+    informacion text not null,
+    FK_idAccion int not null,
+    browser varchar(50) not null,
+    os varchar(50) not null,
+    FK_idCliente int not null,
+    primary key(idLogCliente),
+    Foreign key (FK_idAccion) references Accion(idAccion),
+    Foreign key (FK_idCliente) references Cliente(idCliente)
+);
 
 Ala
 aceites
