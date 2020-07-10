@@ -21,3 +21,13 @@ insert into Accion (nombre) values ('Actualizar estado proveedor');
 insert into Accion (nombre) values ('Actualizar contraseña administrador');
 insert into Accion (nombre) values ('Log in');
 insert into Accion (nombre) values ('Log out');
+insert into Accion (nombre) values ('Actualizar ingredientes a producto');
+insert into Accion (nombre) values ('Borrar ingredientes a producto');
+insert into Accion (nombre) values ('Actualizar contraseña');
+insert into Accion (nombre) values ('Actualizar información personal');
+
+
+
+select Fecha, informacion, FK_idAccion as accion, browser, os from logAdministrador inne join accion on FK_idAccion = idAccion 
+union 
+select Fecha, informacion, FK_idAccion as accion, browser, os from logCliente inne join accion on FK_idAccion = idAccion;

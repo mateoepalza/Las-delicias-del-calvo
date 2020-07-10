@@ -11,6 +11,7 @@ require_once "Negocio/Carrito.php";
 require_once "Negocio/Inventarista.php";
 require_once "Negocio/Factura.php";
 require_once "Negocio/FacturaProducto.php";
+require_once "Negocio/Log.php";
 require_once "Negocio/LogAdmin.php";
 require_once "Negocio/LogInventarista.php";
 //Check

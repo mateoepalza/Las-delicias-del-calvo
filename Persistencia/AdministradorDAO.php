@@ -46,6 +46,16 @@ class AdministradorDAO{
                     clave = '" . md5($nuevaClave) . "'
                 WHERE idAdministrador = " . $this -> idAdministrador;
     }
+
+    public function actualizarAdministrador(){
+        return "UPDATE Administrador
+                SET 
+                    nombre = '" . $this -> nombre . "',
+                    apellido = '" . $this -> apellido . "',
+                    email = '" . $this -> correo. "',
+                    foto = '" . $this -> foto. "'
+                WHERE idAdministrador = " . $this -> idAdministrador;
+    }
 }
 
 ?>

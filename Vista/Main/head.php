@@ -38,6 +38,16 @@
             }, false);
         })();
     </script>
+    <script>
+        $(function(){
+            $('#imageUpload').on('change', function() {
+            //get the file name
+            var fileName = this.files[0].name;
+            //replace the "Choose a file" label
+            $(this).next('.custom-file-label').html(fileName);
+        });
+        });
+    </script>
 </head>
 
 <body>

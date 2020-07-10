@@ -4,8 +4,45 @@ if (isset($_POST['sent'])) {
     $categoria = new Categoria($_GET['idCategoria'], $_POST['nombre']);
     $res = $categoria->actualizarCategoria();
     if ($res == 1) {
+
+        /**
+         * Creo un objeto para retornar el dia y la hora
+         */
+        $date = new DateTime();
+        if ($_SESSION['rol'] == 1) {
+
+            /**
+             * Creo el objeto de log
+             */
+            $logAdmin = new LogAdmin("", $date->format('Y-m-d H:i:s'), LogHActualizarCategoria($categoria -> getIdCategoria(), $categoria -> getNombre()), 5, getBrowser(), getOS(), $_SESSION['id']);
+            /**
+             * Inserto el registro del log
+             */
+            $logAdmin->insertar();
+
+            /**
+             * Log para el Inventarista
+             */
+        } else if ($_SESSION['rol'] == 3) {
+
+            /**
+             * Creo el objeto de log
+             */
+            $logInventarista = new LogInventarista("", $date->format('Y-m-d H:i:s'), LogHActualizarCategoria($categoria -> getIdCategoria(), $categoria -> getNombre()), 5, getBrowser(), getOS(), $_SESSION['id']);
+            /**
+             * Inserto el registro del log
+             */
+            $logInventarista->insertar();
+
+            /**
+             * Log para el Inventarista
+             */
+
+        }
+
         $class = "alert-success";
         $msj = "El registro ha sido actualizado correctamente.";
+        
     } else if ($res == 0) {
         $class = "alert-warning";
         $msj = "No hubo ningun cambio";

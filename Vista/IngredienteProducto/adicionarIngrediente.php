@@ -91,7 +91,7 @@ $listaProdIngredientes = $InPr->buscarIngredientes();
             };
 
             $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/IngredienteProducto/Ajax/borrarIngrediente.php") ?>", json, function(data) {
-
+                console.log(data);
                 res = JSON.parse(data);
 
                 if (res.msj) {

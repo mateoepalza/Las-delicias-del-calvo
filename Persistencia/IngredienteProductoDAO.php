@@ -11,6 +11,12 @@ class IngredienteProductoDAO{
         $this -> cantidad = $cantidad;
     }
 
+    public function getInfoBasic(){
+        return "SELECT FK_idProducto, FK_idIngrediente, cantidad
+                FROM IngredienteProducto
+                WHERE FK_idProducto = " . $this -> producto . " AND FK_idIngrediente = " . $this -> ingrediente;
+    }
+
     public function buscarIngredientes(){
         return "SELECT FK_idProducto as producto, FK_idIngrediente as ingrediente, Ingrediente.nombre, IngredienteProducto.cantidad 
                 FROM IngredienteProducto

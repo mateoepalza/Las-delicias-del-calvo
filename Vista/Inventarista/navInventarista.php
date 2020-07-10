@@ -4,7 +4,7 @@ $invent->getInfoBasic();
 
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position: sticky; top: 0px; z-index: 15;">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="index.php?pid=<?php echo base64_encode("Vista/Inventarista/mainInventarista.php") ?>">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -62,19 +62,21 @@ $invent->getInfoBasic();
                 </div>
             </li>
         </ul>
-        
+
         <div class="menu-right nav-item dropdown">
-                <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <?php echo ($invent->getNombre() != "") ? $invent->getNombre() . " " . $invent->getApellido() : $invent->getCorreo(); ?>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Inventarista/cambiarClaveInventarista.php") ?>">Cambiar contraseña</a>
-                </div>
-            </div>
-            <div class="menu-right">
-                <a class="btn btn-outline-light" style="border:0px;" href="index.php?cerrarSesion=True"><i class="fas fa-sign-out-alt"></i></a>
+            <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <?php echo ($invent->getNombre() != "") ? $invent->getNombre() . " " . $invent->getApellido() : $invent->getCorreo(); ?>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Inventarista/informacionPersonal.php") ?>">Información Personal</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Inventarista/cambiarClaveInventarista.php") ?>">Cambiar contraseña</a>
             </div>
         </div>
+        <div class="menu-right">
+            <a class="btn btn-outline-light" style="border:0px;" href="index.php?cerrarSesion=True"><i class="fas fa-sign-out-alt"></i></a>
+        </div>
+    </div>
     </div>
 </nav>
 <div id="alert-ajax">

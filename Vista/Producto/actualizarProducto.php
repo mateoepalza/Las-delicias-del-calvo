@@ -23,9 +23,12 @@ if (isset($_POST['sent'])) {
         if (!((strpos($tipo, "gif") || strpos($tipo, "jpeg") || strpos($tipo, "jpg") || strpos($tipo, "png")) && ($tamano < 9000000))) {
             $class = "alert-danger";
             $msj = "El tipo de archivo no es valido o el tamañano es demasiado grande";
+
+            $producto = new Producto($idProducto);
+            $producto->getInfoBasic();
         } else {
             if (move_uploaded_file($temp, $url)) {
-                
+
                 if (file_exists($oldUrl)) {
                     unlink(trim($oldUrl));
                 }
@@ -34,6 +37,51 @@ if (isset($_POST['sent'])) {
                 $resInsert = $producto->actualizarProducto();
 
                 if ($resInsert == 1) {
+
+                    /**
+                     * Agrego el log del administrador y del Inventarista
+                     */
+                    /**
+                     * Creo un objeto para retornar el dia y la hora
+                     */
+                    $date = new DateTime();
+                    /**
+                     * Creo un objeto categoría
+                     */
+                    $catlog = new Categoria($categoria);
+                    /**
+                     * Busco el nombre de la categoría
+                     */
+                    $catlog->buscarxID();
+
+                    if ($_SESSION['rol'] == 1) {
+                        /**
+                         * Creo el objeto de log
+                         */
+                        $logAdmin = new LogAdmin("", $date->format('Y-m-d H:i:s'), LogHActualizarProducto($idProducto, $nombre, $url, $descripcion, $precio, $catlog->getNombre()), 2, getBrowser(), getOS(), $_SESSION['id']);
+                        /**
+                         * Inserto el registro del log
+                         */
+                        $logAdmin->insertar();
+
+                        /**
+                         * Log para el Inventarista
+                         */
+                    } else if ($_SESSION['rol'] == 3) {
+                        /**
+                         * Creo el objeto de log
+                         */
+                        $logInventarista = new LogInventarista("", $date->format('Y-m-d H:i:s'), LogHActualizarProducto($idProducto, $nombre, $url, $descripcion, $precio, $catlog->getNombre()), 1, getBrowser(), getOS(), $_SESSION['id']);
+                        /**
+                         * Inserto el registro del log
+                         */
+                        $logInventarista->insertar();
+
+                        /**
+                         * Log para el Inventarista
+                         */
+                    }
+
                     $class = "alert-success";
                     $msj = "El producto se ha guardado correctamente.";
                 } else if ($resInsert == 0) {
@@ -55,6 +103,51 @@ if (isset($_POST['sent'])) {
         $resInsert = $producto->actualizarProducto();
 
         if ($resInsert == 1) {
+
+            /**
+             * Agrego el log del administrador y del Inventarista
+             */
+            /**
+             * Creo un objeto para retornar el dia y la hora
+             */
+            $date = new DateTime();
+            /**
+             * Creo un objeto categoría
+             */
+            $catlog = new Categoria($categoria);
+            /**
+             * Busco el nombre de la categoría
+             */
+            $catlog->buscarxID();
+
+            if ($_SESSION['rol'] == 1) {
+                /**
+                 * Creo el objeto de log
+                 */
+                $logAdmin = new LogAdmin("", $date->format('Y-m-d H:i:s'), LogHActualizarProducto($idProducto, $nombre, $oldUrl, $descripcion, $precio, $catlog->getNombre()), 2, getBrowser(), getOS(), $_SESSION['id']);
+                /**
+                 * Inserto el registro del log
+                 */
+                $logAdmin->insertar();
+
+                /**
+                 * Log para el Inventarista
+                 */
+            } else if ($_SESSION['rol'] == 3) {
+                /**
+                 * Creo el objeto de log
+                 */
+                $logInventarista = new LogInventarista("", $date->format('Y-m-d H:i:s'), LogHActualizarProducto($idProducto, $nombre, $oldUrl, $descripcion, $precio, $catlog->getNombre()), 1, getBrowser(), getOS(), $_SESSION['id']);
+                /**
+                 * Inserto el registro del log
+                 */
+                $logInventarista->insertar();
+
+                /**
+                 * Log para el Inventarista
+                 */
+            }
+
             $class = "alert-success";
             $msj = "El producto se ha guardado correctamente";
         } else if ($resInsert == 0) {
@@ -97,7 +190,6 @@ $resultados = $categoria->buscarTodo();
                 </div>
                 <div class="card-body">
                     <form novalidate class="needs-validation" action="index.php?pid=<?php echo base64_encode("Vista/Producto/actualizarProducto.php") ?>&idProducto=<?php echo $idProducto ?>" method="POST" enctype="multipart/form-data">
-
                         <div class="form-group">
                             <label>Nombre</label>
                             <input value="<?php echo $producto->getNombre() ?>" class="form-control" name="nombre" type="text" required>
@@ -151,9 +243,20 @@ $resultados = $categoria->buscarTodo();
                         </div>
                         <div class="form-group d-flex flex-column">
                             <label>Imagen</label>
-                            <img width="100px" class="m-3" src="<?php echo $producto->getFoto() ?>">
-                            <input style="border:0px;" name="archivo" type="file">
+                            <div class="row d-flex flex-row justify-content-center mb-5">
+                                <img src="<?php echo $producto->getFoto() ?>" width = "200px">
+                            </div>
                             <input type="hidden" name="url_hidden" value="<?php echo $producto->getFoto() ?> ">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" name="archivo" class="custom-file-input" id="imageUpload">
+                                    <label class="custom-file-label" for="imageUpload">Choose file</label>
+                                </div>
+                            </div>
+                            
                         </div>
 
                         <div class="form-group">

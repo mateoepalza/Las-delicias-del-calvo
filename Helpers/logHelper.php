@@ -68,6 +68,17 @@ function LogHCrearProducto($nombre, $foto, $descripcion, $precio, $categoria){
     return $str;
 }
 
+function LogHActualizarProducto($idProducto, $nombre, $url, $descripcion, $precio, $categoria){
+    $str = "idProducto: ". $idProducto.
+    ";;Nombre: " . $nombre .
+    ";;Foto: " . $url .
+    ";;Descripción: " . $descripcion .
+    ";;Precio: " . $precio .
+    ";;Categoria: " . $categoria;
+
+    return $str;
+}
+
 function LogHCrearIngrediente($nombre, $cantidad, $proveedor){
     $str = "Nombre: " . $nombre .
     ";;Cantidad: " . $cantidad .
@@ -75,12 +86,35 @@ function LogHCrearIngrediente($nombre, $cantidad, $proveedor){
     return $str;
 }
 
+function LogHActualizarIngrediente($idIngrediente, $nombre, $cantidad, $proveedor){
+    $str = "idIngrediente: " . $idIngrediente .
+    ";;Nombre: " . $nombre .
+    ";;Cantidad: " . $cantidad .
+    ";;Proveedor: " . $proveedor;
+    return $str;
+}
+
 function LogHCrearCategoria($nombre){
-    return "Nombre: ".$nombre;
+    return "Nombre: " . $nombre;
+}
+
+function LogHActualizarCategoria($idCategoria, $nombre){
+    return  "idCategoria: " . $idCategoria .
+    ";;Nombre: " . $nombre;
 }
 
 function LogHCrearProveedor($nit, $nombre, $telefono, $direccion){
     $str = "NIT: ". $nit .
+    ";;Nombre: " . $nombre .
+    ";;Telefono: " . $telefono .
+    ";;Dirección: " . $direccion;
+
+    return $str;
+}
+
+function LogHActualizarProveedor($idProveedor, $nit, $nombre, $telefono, $direccion){
+    $str = "idProveedor: " . $idProveedor .
+    ";;NIT: ". $nit .
     ";;Nombre: " . $nombre .
     ";;Telefono: " . $telefono .
     ";;Dirección: " . $direccion;
@@ -93,7 +127,18 @@ function LogHCrearCliente($nombre, $apellido, $email, $clave, $estado){
     ";;Apellido: " . $apellido .
     ";;Email: " . $email .
     ";;Clave: " . md5($clave) .
-    ";;Estado: " . $estado;
+    ";;Estado: " . (($estado == 1)? "Activado" : (($estado == 0)? "Bloqueado" : "Desactivado"));
+
+    return $str;
+}
+
+function LogHActualizarCliente($idCliente, $nombre, $apellido, $email, $clave, $estado){
+    $str = "idCliente: " . $idCliente .
+    ";;Nombre: " . $nombre .
+    ";;Apellido: " . $apellido .
+    ";;Email: " . $email .
+    ";;Clave: " . (($clave != "") ?md5($clave) : "").
+    ";;Estado: " . (($estado == 1)? "Activado" : (($estado == 0)? "Bloqueado" : "Desactivado"));
 
     return $str;
 }
@@ -103,7 +148,18 @@ function LogHCrearInventarista($nombre, $apellido, $email, $clave, $estado){
     ";;Apellido: " . $apellido .
     ";;Email: " . $email .
     ";;Clave: " . md5($clave) .
-    ";;Estado: " . $estado;
+    ";;Estado: " . (($estado == 1)? "Activado" :  "Bloqueado");
+
+    return $str;
+}
+
+function LogHActualizarInventarista($idInventarista, $nombre, $apellido, $email, $clave, $estado){
+    $str = "idInventarista: " . $idInventarista.
+    ";;Nombre: " . $nombre .
+    ";;Apellido: " . $apellido .
+    ";;Email: " . $email .
+    ";;Clave: " . (($clave != "") ?md5($clave) : "") .
+    ";;Estado: " . (($estado == 1)? "Activado" :  "Bloqueado");
 
     return $str;
 }
@@ -114,6 +170,53 @@ function LogHCrearIngredienteProducto($idProducto, $producto, $idIngrediente,  $
     ";;idIngrediente: " . $idIngrediente .
     ";;Ingrediente: " . $ingrediente . 
     ";;Cantidad:  " . $cantidad;
+
+    return $str;
+}
+
+function LogHCambiarClave($nuevaClave){
+    $str = "Clave: " . md5($nuevaClave);
+    return $str;
+}
+
+function LogHActualizarInfoPersonal($idCliente, $nombre, $apellido, $email){
+
+    $str = "idCliente: " . $idCliente .
+    ";;Nombre: " . $nombre .
+    ";;Apellido: " . $apellido .
+    ";;Email: " . $email; 
+
+    return $str;
+}
+
+function LogHActualizarEstadoCliente($idCliente, $estado){
+    $str = "idcliente: " . $idCliente .
+    ";;Estado: " .  (($estado == 1)? "Activado" : (($estado == 0)? "Bloqueado" : "Desactivado"));
+    return $str;
+}
+
+function LogHActualizarEstadoInventarista($idInventarista, $estado){
+    $str = "idInventarista : " . $idInventarista .
+    ";;Estado: " .  (($estado == 1)? "Activado" : "Bloqueado");
+    return $str;
+}
+
+function LogHActualizarAdministrador($idAdmin, $nombre, $apellido, $correo, $foto){
+    $str = "idAdministrador: " . $idAdmin . 
+    ";;Nombre: " . $nombre . 
+    ";;Apellido: " . $apellido .
+    ";;Correo: " . $correo . 
+    ";;Foto: " . $foto ;
+
+    return $str;
+}
+
+function LogHActualizarInventaristaIP($idInventarista, $nombre, $apellido, $correo, $foto){
+    $str = "idAdministrador: " . $idInventarista . 
+    ";;Nombre: " . $nombre . 
+    ";;Apellido: " . $apellido .
+    ";;Correo: " . $correo . 
+    ";;Foto: " . $foto ;
 
     return $str;
 }

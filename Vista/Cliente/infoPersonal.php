@@ -12,6 +12,22 @@ if(isset($_POST['actualizarInfoCliente'])){
     $res = $cliente -> actualizarBasic();
 
     if ($res == 1) {
+
+        if($_SESSION['rol'] == 2){
+            /**
+             * Creo un objeto para retornar el dia y la hora
+             */
+            $date = new DateTime();
+            /**
+             * Creo el objeto de log
+             */
+            $logCliente = new LogCliente("", $date -> format('Y-m-d H:i:s'), LogHActualizarInfoPersonal($idCliente, $nombre, $apellido, $correo), 22, getBrowser(), getOS(), $_SESSION['id']);
+            /**
+             * Inserto el registro del log
+             */
+            $logCliente -> insertar();
+        }
+
         $msj = "El cliente se ha actualizado satisfactoriamente.";
         $class = "alert-success";
     } else if ($res == 0) {

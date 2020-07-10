@@ -54,7 +54,7 @@ class Inventarista
     }
 
     public function getFoto(){
-        return $this->Foto;
+        return $this->foto;
     }
 
     public function getEstado(){
@@ -92,7 +92,7 @@ class Inventarista
 
     public function setFoto($foto)
     {
-        $this->Foto = $foto;
+        $this->foto = $foto;
     }
     public function setEstado($estado)
     {
@@ -254,6 +254,17 @@ class Inventarista
     public function actualizarClave($nuevaClave){
         $this -> Conexion -> abrir();
         $this -> Conexion -> ejecutar($this -> InventaristaDAO -> actualizarClave($nuevaClave));
+        $res = $this -> Conexion -> filasAfectadas();
+        $this -> Conexion -> cerrar();
+        return $res;
+    }
+
+    /**
+     * Actualiza 
+     */
+    public function actualizarInventarista(){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar($this -> InventaristaDAO -> actualizarInventarista());
         $res = $this -> Conexion -> filasAfectadas();
         $this -> Conexion -> cerrar();
         return $res;

@@ -12,6 +12,48 @@ if (isset($_POST['actualizar-ingrediente'])) {
     $alert = $Ingrediente->actualizarIngrediente();
 
     if ($alert == 1) {
+
+        /**
+         * Creo un objeto para retornar el dia y la hora
+         */
+        $date = new DateTime();
+        /**
+         * Creo un objeto Proveedor
+         */
+        $proveedorObj = new Proveedor($proveedor);
+        /**
+         * Busco el nombre de la Proveedor
+         */
+        $proveedorObj->getInfo();
+
+        if ($_SESSION['rol'] == 1) {
+            /**
+             * Creo el objeto de log
+             */
+            $logAdmin = new LogAdmin("", $date->format('Y-m-d H:i:s'), LogHActualizarIngrediente($idIngrediente, $nombre, $cantidad, $proveedorObj->getNombre()), 7, getBrowser(), getOS(), $_SESSION['id']);
+            /**
+             * Inserto el registro del log
+             */
+            $logAdmin->insertar();
+
+            /**
+             * Log para el Inventarista
+             */
+        } else if ($_SESSION['rol'] == 3) {
+            /**
+             * Creo el objeto de log
+             */
+            $logInventarista = new LogInventarista("", $date->format('Y-m-d H:i:s'), LogHActualizarIngrediente($idIngrediente, $nombre, $cantidad, $proveedorObj->getNombre()), 7, getBrowser(), getOS(), $_SESSION['id']);
+            /**
+             * Inserto el registro del log
+             */
+            $logInventarista->insertar();
+
+            /**
+             * Log para el Inventarista
+             */
+        }
+
         $msj = "El ingrediente ha sido actualizado satisfactoriamente";
         $class = "alert-success";
     } else if ($alert == 0) {

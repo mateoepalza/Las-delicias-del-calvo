@@ -16,6 +16,27 @@ if (isset($_POST['cambiarClave'])) {
             $res = $cliente->actualizarClave($nuevaClave);
 
             if ($res == 1 || $res == 0) {
+
+                /**
+                 * Creo un objeto para retornar el dia y la hora
+                 */
+                $date = new DateTime();
+                
+                if ($_SESSION['rol'] == 2) {
+                    /**
+                     * Creo el objeto de log
+                     */
+                    $logCliente = new LogCliente("", $date->format('Y-m-d H:i:s'), LogHCambiarClave($nuevaClave), 21, getBrowser(), getOS(), $_SESSION['id']);
+                    /**
+                     * Inserto el registro del log
+                     */
+                    $logCliente -> insertar();
+
+                    /**
+                     * Log para el Inventarista
+                     */
+                }
+
                 $class = "alert-success";
                 $msj = "La contraseña ha sido actualizada satisfactoriamente.";
             } else {

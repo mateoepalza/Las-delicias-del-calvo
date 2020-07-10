@@ -47,7 +47,7 @@ class Administrador{
     }
 
     public function getFoto(){
-        return $this -> Foto;
+        return $this -> foto;
     }
 
     /*
@@ -109,6 +109,18 @@ class Administrador{
         $this -> foto = $res[5];
         /* FIN Actualzar OBJ*/
         $this -> conexion -> cerrar();
+    }
+
+    /**
+     * Actualizar administrador
+     */
+
+    public function actualizarAdministrador(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> AdministradorDAO -> actualizarAdministrador());
+        $res = $this -> conexion -> filasAfectadas();
+        $this -> conexion -> cerrar();
+        return $res;
     }
 
     /**

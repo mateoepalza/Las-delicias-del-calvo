@@ -110,5 +110,15 @@
                     WHERE idInventarista = " . $this -> idInventarista;
         }
 
+        public function actualizarInventarista(){
+            return "UPDATE Inventarista
+                    SET
+                        nombre = '" . $this -> nombre . "',
+                        apellido = '" . $this -> apellido . "',
+                        email = '" . $this -> correo . "',
+                        foto = '" . $this -> foto . "'
+                    WHERE idInventarista = ". $this -> idInventarista;
+        }
+
     }
 ?>

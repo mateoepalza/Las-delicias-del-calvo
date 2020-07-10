@@ -177,13 +177,22 @@ $resultados = $categoria->buscarTodo();
                         </div>
                         <div class="form-group">
                             <label>Imagen</label>
-                            <input class="form-control" style="border:0px;" name="archivo" type="file" required>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" name="archivo" class="custom-file-input" id="imageUpload" required>
+                                    <label class="custom-file-label" for="imageUpload">Choose file</label>
+                                </div>
+                            </div>
                             <div class="invalid-feedback">
                                 Por favor ingrese la foto del producto.
                             </div>
                             <div class="valid-feedback">
                                 ¡Enhorabuena!
                             </div>
+
                         </div>
                         <div class="form-group">
                             <button class="btn btn-primary w-100" name="sent" type="submit">Crear</button>

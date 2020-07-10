@@ -19,6 +19,22 @@ if (isset($_POST['actualizarInventarista'])) {
     }
 
     if ($res == 1) {
+
+        if($_SESSION['rol'] == 1){
+            /**
+             * Creo un objeto para retornar el dia y la hora
+             */
+            $date = new DateTime();
+            /**
+             * Creo el objeto de log
+             */
+            $logAdmin = new LogAdmin("", $date -> format('Y-m-d H:i:s'), LogHActualizarInventarista($idInventarista, $nombre, $apellido, $email, $clave, $estado), 13, getBrowser(), getOS(), $_SESSION['id']);
+            /**
+             * Inserto el registro del log
+             */
+            $logAdmin -> insertar();
+        }
+
         $msj = "El inventarista se ha actualizado satisfactoriamente.";
         $class = "alert-success";
     } else if ($res == 0) {

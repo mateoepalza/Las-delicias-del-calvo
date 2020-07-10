@@ -53,6 +53,18 @@ class IngredienteProducto{
 
     /*Methods*/
 
+    /**
+     * Actualiza el objeto
+     */
+
+    public function getInfoBasic(){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> IngredienteProductoDAO -> getInfoBasic() );
+        $res = $this -> Conexion -> extraer();
+        $this -> cantidad =  $res[2];
+        $this -> Conexion -> cerrar();
+    }
+
     /*
      * Busca todos los ingredientes asociados a un producto
      */
@@ -83,7 +95,7 @@ class IngredienteProducto{
     }
 
     /*
-     * Pruenaaaaaaaaaaaaaaa
+     * 
      */
 
     public function buscarIngredienteOb(){

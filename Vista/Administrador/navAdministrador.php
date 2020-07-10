@@ -6,7 +6,7 @@ $admin->getInfoBasic();
 
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position: sticky; top: 0px; z-index: 15;">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="index.php?pid=<?php echo base64_encode("Vista/Administrador/mainAdministrador.php") ?>">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -47,6 +47,8 @@ $admin->getInfoBasic();
                     <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Security/buscarCliente.php") ?>">Clientes</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Security/buscarInventarista.php") ?>">Inventarista</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Security/buscarLog.php") ?>">Log</a>
                 </div>
             </li>
         </ul>
@@ -55,6 +57,8 @@ $admin->getInfoBasic();
                     <?php echo ($admin->getNombre() != "") ? $admin->getNombre() . " " . $admin->getApellido() : $admin->getCorreo(); ?>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Administrador/informacionPersonal.php") ?>">Información Personal</a>
+                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Administrador/cambiarClaveAdministrador.php") ?>">Cambiar contraseña</a>
                 </div>
             </div>
