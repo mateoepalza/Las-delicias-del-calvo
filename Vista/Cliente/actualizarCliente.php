@@ -10,39 +10,53 @@ if (isset($_POST['actualizarCliente'])) {
     $clave = $_POST['clave'];
     $estado = $_POST['estado'];
 
-    $cliente = new Cliente($idCliente, $nombre, $apellido, $email, $clave, "", $estado);
+    
+    $inventarista = new Inventarista("", "", "", $email);
+    $administrador = new Administrador("", "", "", $email);
+    $cliente = new Cliente($idCliente);
+    $cliente -> getInfoBasic();
 
-    if ($clave != "") {
-        $res = $cliente->actualizarCClave();
-    } else {
-        $res = $cliente->actualizar();
-    }
+    if ( $cliente -> getCorreo() != $email && ($inventarista->existeCorreo() || $administrador->existeCorreo() || $cliente -> existeNuevoCorreo($email) )) {
 
-    if ($res == 1) {
-
-        if($_SESSION['rol'] == 1){
-                /**
-                 * Creo un objeto para retornar el dia y la hora
-                 */
-                $date = new DateTime();
-                /**
-                 * Creo el objeto de log
-                 */
-                $logAdmin = new LogAdmin("", $date -> format('Y-m-d H:i:s'), LogHActualizarCliente($idCliente, $nombre, $apellido, $email, $clave, $estado), 10, getBrowser(), getOS(), $_SESSION['id']);
-                /**
-                 * Inserto el registro del log
-                 */
-                $logAdmin -> insertar();
-        }
-
-        $msj = "El cliente se ha actualizado satisfactoriamente.";
-        $class = "alert-success";
-    } else if ($res == 0) {
-        $msj = "No hubo ningún cambio.";
-        $class = "alert-warning";
-    } else {
-        $msj = "Ocurrió algo inesperado, intente de nuevo.";
+        $msj = "El correo proporcionado ya se encuentra en uso.";
         $class = "alert-danger";
+
+    }else{
+
+        $cliente = new Cliente($idCliente, $nombre, $apellido, $email, $clave, "", $estado);
+
+        if ($clave != "") {
+            $res = $cliente->actualizarCClave();
+        } else {
+            $res = $cliente->actualizar();
+        }
+    
+        if ($res == 1) {
+    
+            if($_SESSION['rol'] == 1){
+                    /**
+                     * Creo un objeto para retornar el dia y la hora
+                     */
+                    $date = new DateTime();
+                    /**
+                     * Creo el objeto de log
+                     */
+                    $logAdmin = new LogAdmin("", $date -> format('Y-m-d H:i:s'), LogHActualizarCliente($idCliente, $nombre, $apellido, $email, $clave, $estado), 11, getBrowser(), getOS(), $_SESSION['id']);
+                    /**
+                     * Inserto el registro del log
+                     */
+                    $logAdmin -> insertar();
+            }
+    
+            $msj = "El cliente se ha actualizado satisfactoriamente.";
+            $class = "alert-success";
+        } else if ($res == 0) {
+            $msj = "No hubo ningún cambio.";
+            $class = "alert-warning";
+        } else {
+            $msj = "Ocurrió algo inesperado, intente de nuevo.";
+            $class = "alert-danger";
+        }
     }
 
     include "Vista/Main/error.php";

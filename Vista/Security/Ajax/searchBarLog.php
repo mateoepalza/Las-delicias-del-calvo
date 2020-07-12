@@ -5,17 +5,17 @@
     $pagina = $_POST['page'];
     $cantPag = $_POST['cantPag'];
 
-    $ingrediente = new Ingrediente();
+    $log = new Log();
     
-    $data = $ingrediente -> filtroPaginado($str, $pagina, $cantPag);
-    $resultado = $ingrediente -> filtroCantidad($str);
+    $data = $log -> filtroPaginado($str, $pagina, $cantPag);
+    $resultado = $log -> filtroCantidad($str);
     
     $cant = $resultado/$cantPag;
 
     $ajax = Array(
         "status" => ((count($data) > 0)? true : false),
         "DataT" => $data,
-        "DataL" => base64_encode("Vista/Ingrediente/actualizarIngrediente.php"),
+        "DataL" => "",
         "Cpage" => $pagina,
         "DataP" => $cant
     );

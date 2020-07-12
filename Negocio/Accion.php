@@ -10,7 +10,7 @@ class Accion{
     private $Conexion;
     private $AccionDAO;
 
-    public function Accion($idAccion, $nombre){
+    public function Accion($idAccion = "", $nombre = ""){
         $this -> idAccion = $idAccion;
         $this -> nombre = $nombre;
 
@@ -38,7 +38,19 @@ class Accion{
 
     public function setNombre($nombre){
         $this -> nombre = $nombre;
-    }   
+    } 
+
+    /**
+     * Methods
+     */
+
+    public function getInfoBasic(){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> AccionDAO -> getInfoBasic());
+        $res = $this -> Conexion -> extraer();
+        $this -> nombre = $res[1];
+        $this -> Conexion -> cerrar();
+    }
 
 }
 

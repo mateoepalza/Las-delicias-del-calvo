@@ -120,12 +120,27 @@ class Producto{
     /*
      * Función que busca los productos destacados
      */
-    public function getDestProducts(){
+    public function getDestProducts($inicio, $fin){
         $this -> Conexion -> abrir();
-        $this -> Conexion -> ejecutar( $this -> ProductoDAO -> getDestProducts());
+        $this -> Conexion -> ejecutar( $this -> ProductoDAO -> getDestProducts($inicio, $fin));
         $resList = array();
         while($res = $this -> Conexion -> extraer()){
             array_push($resList, new Producto($res[0], $res[1], $res[2], "",  $res[3]));
+        }
+        $this -> Conexion -> cerrar();
+
+        return $resList;
+    }
+
+    /*
+     * Función que busca los productos destacados
+     */
+    public function getDestProductsAjax($inicio, $fin){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> ProductoDAO -> getDestProducts($inicio, $fin));
+        $resList = array();
+        while($res = $this -> Conexion -> extraer()){
+            array_push($resList, $res);
         }
         $this -> Conexion -> cerrar();
 
@@ -183,22 +198,6 @@ class Producto{
     public function buscarAPaginado($pag, $cant){
         $this -> Conexion -> abrir();
         $this -> Conexion -> ejecutar( $this -> ProductoDAO -> buscarPaginado($pag, $cant));
-        $resList = Array();
-        while($res = $this -> Conexion -> extraer()){
-            array_push($resList, $res);
-        }
-        $this -> Conexion -> cerrar();
-
-        return $resList;
-    }
-
-    /*
-     * ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-     */
-
-    public function buscarAPaginadoByCategory($category, $pagina, $cantPag){
-        $this -> Conexion -> abrir();
-        $this -> Conexion -> ejecutar( $this -> ProductoDAO -> buscarPaginadoByCategory($category, $pag, $cant));
         $resList = Array();
         while($res = $this -> Conexion -> extraer()){
             array_push($resList, $res);

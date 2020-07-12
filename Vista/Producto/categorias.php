@@ -20,6 +20,7 @@ $pagination = $cantPag / $numReg;
 
     </div>
     <div class="row product-container mt-4">
+        <!--
         <?php
         foreach ($productosDest as $prod) {
         ?>
@@ -35,7 +36,7 @@ $pagination = $cantPag / $numReg;
             </div>
         <?php
         }
-        ?>
+        ?>-->
     </div>
     <div class="row d-flex flex-row justify-content-center">
         <div class="col-8 d-flex flex-row justify-content-center">
@@ -51,16 +52,34 @@ $pagination = $cantPag / $numReg;
                     <?php
                     }
                     ?>
-                    <li class="page-item page-item-list <?php echo ($pagination > 1)? "" : "disabled"?>" id="page-next" data-page="<?php echo ($pagina + 1) ?>">
+                    <li class="page-item page-item-list <?php echo ($pagination > 1) ? "" : "disabled" ?>" id="page-next" data-page="<?php echo ($pagina + 1) ?>">
                         <a class="page-link" href="#">Next</a>
                     </li>
                 </ul>
             </nav>
+            <input id="escondido" style="display:none;" type="text" value="1">
         </div>
     </div>
 </div>
 
 <script type="text/javascript">
+    $(function() {
+        json = {
+            "page": $("#escondido").val(),
+            "search": $("#search-product").val(),
+            "category": <?php echo $category ?>
+        };
+
+        $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Producto/Ajax/productoCategoria.php") ?>", json, function(data) {
+            console.log(data);
+            res = JSON.parse(data);
+            //imprime los datos en la tabla
+            tablePrint(res.DataT, res.DataL);
+            //Imprime paginación
+            paginationPrint(res.DataP, parseInt(res.Cpage));
+        });
+    });
+
     $(function() {
 
         /*
@@ -95,23 +114,35 @@ $pagination = $cantPag / $numReg;
          */
 
         $(".pagination").on('click', ".page-item-list", function() {
-            json = {
-                "page": $(this).data("page"),
-                "search": $("#search-product").val(),
-                "category": <?php echo $category ?>
-            };
+            if ($(this).data("page") != 0) {
+                json = {
+                    "page": $(this).data("page"),
+                    "search": $("#search-product").val(),
+                    "category": <?php echo $category ?>
+                };
 
-            $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Producto/Ajax/productoCategoria.php") ?>", json, function(data) {
-                console.log(data);
-                res = JSON.parse(data);
-                //imprime los datos en la tabla
-                tablePrint(res.DataT, res.DataL);
-                //Imprime paginación
-                paginationPrint(res.DataP, parseInt(res.Cpage));
-            });
+                $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Producto/Ajax/productoCategoria.php") ?>", json, function(data) {
+                    res = JSON.parse(data);
+
+                    if (res.status) {
+                        //imprime los datos en la tabla
+                        tablePrint(res.DataT, res.DataL);
+                        //Imprime paginación
+                        paginationPrint(res.DataP, parseInt(res.Cpage));
+                        updateEscondido(parseInt(res.Cpage));
+                    }
+                });
+            }
         })
 
     });
+
+    /*
+     * Update escondido
+     */
+    function updateEscondido(num) {
+        $("#escondido").val(num);
+    }
 
     /*
      * Imprime los datos en la tabla

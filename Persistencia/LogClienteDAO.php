@@ -25,5 +25,11 @@ class LogClienteDAO{
                 VALUES ('" . $this -> fecha . "', '" . $this -> informacion . "', '" . $this -> accion . "', '" . $this -> browser . "', '" . $this -> os . "', '" . $this -> Cliente . "')";
     }
 
+    public function getInfoBasic(){
+        return "SELECT idLogCliente, Fecha, informacion, FK_idAccion, browser, os, FK_idCliente, 2 
+                FROM logCliente 
+                WHERE idLogCliente = " . $this -> idLogCliente;
+    }
+
 }
 ?>

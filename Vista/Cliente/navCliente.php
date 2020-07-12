@@ -71,7 +71,7 @@ $categorias = $categoria->buscarTodo();
 
         <div class="logo-pos col-xl-3 col-md-4 col-sm-12 col-12 d-flex flex-column justify-content-center align-items-center">
             <div class="input-group" style="width:225px">
-                <input id="search-product" class="form-control" type="search" placeholder="Buscar" width="200px">
+                <input id="search-product" class="form-control" type="text" placeholder="Buscar" width="200px">
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="validatedInputGroupSelect"><i class="fas fa-search"></i></label>
                 </div>

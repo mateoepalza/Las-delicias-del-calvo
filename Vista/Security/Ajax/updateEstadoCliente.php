@@ -5,6 +5,7 @@ $estado = $_POST['estado'];
 $cliente = new Cliente($idCliente, "", "", "", "", "", $estado);
 
 $res = $cliente->updateEstado();
+$cliente -> getInfoBasic();
 $ajax = array();
 
 if ($res == 1) {
@@ -17,7 +18,7 @@ if ($res == 1) {
         /**
          * Creo el objeto de log
          */
-        $logAdmin = new LogAdmin("", $date->format('Y-m-d H:i:s'), LogHActualizarEstadoCliente($idCliente, $estado), 14, getBrowser(), getOS(), $_SESSION['id']);
+        $logAdmin = new LogAdmin("", $date->format('Y-m-d H:i:s'), LogHActualizarEstadoCliente($cliente -> getIdCliente(), $cliente -> getNombre()." ". $cliente -> getApellido(), $cliente -> getEstado()), 14, getBrowser(), getOS(), $_SESSION['id']);
         /**
          * Inserto el registro del log
          */

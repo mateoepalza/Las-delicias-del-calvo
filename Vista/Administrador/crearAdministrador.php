@@ -1,29 +1,28 @@
 <?php
 
-if (isset($_POST['crearInventarista'])) {
+if (isset($_POST['crearAdministrador'])) {
 
     $nombre = $_POST['nombre'];
     $apellido = $_POST['apellido'];
     $email = $_POST['email'];
     $clave = $_POST['clave'];
-    $estado = $_POST['estado'];
+    
 
-    $inventarista = new Inventarista("", $nombre, $apellido, $email, $clave, "", $estado);
-    $cliente = new Cliente("", "", "", $email);
-    $administrador = new Administrador("", "", "", $email);
+    $Administrador = new Administrador("", $nombre, $apellido, $email, $clave);
+    $inventarista = new Inventarista("", "", "", $email);
+    $Cliente = new Cliente("", "", "", $email);
+    
+    if ($Cliente -> existeCorreo() || $inventarista->existeCorreo() || $Administrador->existeCorreo()) {
 
-    if ($inventarista->existeCorreo() || $cliente->existeCorreo() || $administrador->existeCorreo()) {
-
-        $msj = "El correo suministrado ya se encuentra en uso";
+        $msj = "El correo proporcionado ya se encuentra en uso.";
         $class = "alert-danger";
-        
-    } else {
 
-        $res = $inventarista->insertar();
+    } else {
+        $res = $Administrador -> insertar();
 
         if ($res == 1) {
 
-            if ($_SESSION['rol'] == 1) {
+            if($_SESSION['rol'] == 1){
                 /**
                  * Creo un objeto para retornar el dia y la hora
                  */
@@ -31,43 +30,41 @@ if (isset($_POST['crearInventarista'])) {
                 /**
                  * Creo el objeto de log
                  */
-                $logAdmin = new LogAdmin("", $date->format('Y-m-d H:i:s'), LogHCrearInventarista($nombre, $apellido, $email, $clave, $estado), 12, getBrowser(), getOS(), $_SESSION['id']);
+                $logAdmin = new LogAdmin("", $date -> format('Y-m-d H:i:s'), LogHCrearAdministrador($nombre, $apellido, $email, $clave), 24, getBrowser(), getOS(), $_SESSION['id']);
                 /**
                  * Inserto el registro del log
                  */
-                $logAdmin->insertar();
+                $logAdmin -> insertar();
             }
 
-            $msj = "El inventarista se ha creado satisfactoriamente";
+            $msj = "El administrador se ha creado satisfactoriamente";
             $class = "alert-success";
         } else {
             $msj = "Ocurrió algo inesperado, intente de nuevo.";
             $class = "alert-danger";
         }
-
     }
-
 
     include "Vista/Main/error.php";
 }
 ?>
 <div class="container mt-5 mb-5">
     <div class="row justify-content-center">
-        <h1>Crear Inventarista</h1>
+        <h1>Crear Administrador</h1>
     </div>
     <div class="row justify-content-center mt-5">
         <div class="col-11 col-md-12 col-lg-9 col-xl-8">
             <div class="card">
                 <div class="card-header">
-                    Crear un nuevo inventarista
+                    Crear un nuevo Administrador
                 </div>
                 <div class="card-body">
-                    <form novalidate class="needs-validation" action="index.php?pid=<?php echo base64_encode("Vista/Inventarista/crearInventarista.php") ?>" method="POST">
+                    <form novalidate class="needs-validation" action="index.php?pid=<?php echo base64_encode("Vista/Administrador/crearAdministrador.php") ?>" method="POST">
                         <div class="form-group">
                             <label>Nombre Completo</label>
                             <div class="row">
                                 <div class="col-6">
-                                    <input class="form-control" name="nombre" type="text" required>
+                                    <input class="form-control" name="nombre" type="text" placeholder="Ingrese el nombre" required>
                                     <div class="invalid-feedback">
                                         Por favor ingrese el nombre.
                                     </div>
@@ -76,7 +73,7 @@ if (isset($_POST['crearInventarista'])) {
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <input class="form-control" name="apellido" type="text" required>
+                                    <input class="form-control" name="apellido" type="text" placeholder="Ingrese el apellido" required>
                                     <div class="invalid-feedback">
                                         Por favor ingrese el apellido.
                                     </div>
@@ -87,22 +84,8 @@ if (isset($_POST['crearInventarista'])) {
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Estado</label>
-                            <select name="estado" class="form-control" required>
-                                <option value="" selected disabled>-- Estado --</option>
-                                <option value="1">Activado</option>
-                                <option value="0">Bloqueado</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Por favor seleccione un estado.
-                            </div>
-                            <div class="valid-feedback">
-                                ¡Enhorabuena!
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label>Email</label>
-                            <input class="form-control" name="email" type="email" required>
+                            <input class="form-control" name="email" type="email" placeholder="Ingrese el correo" required>
                             <div class="invalid-feedback">
                                 Por favor ingrese el correo.
                             </div>
@@ -112,7 +95,7 @@ if (isset($_POST['crearInventarista'])) {
                         </div>
                         <div class="form-group">
                             <label>Contraseña</label>
-                            <input class="form-control" name="clave" type="password" value="" required>
+                            <input class="form-control" name="clave" type="password" value="" placeholder="Ingrese la contraseña" required>
                             <div class="invalid-feedback">
                                 Por favor ingrese la contraseña.
                             </div>
@@ -121,7 +104,7 @@ if (isset($_POST['crearInventarista'])) {
                             </div>
                         </div>
                         <div>
-                            <button class="btn btn-primary w-100" name="crearInventarista" type="submit"> Crear </button>
+                            <button class="btn btn-primary w-100" name="crearAdministrador" type="submit"> Crear administrador </button>
                         </div>
                     </form>
                 </div>

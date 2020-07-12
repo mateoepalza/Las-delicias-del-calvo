@@ -20,6 +20,7 @@
      * Crear la estructura de retorno
      */
     $ajax = Array(
+        "status" => ((count($data) > 0)? true : false),
         "DataT" => $data,
         "DataL" => base64_encode("Vista/Proveedor/actualizarProveedor.php"),
         "Cpage" => $pagina,

@@ -132,7 +132,7 @@ $resultados = $Proveedor->buscarTodo();
                             </div>
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-primary w-100" name="actualizar-ingrediente" type="submit">Actulizar ingrediente</button>
+                            <button class="btn btn-primary w-100" name="actualizar-ingrediente" type="submit">Actualizar ingrediente</button>
                         </div>
                     </form>
                 </div>

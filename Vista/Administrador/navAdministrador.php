@@ -48,6 +48,8 @@ $admin->getInfoBasic();
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Security/buscarInventarista.php") ?>">Inventarista</a>
                     <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Security/buscarAdministrador.php") ?>">Administrador</a>
+                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Security/buscarLog.php") ?>">Log</a>
                 </div>
             </li>

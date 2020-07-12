@@ -9,107 +9,122 @@ if (isset($_POST['actualizarInfoInventarista'])) {
     $oldUrl = $_POST['url_hidden'];
     $archivo = $_FILES['archivo']['name'];
 
-    if (isset($archivo) && $archivo != "") {
+    $cliente = new Cliente("", "", "", $correo);
+    $administrador = new Administrador("", "", "", $correo);
+    $inventarista = new Inventarista($idInventarista);
+    $inventarista -> getInfoBasic();
+    
+    if ($inventarista -> getCorreo() != $correo && ($administrador->existeCorreo() || $cliente->existeCorreo() || $inventarista -> existeNuevoCorreo($correo))) {
 
-        $archivo = date("Y_m_d_H_i_s_") . $archivo;
+        $msj = "El correo proporcionado ya se encuentra en uso.";
+        $class = "alert-danger";
 
-        $tipo = $_FILES['archivo']['type'];
-        $tamano = $_FILES['archivo']['size'];
-        $temp = $_FILES['archivo']['tmp_name'];
-        $url = 'static/img/Users/' . $archivo;
+    } else {
 
-        if (!((strpos($tipo, "gif") || strpos($tipo, "jpeg") || strpos($tipo, "jpg") || strpos($tipo, "png")) && ($tamano < 9000000))) {
+        if (isset($archivo) && $archivo != "") {
 
-            $class = "alert-danger";
-            $msj = "El tipo de archivo no es valido o el tamañano es demasiado grande";
-            $inventarista = new Inventarista($idInventarista);
-            $inventarista -> getInfoBasic();
-
-        } else {
-            if (move_uploaded_file($temp, $url)) {
-
-                if (file_exists($oldUrl)) {
-                    unlink(trim($oldUrl));
-                }
-
-                $inventarista = new Inventarista($idInventarista, $nombre, $apellido, $correo, "", $url);
-                $resInsert = $inventarista -> actualizarInventarista();
-
-                if ($resInsert == 1) {
-
-                    /**
-                     * Creo un objeto para retornar el dia y la hora
-                     */
-                    $date = new DateTime();
-
-                    if ($_SESSION['rol'] == 3) {
-                        /**
-                         * Creo el objeto de log
-                         */
-                        $logAdmin = new LogInventarista("", $date->format('Y-m-d H:i:s'), LogHActualizarInventaristaIP($idInventarista, $nombre, $apellido, $correo, $url), 22, getBrowser(), getOS(), $_SESSION['id']);
-                        /**
-                         * Inserto el registro del log
-                         */
-                        $logAdmin->insertar();
-
-                        /**
-                         * Log para el Inventarista
-                         */
+            $archivo = date("Y_m_d_H_i_s_") . $archivo;
+    
+            $tipo = $_FILES['archivo']['type'];
+            $tamano = $_FILES['archivo']['size'];
+            $temp = $_FILES['archivo']['tmp_name'];
+            $url = 'static/img/Users/' . $archivo;
+    
+            if (!((strpos($tipo, "gif") || strpos($tipo, "jpeg") || strpos($tipo, "jpg") || strpos($tipo, "png")) && ($tamano < 9000000))) {
+    
+                $class = "alert-danger";
+                $msj = "El tipo de archivo no es valido o el tamañano es demasiado grande";
+                $inventarista = new Inventarista($idInventarista);
+                $inventarista -> getInfoBasic();
+    
+            } else {
+                if (move_uploaded_file($temp, $url)) {
+    
+                    if (file_exists($oldUrl)) {
+                        unlink(trim($oldUrl));
                     }
-
-                    $class = "alert-success";
-                    $msj = "El producto se ha guardado correctamente.";
-                } else if ($resInsert == 0) {
-                    $class = "alert-warning";
-                    $msj = "No se ha modificado ningún valor.";
+    
+                    $inventarista = new Inventarista($idInventarista, $nombre, $apellido, $correo, "", $url);
+                    $resInsert = $inventarista -> actualizarInventarista();
+    
+                    if ($resInsert == 1) {
+    
+                        /**
+                         * Creo un objeto para retornar el dia y la hora
+                         */
+                        $date = new DateTime();
+    
+                        if ($_SESSION['rol'] == 3) {
+                            /**
+                             * Creo el objeto de log
+                             */
+                            $logAdmin = new LogInventarista("", $date->format('Y-m-d H:i:s'), LogHActualizarInventaristaIP($idInventarista, $nombre, $apellido, $correo, $url), 22, getBrowser(), getOS(), $_SESSION['id']);
+                            /**
+                             * Inserto el registro del log
+                             */
+                            $logAdmin->insertar();
+    
+                            /**
+                             * Log para el Inventarista
+                             */
+                        }
+    
+                        $class = "alert-success";
+                        $msj = "El producto se ha guardado correctamente.";
+                    } else if ($resInsert == 0) {
+                        $class = "alert-warning";
+                        $msj = "No se ha modificado ningún valor.";
+                    } else {
+                        $class = "alert-danger";
+                        $msj = "Ocurrió algo inesperado";
+                    }
                 } else {
                     $class = "alert-danger";
                     $msj = "Ocurrió algo inesperado";
                 }
+            }
+            include "Vista/Main/error.php";
+        } else {
+    
+            $inventarista = new Inventarista($idInventarista, $nombre, $apellido, $correo, "", trim($oldUrl));
+            $resInsert = $inventarista -> actualizarInventarista();
+    
+            if ($resInsert == 1) {
+                /**
+                 * Creo un objeto para retornar el dia y la hora
+                 */
+                $date = new DateTime();
+    
+                if ($_SESSION['rol'] == 3) {
+                    /**
+                     * Creo el objeto de log
+                     */
+                    $logAdmin = new LogInventarista("", $date->format('Y-m-d H:i:s'), LogHActualizarInventaristaIP($idInventarista, $nombre, $apellido, $correo, $oldUrl), 22, getBrowser(), getOS(), $_SESSION['id']);
+                    /**
+                     * Inserto el registro del log
+                     */
+                    $logAdmin->insertar();
+    
+                    /**
+                     * Log para el Inventarista
+                     */
+                }
+    
+                $class = "alert-success";
+                $msj = "El producto se ha guardado correctamente";
+            } else if ($resInsert == 0) {
+                $class = "alert-warning";
+                $msj = "No se ha modificado ningún valor.";
             } else {
                 $class = "alert-danger";
                 $msj = "Ocurrió algo inesperado";
             }
+    
         }
-        include "Vista/Main/error.php";
-    } else {
-
-        $inventarista = new Inventarista($idInventarista, $nombre, $apellido, $correo, "", $oldUrl);
-        $resInsert = $inventarista -> actualizarInventarista();
-
-        if ($resInsert == 1) {
-            /**
-             * Creo un objeto para retornar el dia y la hora
-             */
-            $date = new DateTime();
-
-            if ($_SESSION['rol'] == 3) {
-                /**
-                 * Creo el objeto de log
-                 */
-                $logAdmin = new LogInventarista("", $date->format('Y-m-d H:i:s'), LogHActualizarInventaristaIP($idInventarista, $nombre, $apellido, $correo, $oldUrl), 22, getBrowser(), getOS(), $_SESSION['id']);
-                /**
-                 * Inserto el registro del log
-                 */
-                $logAdmin->insertar();
-
-                /**
-                 * Log para el Inventarista
-                 */
-            }
-
-            $class = "alert-success";
-            $msj = "El producto se ha guardado correctamente";
-        } else if ($resInsert == 0) {
-            $class = "alert-warning";
-            $msj = "No se ha modificado ningún valor.";
-        } else {
-            $class = "alert-danger";
-            $msj = "Ocurrió algo inesperado";
-        }
-
-        include "Vista/Main/error.php";
     }
+
+    include "Vista/Main/error.php";
+
 } else {
     $inventarista = new Inventarista($idInventarista);
     $inventarista -> getInfoBasic();

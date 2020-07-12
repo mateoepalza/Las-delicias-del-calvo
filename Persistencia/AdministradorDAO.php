@@ -56,6 +56,48 @@ class AdministradorDAO{
                     foto = '" . $this -> foto. "'
                 WHERE idAdministrador = " . $this -> idAdministrador;
     }
+
+    public function existeCorreo(){
+        return "SELECT idAdministrador
+                FROM Administrador
+                WHERE email = '" . $this -> correo . "'";
+    }
+
+    public function existeNuevoCorreo($correo){
+        return "SELECT idAdministrador
+                FROM Administrador
+                WHERE email = '" . $correo . "'";
+    }
+
+    public function buscarPaginado($pag, $cant){
+        return "SELECT idAdministrador, nombre, apellido, email 
+                FROM Administrador
+                LIMIT " . (($pag - 1)*$cant) . ", " . $cant;
+    }
+
+    public function buscarCantidad(){
+        return "SELECT count(*) 
+                FROM Administrador";
+    }
+
+    public function insertar(){
+        return "INSERT INTO Administrador (nombre, apellido, email, clave) 
+                VALUES ('" . $this -> nombre . "', '" . $this -> apellido . "', '" . $this -> correo . "', '" . md5($this -> clave) . "')";
+    }
+
+    public function filtroPaginado($str, $pag, $cant){
+        return "SELECT idAdministrador, nombre, apellido, email 
+                FROM Administrador 
+                WHERE Administrador.nombre like '%". $str ."%' OR Administrador.apellido like '%" . $str . "%' OR Administrador.email like '%" . $str . "%'
+                LIMIT " . (($pag - 1)*$cant) . ", " . $cant;
+    }
+
+    public function filtroCantidad($str){
+        return "SELECT count(*) 
+                FROM Administrador
+                WHERE Administrador.nombre like '%". $str ."%' OR Administrador.apellido like '%" . $str . "%' OR Administrador.email like '%" . $str . "%'";
+    }
+
 }
 
 ?>

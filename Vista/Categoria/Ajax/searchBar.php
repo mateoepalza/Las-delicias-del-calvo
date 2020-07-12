@@ -1,28 +1,24 @@
-<?php 
+<?php
 
 
-    $str = $_POST['search'];
+$str = $_POST['search'];
 
-    $pagina = $_POST['page'];
-    $cantPag = $_POST['cantPag'];
+$pagina = $_POST['page'];
+$cantPag = $_POST['cantPag'];
 
-    $categoria = new Categoria();
+$categoria = new Categoria();
 
-    if($str != "0"){
-        $data = $categoria -> filtroPaginado($str, $pagina, $cantPag);
-        $resultado = $categoria -> filtroCantidad($str);
-    }else{
-        $data = $categoria -> buscarAPaginado($pagina, $cantPag);
-        $resultado = $categoria -> buscarCantidad($str);
-    }
-    
-    $cant = $resultado/$cantPag;
+$data = $categoria->filtroPaginado($str, $pagina, $cantPag);
+$resultado = $categoria->filtroCantidad($str);
 
-    $ajax = Array(
-        "DataT" => $data,
-        "DataL" => base64_encode("Vista/Categoria/actualizarCategoria.php"),
-        "Cpage" => $pagina,
-        "DataP" => $cant
-    );
-    echo json_encode($ajax);
+$cant = $resultado / $cantPag;
+
+$ajax = array(
+    "status" => ((count($data) > 0) ? true : false),
+    "DataT" => $data,
+    "DataL" => base64_encode("Vista/Categoria/actualizarCategoria.php"),
+    "Cpage" => $pagina,
+    "DataP" => $cant
+);
+echo json_encode($ajax);
 ?>

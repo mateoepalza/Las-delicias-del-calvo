@@ -9,6 +9,12 @@ class AccionDAO{
         $this -> nombre = $nombre;
     }
 
+    public function getInfoBasic(){
+        return "SELECT idAccion, nombre 
+                FROM Accion 
+                WHERE idAccion = " . $this -> idAccion;
+    }
+
 }
 
 

@@ -1,26 +1,26 @@
 <?php
 
 $pagina = 1;
-$numReg = 15;
+$numReg = 5;
 
-$log = new Log();
-$resultados = $log->buscarPaginado($pagina, $numReg);
-$cantPag = $log->buscarCantidad();
+$administrador = new Administrador();
+$resultados = $administrador->buscarPaginado($pagina, $numReg);
+$cantPag = $administrador->buscarCantidad();
 $pagination = $cantPag / $numReg;
 ?>
 <div class="container mt-5 mb-5">
     <div class="row justify-content-center">
-        <h1>Buscar Log</h1>
+        <h1>Buscar Administrador</h1>
     </div>
     <div class="row justify-content-center mt-5">
-        <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="col-12 col-md-12 col-lg-11 col-xl-10">
             <div class="card">
                 <div class="card-header bg-dark d-flex flex-row justify-content-between">
-                    <div style="width: 182px;"></div>
+                    <a href="index.php?pid=<?php echo base64_encode("Vista/Administrador/crearAdministrador.php") ?>"><button type="button" class="btn btn-outline-light">Crear nuevo</button></a>
                     <select id="select-cantidad">
-                        <option value="5">5</option>
+                        <option value="5" selected>5</option>
                         <option value="10">10</option>
-                        <option value="15" selected>15</option>
+                        <option value="15">15</option>
                         <option value="25">25</option>
                         <option value="50">50</option>
                         <option value="100">100</option>
@@ -32,12 +32,9 @@ $pagination = $cantPag / $numReg;
                         <table class="table">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th>Fecha</th>
-                                    <th>Acción</th>
-                                    <th>Navegador</th>
-                                    <th>SO</th>
-                                    <th>Usuario</th>
-                                    <th></th>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Email</th>
                                 </tr>
                             </thead>
                             <tbody id="tabla">
@@ -45,12 +42,9 @@ $pagination = $cantPag / $numReg;
                                 foreach ($resultados as $resultado) {
                                 ?>
                                     <tr>
-                                        <td><?php echo $resultado->getFecha() ?></td>
-                                        <td><?php echo $resultado->getAccion() ?></td>
-                                        <td><?php echo $resultado->getBrowser() ?></td>
-                                        <td><?php echo $resultado->getOs() ?></td>
-                                        <td><?php echo $resultado->getUser() ?></td>
-                                        <td><a href='#' class="moreInfoBtn" data-id="<?php echo $resultado->getIdLog() ?>" data-table="<?php echo $resultado->getTipo() ?>" data-toggle="modal" data-target="#moreInfo"><i class='fas fa-info-circle'></i></a></td>
+                                        <td><?php echo $resultado->getNombre() ?></td>
+                                        <td><?php echo $resultado->getApellido() ?></td>
+                                        <td><?php echo $resultado->getCorreo() ?></td>
                                     </tr>
                                 <?php
                                 }
@@ -82,31 +76,8 @@ $pagination = $cantPag / $numReg;
         </div>
     </div>
 </div>
-<div id="moreInfo" class="modal fade show">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Información Log</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body p-5">
-
-            </div>
-        </div>
-    </div>
-</div>
 <script type="text/javascript">
     $(function() {
-
-        /*
-         * 
-         */
-        $("#tabla").on('click', ".moreInfoBtn", function() {
-            $url = "indexAJAX.php?pid=<?php echo base64_encode("Vista/Security/Ajax/moreInfoLog.php") ?>&idLog=" + $(this).data("id") + "&idTable=" + $(this).data("table");
-            $(".modal-body").load($url);
-        });
 
         /*
          * Evento de buscar en la tabla
@@ -119,8 +90,7 @@ $pagination = $cantPag / $numReg;
                 "search": $(this).val()
             };
 
-            $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Security/Ajax/searchBarLog.php") ?>", json, function(data) {
-                console.log(data);
+            $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Security/Ajax/searchBarAdministrador.php") ?>", json, function(data) {
                 res = JSON.parse(data);
                 // Imprime los datos de la tabla
                 tablePrint(res.DataT);
@@ -142,16 +112,15 @@ $pagination = $cantPag / $numReg;
                     "search": $("#search").val()
                 };
 
-                $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Security/Ajax/searchBarLog.php") ?>", json, function(data) {
-                    
+                $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Security/Ajax/searchBarAdministrador.php") ?>", json, function(data) {
                     res = JSON.parse(data);
                     //imprime los datos en la tabla
-                    
-                    if (res.status) {
+                    if(res.status){
                         tablePrint(res.DataT);
                         //Imprime paginación
                         paginationPrint(res.DataP, parseInt(res.Cpage));
                     }
+                    
                 });
             }
         })
@@ -166,17 +135,19 @@ $pagination = $cantPag / $numReg;
                 "cantPag": $(this).val(),
                 "search": $("#search").val()
             };
-
-            $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Security/Ajax/searchBarLog.php") ?>", json, function(data) {
+            $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Security/Ajax/searchBarAdministrador.php") ?>", json, function(data) {
                 res = JSON.parse(data);
                 //imprime los datos en la tabla
+                
                 tablePrint(res.DataT);
                 //Imprime paginación
                 paginationPrint(res.DataP, parseInt(res.Cpage));
+                
             });
         });
 
     });
+
     /*
      * Imprime los datos en la tabla
      */
@@ -184,7 +155,7 @@ $pagination = $cantPag / $numReg;
         $("#tabla").empty();
 
         DataT.forEach(function(data) {
-            $("#tabla").append("<tr><td>" + data[1] + "</td><td>" + data[4] + "</td><td>" + data[5] + "</td><td>" + data[6] + "</td><td>" + data[7] + "</td><td style='display: flex; flex-flow: row; justify-content: center; align-items:center;'><a href='#' class='moreInfoBtn' data-toggle='modal' data-target='#moreInfo' data-id='" + data[0] + "' data-table='" + data[8] + "' style='margin: 0px 2px;'><i class='fas fa-info-circle'></i></a></a></td></tr>")
+            $("#tabla").append(`<tr><td>${data[1]}</td><td>${data[2]}</td><td>${data[3]}</td></tr>`);
         });
     }
     /*
@@ -227,6 +198,24 @@ $pagination = $cantPag / $numReg;
             $("#page-next").data("page", nextNumber);
             $("#page-next").removeClass("disabled");
         }
+
+    }
+
+    function crearAlert(status, msj) {
+        let className = "";
+
+        if (status) {
+            className = "alert-success";
+        } else {
+            className = "alert-danger";
+        }
+
+        $("#alert-ajax").html(`<div class="alert ${className} alert-dismissible fade show" role="alert" style="top: 0px;position: fixed; z-index:20; margin-top : 50px; transform: translateX(-50%); margin-left: 50%">
+                        <span id="alert-ajax-msj">${msj}</span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>`);
 
     }
 </script>

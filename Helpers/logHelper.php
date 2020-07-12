@@ -189,14 +189,16 @@ function LogHActualizarInfoPersonal($idCliente, $nombre, $apellido, $email){
     return $str;
 }
 
-function LogHActualizarEstadoCliente($idCliente, $estado){
+function LogHActualizarEstadoCliente($idCliente, $nombre, $estado){
     $str = "idcliente: " . $idCliente .
+    ";;Nombre: " . $nombre .
     ";;Estado: " .  (($estado == 1)? "Activado" : (($estado == 0)? "Bloqueado" : "Desactivado"));
     return $str;
 }
 
-function LogHActualizarEstadoInventarista($idInventarista, $estado){
+function LogHActualizarEstadoInventarista($idInventarista, $nombre, $estado){
     $str = "idInventarista : " . $idInventarista .
+    ";;Nombre: " . $nombre .
     ";;Estado: " .  (($estado == 1)? "Activado" : "Bloqueado");
     return $str;
 }
@@ -212,11 +214,46 @@ function LogHActualizarAdministrador($idAdmin, $nombre, $apellido, $correo, $fot
 }
 
 function LogHActualizarInventaristaIP($idInventarista, $nombre, $apellido, $correo, $foto){
-    $str = "idAdministrador: " . $idInventarista . 
+    $str = "idInventarista: " . $idInventarista . 
     ";;Nombre: " . $nombre . 
     ";;Apellido: " . $apellido .
     ";;Correo: " . $correo . 
     ";;Foto: " . $foto ;
+
+    return $str;
+}
+
+function LogHActualizarClienteIP($idCliente, $nombre, $apellido, $correo, $foto){
+    $str = "idCliente: " . $idCliente . 
+    ";;Nombre: " . $nombre . 
+    ";;Apellido: " . $apellido .
+    ";;Correo: " . $correo . 
+    ";;Foto: " . $foto ;
+
+    return $str;
+}
+
+function LogHCrearFactura($idFactura, $fecha, $valor, $cliente, $getListProducto){
+    $str = "idFcatura: " . $idFactura . 
+    ";;Fecha: " . $fecha .
+    ";;Valor: " . $valor .
+    ";;Cliente: " . $cliente .
+    "%%";
+    for($i = 0; $i < count($getListProducto); $i++){
+        $str .= "idProducto: " . $getListProducto[$i][0] -> getIdProducto();
+        $str .= ";;nombre: " . $getListProducto[$i][0] -> getNombre();
+        $str .= ";;precio: " . $getListProducto[$i][0] -> getPrecio();
+        $str .= ";;Cantidad: " . $getListProducto[$i][1];
+        $str .= "&&";
+    }
+    return $str;
+}
+
+function LogHCrearAdministrador($nombre, $apellido, $correo, $clave){
+    $str = "Nombre: " . $nombre . 
+    ";;Apellido: " . $apellido .
+    ";;Correo: " . $correo . 
+    ";;Foto: " . md5($clave) ;
 
     return $str;
 }

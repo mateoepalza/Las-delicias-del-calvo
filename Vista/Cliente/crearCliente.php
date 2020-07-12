@@ -9,8 +9,10 @@ if (isset($_POST['crearCliente'])) {
     $estado = $_POST['estado'];
 
     $Cliente = new Cliente("", $nombre, $apellido, $email, $clave, "", $estado);
-
-    if ($Cliente -> existeCorreo()) {
+    $inventarista = new Inventarista("", "", "", $email);
+    $administrador = new Administrador("", "", "", $email);
+    
+    if ($Cliente -> existeCorreo() || $inventarista->existeCorreo() || $administrador->existeCorreo()) {
 
         $msj = "El correo proporcionado ya se encuentra en uso.";
         $class = "alert-danger";

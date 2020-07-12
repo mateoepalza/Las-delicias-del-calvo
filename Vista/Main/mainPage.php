@@ -6,8 +6,10 @@ if(isset($_POST['btn-registrar'])){
     $clave = $_POST['clave'];
 
     $cliente = new Cliente("", "", "", $correo, $clave);
+    $administrador = new Administrador("", "", "", $correo);
+    $inventarista = new Inventarista("", "", "", $correo);
 
-    if($cliente -> existeCorreo()){
+    if($cliente -> existeCorreo() || $administrador -> existeCorreo() || $inventarista -> existeCorreo()){
 
         $msj = "El correo proporcionado ya se encuentra en uso.";
         $class = "alert-danger";

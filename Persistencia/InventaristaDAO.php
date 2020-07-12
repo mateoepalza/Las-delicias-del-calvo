@@ -93,8 +93,8 @@
         }
 
         public function insertar(){
-            return "INSERT INTO Inventarista (nombre, apellido, email, clave, estado) 
-                    VALUES ('" . $this -> nombre ."', '" . $this -> apellido  ."', '" . $this -> correo  ."', '" . md5($this -> clave)  ."', '" . $this -> estado  ."')";
+            return "INSERT INTO Inventarista (nombre, apellido, email, clave, foto, estado) 
+                    VALUES ('" . $this -> nombre ."', '" . $this -> apellido  ."', '" . $this -> correo  ."', '" . md5($this -> clave)  ."', '" . $this -> foto . "','" . $this -> estado  ."')";
         }
 
         public function checkClave(){
@@ -118,6 +118,18 @@
                         email = '" . $this -> correo . "',
                         foto = '" . $this -> foto . "'
                     WHERE idInventarista = ". $this -> idInventarista;
+        }
+
+        public function existeCorreo(){
+            return "SELECT idInventarista
+                    FROM Inventarista
+                    WHERE email = '" . $this -> correo . "'";
+        }
+
+        public function existeNuevoCorreo($correo){
+            return "SELECT idInventarista
+                    FROM Inventarista
+                    WHERE email = '" . $correo . "'";
         }
 
     }

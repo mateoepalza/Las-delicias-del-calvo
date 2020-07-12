@@ -13,6 +13,7 @@
     $cant = $resultado/$cantPag;
 
     $ajax = Array(
+        "status" => ((count($data) > 0)? true : false),
         "DataT" => $data,
         "DataL" => base64_encode("Vista/Inventarista/actualizarInventarista.php"),
         "Cpage" => $pagina,
