@@ -82,6 +82,22 @@ class Factura{
                 if(!$bool){
                     $resCheck = $carrito -> transaction();
                     if(!$resCheck){
+
+                        if($_SESSION['rol'] == 2){
+                            /**
+                             * Creo un objeto para retornar el dia y la hora
+                             */
+                            $date = new DateTime();
+                            /**
+                             * Creo el objeto de log
+                             */
+                            $logCliente = new LogCliente("", $date -> format('Y-m-d H:i:s'), LogHCrearFactura($this -> idFactura, $this -> fecha, $this -> valor, $this -> cliente, $carrito -> getListProducto()), 23, getBrowser(), getOS(), $_SESSION['id']);
+                            /**
+                             * Inserto el registro del log
+                             */
+                            $logCliente -> insertar();
+                        }
+
                         $carrito -> vaciarCarrito();
                         $bool = true;
                     }

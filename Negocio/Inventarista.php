@@ -269,4 +269,18 @@ class Inventarista
         $this -> Conexion -> cerrar();
         return $res;
     }
+
+    public function existeCorreo(){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> InventaristaDAO -> existeCorreo());
+        $this -> Conexion -> cerrar();
+        return $this -> Conexion -> numFilas();
+    }
+
+    public function existeNuevoCorreo($correo){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> InventaristaDAO -> existeNuevoCorreo($correo));
+        $this -> Conexion -> cerrar();
+        return $this -> Conexion -> numFilas();
+    }
 }

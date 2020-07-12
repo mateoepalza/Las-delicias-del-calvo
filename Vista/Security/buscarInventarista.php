@@ -112,21 +112,24 @@ $pagination = $cantPag / $numReg;
          */
 
         $(".pagination").on('click', ".page-item-list", function() {
+            if ($(this).data("page") != 0) {
+                json = {
+                    "page": $(this).data("page"),
+                    "cantPag": $("#select-cantidad").val(),
+                    "search": $("#search").val()
+                };
 
-            json = {
-                "page": $(this).data("page"),
-                "cantPag": $("#select-cantidad").val(),
-                "search": $("#search").val()
-            };
+                $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Security/Ajax/searchBarInventarista.php") ?>", json, function(data) {
 
-            $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Security/Ajax/searchBarInventarista.php") ?>", json, function(data) {
-                console.log(data);
-                res = JSON.parse(data);
-                //imprime los datos en la tabla
-                tablePrint(res.DataT, res.DataL);
-                //Imprime paginación
-                paginationPrint(res.DataP, parseInt(res.Cpage));
-            });
+                    res = JSON.parse(data);
+                    if (res.status) {
+                        //imprime los datos en la tabla
+                        tablePrint(res.DataT, res.DataL);
+                        //Imprime paginación
+                        paginationPrint(res.DataP, parseInt(res.Cpage));
+                    }
+                });
+            }
         })
 
         /*

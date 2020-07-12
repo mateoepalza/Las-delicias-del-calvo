@@ -25,5 +25,11 @@ class LogAdminDAO{
                 VALUES ('" . $this -> fecha . "', '" . $this -> informacion . "', '" . $this -> accion . "', '" . $this -> browser . "', '" . $this -> os . "', '" . $this -> Administrador . "')";
     }
 
+    public function getInfoBasic(){
+        return "SELECT idLogAdministrador, Fecha, informacion, FK_idAccion, browser, os, FK_idAdministrador, 1 
+                FROM logAdministrador 
+                WHERE idLogAdministrador = " . $this -> idLogAdmin;
+    }
+
 }
 ?>

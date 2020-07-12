@@ -24,10 +24,10 @@ class ProductoDAO{
                 VALUES ('" . $this -> nombre . "', '" . $this -> foto . "', '" . $this -> descripcion . "', '" . $this -> precio . "', '" . $this -> categoria . "')";
     }
 
-    public function getDestProducts(){
+    public function getDestProducts($inicio, $fin){
         return "SELECT idProducto, nombre, foto, precio
                 FROM producto
-                LIMIT 0, 10";
+                LIMIT " . $inicio . ", " . $fin . "";
     }
 
     public function getProductsByCategory($category){

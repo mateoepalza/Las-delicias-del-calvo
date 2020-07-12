@@ -27,5 +27,11 @@ class LogInventaristaDAO{
         return "INSERT INTO LogInventarista (fecha, informacion, FK_idAccion, browser, os, FK_idInventarista) 
                 VALUES ('" . $this -> fecha . "', '" . $this -> informacion . "', '" . $this -> accion . "', '" . $this -> browser . "', '" . $this -> os . "', '" . $this -> Inventarista . "')";
     }
+
+    public function getInfoBasic(){
+        return "SELECT idLogInventarista, Fecha, informacion, FK_idAccion, browser, os, FK_idInventarista, 3 
+                FROM logInventarista 
+                WHERE idLogInventarista = " . $this -> idLogInventarista;
+    }
 }
 ?>

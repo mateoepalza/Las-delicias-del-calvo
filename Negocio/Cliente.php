@@ -51,7 +51,7 @@ class Cliente{
     }
 
     public function getFoto(){
-        return $this -> Foto;
+        return $this -> foto;
     }
     public function getEstado(){
         return $this -> estado;
@@ -84,7 +84,7 @@ class Cliente{
     }
 
     public function setFoto($foto){
-        $this -> Foto = $foto;
+        $this -> foto = $foto;
     }
     public function setEstado($estado){
         $this -> Estado = $estado;
@@ -197,6 +197,13 @@ class Cliente{
     public function existeCorreo(){
         $this -> conexion -> abrir();
         $this -> conexion -> ejecutar( $this -> ClienteDAO -> existeCorreo());
+        $this -> conexion -> cerrar();
+        return $this -> conexion -> numFilas();
+    }
+
+    public function existeNuevoCorreo($correo){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar( $this -> ClienteDAO -> existeNuevoCorreo($correo));
         $this -> conexion -> cerrar();
         return $this -> conexion -> numFilas();
     }

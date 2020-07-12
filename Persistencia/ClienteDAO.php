@@ -28,14 +28,20 @@ class ClienteDAO{
     }
 
     public function registrar($codigoActivacion){
-        return "INSERT INTO Cliente (nombre, apellido, email, clave, estado, activation)
-                VALUES ('" . $this -> nombre . "', '" . $this -> apellido . "', '" . $this -> correo . "', '" . md5($this -> clave)  . "', '-1', '" . md5($codigoActivacion) . "')";
+        return "INSERT INTO Cliente (nombre, apellido, email, clave, foto, estado, activation)
+                VALUES ('" . $this -> nombre . "', '" . $this -> apellido . "', '" . $this -> correo . "', '" . md5($this -> clave)  . "', '" . $this -> foto . "' ,'-1', '" . md5($codigoActivacion) . "')";
     }
 
     public function existeCorreo(){
         return "SELECT idCliente
                 FROM Cliente
                 WHERE email = '" . $this -> correo . "'";
+    }
+
+    public function existeNuevoCorreo($correo){
+        return "SELECT idCliente
+                FROM Cliente
+                WHERE email = '" . $correo . "'";
     }
 
     public function checkClave(){
@@ -96,8 +102,8 @@ class ClienteDAO{
     }
 
     public function insertar(){
-        return "INSERT INTO Cliente (nombre, apellido, email, clave, estado) 
-                VALUES ('" . $this -> nombre ."', '" . $this -> apellido  ."', '" . $this -> correo  ."', '" . md5($this -> clave)  ."', '" . $this -> estado  ."')";
+        return "INSERT INTO Cliente (nombre, apellido, email, clave, foto, estado) 
+                VALUES ('" . $this -> nombre ."', '" . $this -> apellido  ."', '" . $this -> correo  ."', '" . md5($this -> clave)  ."', '" . $this -> foto . "' ,'" . $this -> estado  ."')";
     }
 
     public function actualizar(){
@@ -115,7 +121,8 @@ class ClienteDAO{
                 SET
                     nombre = '" . $this -> nombre . "',
                     apellido = '" . $this -> apellido . "',
-                    email = '" . $this -> correo . "'
+                    email = '" . $this -> correo . "',
+                    foto = '" . $this -> foto . "'
                 WHERE idCliente = ". $this -> idCliente;
     }
 

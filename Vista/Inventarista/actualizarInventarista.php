@@ -10,42 +10,57 @@ if (isset($_POST['actualizarInventarista'])) {
     $clave = $_POST['clave'];
     $estado = $_POST['estado'];
 
-    $inventarista = new Inventarista($idInventarista, $nombre, $apellido, $email, $clave, "", $estado);
+    
+    $cliente = new Cliente("", "", "", $email);
+    $administrador = new Administrador("", "", "", $email);
+    $inventarista = new Inventarista($idInventarista);
+    $inventarista -> getInfoBasic();
 
-    if ($clave != "") {
-        $res = $inventarista->actualizarCClave();
-    } else {
-        $res = $inventarista->actualizar();
-    }
+    if ($inventarista -> getCorreo() != $email && ($cliente -> existeCorreo() || $administrador->existeCorreo() || $inventarista -> existeNuevoCorreo($email))) {
 
-    if ($res == 1) {
-
-        if($_SESSION['rol'] == 1){
-            /**
-             * Creo un objeto para retornar el dia y la hora
-             */
-            $date = new DateTime();
-            /**
-             * Creo el objeto de log
-             */
-            $logAdmin = new LogAdmin("", $date -> format('Y-m-d H:i:s'), LogHActualizarInventarista($idInventarista, $nombre, $apellido, $email, $clave, $estado), 13, getBrowser(), getOS(), $_SESSION['id']);
-            /**
-             * Inserto el registro del log
-             */
-            $logAdmin -> insertar();
-        }
-
-        $msj = "El inventarista se ha actualizado satisfactoriamente.";
-        $class = "alert-success";
-    } else if ($res == 0) {
-        $msj = "No hubo ningún cambio.";
-        $class = "alert-warning";
-    } else {
-        $msj = "Ocurrió algo inesperado, intente de nuevo.";
+        $msj = "El correo proporcionado ya se encuentra en uso.";
         $class = "alert-danger";
+
+    }else{
+
+        $inventarista = new Inventarista($idInventarista, $nombre, $apellido, $email, $clave, "", $estado);
+
+        if ($clave != "") {
+            $res = $inventarista->actualizarCClave();
+        } else {
+            $res = $inventarista->actualizar();
+        }
+    
+        if ($res == 1) {
+    
+            if($_SESSION['rol'] == 1){
+                /**
+                 * Creo un objeto para retornar el dia y la hora
+                 */
+                $date = new DateTime();
+                /**
+                 * Creo el objeto de log
+                 */
+                $logAdmin = new LogAdmin("", $date -> format('Y-m-d H:i:s'), LogHActualizarInventarista($idInventarista, $nombre, $apellido, $email, $clave, $estado), 13, getBrowser(), getOS(), $_SESSION['id']);
+                /**
+                 * Inserto el registro del log
+                 */
+                $logAdmin -> insertar();
+            }
+    
+            $msj = "El inventarista se ha actualizado satisfactoriamente.";
+            $class = "alert-success";
+        } else if ($res == 0) {
+            $msj = "No hubo ningún cambio.";
+            $class = "alert-warning";
+        } else {
+            $msj = "Ocurrió algo inesperado, intente de nuevo.";
+            $class = "alert-danger";
+        }
     }
 
     include "Vista/Main/error.php";
+
 } else {
     $inventarista = new Inventarista($idInventarista);
     $inventarista->getInfoBasic();

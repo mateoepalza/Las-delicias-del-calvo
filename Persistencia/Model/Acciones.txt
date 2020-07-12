@@ -25,9 +25,13 @@ insert into Accion (nombre) values ('Actualizar ingredientes a producto');
 insert into Accion (nombre) values ('Borrar ingredientes a producto');
 insert into Accion (nombre) values ('Actualizar contraseña');
 insert into Accion (nombre) values ('Actualizar información personal');
+insert into Accion (nombre) values ('Compra');
+insert into Accion (nombre) values ('Crear administrador');
 
 
 
-select Fecha, informacion, FK_idAccion as accion, browser, os from logAdministrador inne join accion on FK_idAccion = idAccion 
-union 
-select Fecha, informacion, FK_idAccion as accion, browser, os from logCliente inne join accion on FK_idAccion = idAccion;
+select Fecha, informacion, FK_idAccion, accion.nombre as accion, browser, os, 1 from logAdministrador inner join accion on FK_idAccion = idAccion 
+union all 
+select Fecha, informacion, FK_idAccion, accion.nombre as accion, browser, os, 2 from logCliente inner join accion on FK_idAccion = idAccion
+union all
+select Fecha, informacion, FK_idAccion,  accion.nombre as accion, browser, os, 3 from logInventarista inner join accion on FK_idAccion = idAccion;

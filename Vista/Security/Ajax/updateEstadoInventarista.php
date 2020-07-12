@@ -5,6 +5,7 @@ $estado = $_POST['estado'];
 $inventarista = new Inventarista($idInventarista,"","","","","",$estado);
 
 $res = $inventarista -> updateEstado();
+$inventarista -> getInfoBasic();
 $ajax = Array();
 
 if($res == 1){
@@ -18,7 +19,7 @@ if($res == 1){
         /**
          * Creo el objeto de log
          */
-        $logAdmin = new LogAdmin("", $date->format('Y-m-d H:i:s'), LogHActualizarEstadoInventarista($idInventarista, $estado), 15, getBrowser(), getOS(), $_SESSION['id']);
+        $logAdmin = new LogAdmin("", $date->format('Y-m-d H:i:s'), LogHActualizarEstadoInventarista($inventarista -> getIdInventarista(), $inventarista -> getNombre()." ".$inventarista -> getApellido(), $inventarista -> getEstado()), 15, getBrowser(), getOS(), $_SESSION['id']);
         /**
          * Inserto el registro del log
          */

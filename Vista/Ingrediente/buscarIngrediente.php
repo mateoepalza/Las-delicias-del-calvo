@@ -25,7 +25,7 @@ $pagination = $cantPag / $numReg;
                         <option value="50">50</option>
                         <option value="100">100</option>
                     </select>
-                    <input id="search" type="search" placeholder="search">
+                    <input id="search" type="text" placeholder="search">
                 </div>
                 <div class="card-body">
                     <table class="table">
@@ -38,7 +38,7 @@ $pagination = $cantPag / $numReg;
                             </tr>
                         </thead>
                         <tbody id="tabla">
-                            <?php
+                            <!--<?php
                             foreach ($resultados as $resultado) {
                                 echo "<tr>";
                                 echo "<td>" . $resultado->getNombre() . "</td>";
@@ -47,7 +47,7 @@ $pagination = $cantPag / $numReg;
                                 echo "<td><a href='index.php?pid=" . base64_encode("Vista/Ingrediente/actualizarIngrediente.php") . "&idIngrediente=" . $resultado->getIdIngrediente() . "'><i class='far fa-edit'></i></a></td>";
                                 echo "</tr>";
                             }
-                            ?>
+                            ?>-->
                         </tbody>
                     </table>
                 </div>
@@ -64,11 +64,12 @@ $pagination = $cantPag / $numReg;
                             <?php
                             }
                             ?>
-                            <li class="page-item page-item-list" id="page-next" data-page="<?php echo ($pagina + 1) ?>">
+                            <li class="page-item page-item-list <?php echo ($pagination <= 1) ? "disabled" : ""; ?>" id="page-next" data-page="<?php echo ($pagina + 1) ?>">
                                 <a class="page-link" href="#">Next</a>
                             </li>
                         </ul>
                     </nav>
+                    <input id="escondido" style="display:none;" type="text" value="1">
                 </div>
             </div>
         </div>
@@ -76,11 +77,27 @@ $pagination = $cantPag / $numReg;
 </div>
 <script type="text/javascript">
     $(function() {
+        json = {
+            "page": $("#escondido").val(),
+            "cantPag": $("#select-cantidad").val(),
+            "search": $("#search").val()
+        };
 
+        $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Ingrediente/Ajax/searchBar.php") ?>", json, function(data) {
+
+            res = JSON.parse(data);
+            // Imprime los datos de la tabla
+            tablePrint(res.DataT, res.DataL);
+            //Imprime la paginación
+            paginationPrint(res.DataP, parseInt(res.Cpage));
+
+        });
+    });
+
+    $(function() {
         /*
          * Evento de buscar en la tabla
          */
-
         $("#search").on('keyup', function() {
             json = {
                 "page": "1",
@@ -89,7 +106,7 @@ $pagination = $cantPag / $numReg;
             };
 
             $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Ingrediente/Ajax/searchBar.php") ?>", json, function(data) {
-                
+
                 res = JSON.parse(data);
                 // Imprime los datos de la tabla
                 tablePrint(res.DataT, res.DataL);
@@ -104,20 +121,35 @@ $pagination = $cantPag / $numReg;
          */
 
         $(".pagination").on('click', ".page-item-list", function() {
-            json = {
-                "page": $(this).data("page"),
-                "cantPag": $("#select-cantidad").val(),
-                "search": $("#search").val()
-            };
+            if ($(this).data("page") != 0) {
+                json = {
+                    "page": $(this).data("page"),
+                    "cantPag": $("#select-cantidad").val(),
+                    "search": $("#search").val()
+                };
 
-            $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Ingrediente/Ajax/searchBar.php") ?>", json, function(data) {
-                res = JSON.parse(data);
-                //imprime los datos en la tabla
-                tablePrint(res.DataT, res.DataL);
-                //Imprime paginación
-                paginationPrint(res.DataP, parseInt(res.Cpage));
-            });
+                $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Ingrediente/Ajax/searchBar.php") ?>", json, function(data) {
+                    res = JSON.parse(data);
+
+                    if (res.status) {
+
+                        //imprime los datos en la tabla
+                        tablePrint(res.DataT, res.DataL);
+                        //Imprime paginación
+                        paginationPrint(res.DataP, parseInt(res.Cpage));
+                        //actualiza el escondido
+                        updateEscondido(parseInt(res.Cpage));
+                    }
+                });
+            }
         })
+
+        /*
+         * Update escondido
+         */
+        function updateEscondido(num) {
+            $("#escondido").val(num);
+        }
 
         /*
          * Evento de select (cantidad de registros a mostrar)

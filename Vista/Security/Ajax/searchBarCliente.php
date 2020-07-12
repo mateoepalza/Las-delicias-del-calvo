@@ -13,6 +13,7 @@ $resultado = $cliente->filtroCantidad($str);
 $cant = $resultado / $cantPag;
 
 $ajax = array(
+    "status" => ((count($data) > 0)? true : false),
     "DataT" => $data,
     "DataL" => base64_encode("Vista/Cliente/actualizarCliente.php"),
     "Cpage" => $pagina,

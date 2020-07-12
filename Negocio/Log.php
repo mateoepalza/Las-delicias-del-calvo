@@ -12,11 +12,12 @@ class Log{
     protected $browser;
     protected $os;
     protected $user;
+    protected $tipo;
 
     protected $Conexion;
-    private $LogAdminDAO; 
+    private $LogDAO; 
 
-    public function Log($idLog = "", $fecha = "", $informacion = "", $accion = "", $browser = "", $os = "", $user = ""){
+    public function Log($idLog = "", $fecha = "", $informacion = "", $accion = "", $browser = "", $os = "", $user = "", $tipo=""){
         $this -> idLog = $idLog;
         $this -> fecha = $fecha;
         $this -> informacion = $informacion;
@@ -24,9 +25,10 @@ class Log{
         $this -> browser = $browser;
         $this -> os = $os;
         $this -> user = $user;
+        $this -> tipo = $tipo;
 
         $this -> Conexion = new Conexion();
-        $this -> LogAdminDAO = new LogDAO($this -> idLog, $this -> fecha, $this -> informacion, $this -> accion, $this -> browser, $this -> os, $this -> user);
+        $this -> LogDAO = new LogDAO($this -> idLog, $this -> fecha, $this -> informacion, $this -> accion, $this -> browser, $this -> os, $this -> user);
     }
 
     /**
@@ -61,6 +63,10 @@ class Log{
         return $this -> user;
     }
 
+    public function getTipo(){
+        return $this -> tipo;
+    }
+
     /**
      * SETS
      */
@@ -92,9 +98,59 @@ class Log{
     public function setUser($user){
         $this -> user = $user;
     }
+
+    public function setTipo($tipo){
+        $this -> tipo = $tipo;
+    }
     /**
      * Methods
      */
+    public function buscarPaginado($pagina, $numReg){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar($this -> LogDAO -> buscarPaginado($pagina, $numReg));
+        $resList = array();
+        while($res = $this -> Conexion -> extraer()){
+            array_push($resList, new Log($res[0], $res[1], $res[2], $res[4], $res[5], $res[6], $res[7], $res[8]));
+        }
+        $this -> Conexion -> cerrar();
+
+        return $resList;
+    }
+
+    public function buscarCantidad(){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> LogDAO -> buscarCantidad());
+        $res = $this -> Conexion -> extraer();
+        $this -> Conexion -> cerrar();
+        return $res[0];
+    }
+
+    /*
+     * Función que busca por paginación, filtro de palabra y devuelve la información en un array
+     */
+    public function filtroPaginado($str, $pag, $cant){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> LogDAO -> filtroPaginado($str, $pag, $cant));
+        $resList = Array();
+        while($res = $this -> Conexion -> extraer()){
+            array_push($resList, $res);
+        }
+        $this -> Conexion -> cerrar();
+
+        return $resList;
+    }
+
+    /*
+     * Busca la cantidad de registros con filtro de palabra
+     */
+    public function filtroCantidad($str){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> LogDAO -> filtroCantidad($str));
+        $res = $this -> Conexion -> extraer();
+        $this -> Conexion -> cerrar();
+
+        return $res[0];
+    }
 
 
 }

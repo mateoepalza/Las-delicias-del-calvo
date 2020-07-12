@@ -15,6 +15,7 @@
     $cant = $resultado/$cantPag;
 
     $ajax = Array(
+        "status" => ((count($data) > 0)? true : false),
         "DataT" => $data,
         "DataL" => array(base64_encode("Vista/Producto/actualizarProducto.php"), base64_encode("Vista/IngredienteProducto/adicionarIngrediente.php")),
         "Cpage" => $pagina,
