@@ -180,7 +180,7 @@ $pagination = $cantPag / $numReg;
         $("#tabla").empty();
 
         DataT.forEach(function(data) {
-            $("#tabla").append(`<tr><td>${data[1]}</td><td>${data[2]}</td><td>${data[3]}</td><td><a href='index.php?pid=${DataL}&idIngrediente=${data[0]}'><i class='far fa-edit'></i></a></td></tr>`)
+            $("#tabla").append(`<tr><td>${data[1]}</td><td>${data[2]}</td><td>${data[3]}</td><td style='display:flex; flex-flow: row nowrap; justify-content: space-evenly; align-items:center'><a href='index.php?pid=${DataL[0]}&idIngrediente=${data[0]}'><i class="fas fa-calculator"></i></a><a href='index.php?pid=${DataL[1]}&idIngrediente=${data[0]}'><i class='far fa-edit'></i></a></td></tr>`)
         });
     }
     /*

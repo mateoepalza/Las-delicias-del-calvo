@@ -138,6 +138,8 @@ create table LogCliente(
     Foreign key (FK_idCliente) references Cliente(idCliente)
 );
 
+insert into Administrador (nombre, apellido, email, clave) values ('Mateo', 'Epalza Ramirez', 'admin@gmail.com', md5('123'));
+
 Ala
 aceites
 

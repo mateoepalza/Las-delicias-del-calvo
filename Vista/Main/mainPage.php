@@ -128,7 +128,7 @@ if (isset($_GET['error'])) {
         <a class="navbar-brand" href="#"><img src="static/img/logo.png" width=50></a>
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">Las delicias del calvo <span class="sr-only">(current)</span></a>
             </li>
             <!--<li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
@@ -155,8 +155,8 @@ if (isset($_GET['error'])) {
             </div>
             <div class="w-100 h-100" style="background-Image: url('static/img/bg1.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover"></div>
             <div class="carousel-caption d-none d-md-block">
-                <h5>First slide label</h5>
-                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                <h5>La mejor comida de Bogotá</h5>
+                <p>Disfruta del mejor restaurante de comidas rápidas de Bogotá.</p>
             </div>
         </div>
         <div class="carousel-item" style="height: 600px; overflow: hidden">
@@ -164,8 +164,8 @@ if (isset($_GET['error'])) {
             </div>
             <div class="w-100 h-100" style="background-Image: url('static/img/bg2.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover"></div>
             <div class="carousel-caption d-none d-md-block">
-                <h5>Second slide label</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <h5>Comida para todos los gustos</h5>
+                <p>Registrate y empieza a degustar todos nuestros platos.</p>
             </div>
         </div>
         <div class="carousel-item" style="height: 600px; overflow: hidden">
@@ -173,8 +173,8 @@ if (isset($_GET['error'])) {
             </div>
             <div class="w-100 h-100" style="background-Image: url('static/img/bg3.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover"></div>
             <div class="carousel-caption d-none d-md-block">
-                <h5>Third slide label</h5>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                <h5>Llevamos tu comida donde estes</h5>
+                <p>Tenemos domicilios a toda Boogtá las 24 horas del día.</p>
             </div>
         </div>
     </div>
@@ -189,11 +189,21 @@ if (isset($_GET['error'])) {
 </div>
 <div class="container mt-5 mb-5">
     <div class="row">
-        <div class="col-sm-6  col-lg-4 mb-5 d-flex flex-column align-items-center justify-content-center">
-            <div class="mb-4 d-flex flex-column justify-content-center align-items-end" style="width : 260px; height: 260px; border-radius: 200px; background: red; overflow: hidden; position: relative">
-                <img src="static/img/bg3.jpg" height="100%" style="position: absolute">
+        <div class="col-sm-6  col-lg-4 mb-5 d-flex flex-column align-items-center">
+            <div class="mb-4 d-flex flex-column justify-content-center" style="width : 260px; height: 260px; border-radius: 200px; overflow: hidden; position: relative">
+                <img src="static/img/main1.jpg" height="100%" style="position: absolute">
             </div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ea alias excepturi praesentium iure odit provident dolorum, maiores qui reiciendis nesciunt, dignissimos ratione. Aliquid sapiente et atque fuga libero possimus.</p>
+            <p>Ven y disfruta de nuestros almuerzos tipo buffet, todo con la mejor calidad hacia nuestros usuarios.</p>
+            <div class="d-flex flex-row justify-content-center">
+                <a class="btn btn-outline-secondary" href="#"> View more</a>
+            </div>
+        </div>
+        <div class="col-sm-6  col-lg-4 mb-5 d-flex flex-column align-items-center">
+
+            <div class="mb-4 d-flex flex-column justify-content-center" style="width : 260px; height: 260px; border-radius: 200px; overflow: hidden; position: relative">
+                <img src="static/img/main2.jpg" height="100%" style="position: absolute">
+            </div>
+            <p>Nuestros desayunos son conocidos a lo largo y ancho de Bogotá, que no seas el ultimo en probarlos.</p>
             <div class="d-flex flex-row justify-content-center">
                 <a class="btn btn-outline-secondary" href="#"> View more</a>
             </div>
@@ -201,9 +211,18 @@ if (isset($_GET['error'])) {
         <div class="col-sm-6  col-lg-4 mb-5 d-flex flex-column align-items-center">
 
             <div class="mb-4 d-flex flex-column justify-content-center" style="width : 260px; height: 260px; border-radius: 200px; background: red; overflow: hidden; position: relative">
-                <img src="static/img/bg2.jpg" height="100%" style="position: absolute">
+                <img src="static/img/main3.jpg" height="100%" style="position: absolute">
             </div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ea alias excepturi praesentium iure odit provident dolorum, maiores qui reiciendis nesciunt, dignissimos ratione. Aliquid sapiente et atque fuga libero possimus.</p>
+            <p>Nuestras sopas son las mejores de Bogotá, extranjeros alrededor del mundo vienen exclusivamente a probarlas.</p>
+            <div class="d-flex flex-row justify-content-center">
+                <a class="btn btn-outline-secondary" href="#"> View more</a>
+            </div>
+        </div>
+        <div class="col-sm-6  col-lg-4 mb-5 d-flex flex-column align-items-center">
+            <div class="mb-4 d-flex flex-column justify-content-center" style="width : 260px; height: 260px; border-radius: 200px; background: red; overflow: hidden; position: relative">
+                <img src="static/img/main4.jpg" height="100%" style="position: absolute">
+            </div>
+            <p>Constantemente estamos actualizando nuestros platos en busqueda de ofrecer el mejor sabor a todos nuestros clientes.</p>
             <div class="d-flex flex-row justify-content-center">
                 <a class="btn btn-outline-secondary" href="#"> View more</a>
             </div>
@@ -211,28 +230,9 @@ if (isset($_GET['error'])) {
         <div class="col-sm-6  col-lg-4 mb-5 d-flex flex-column align-items-center">
 
             <div class="mb-4 d-flex flex-column justify-content-center" style="width : 260px; height: 260px; border-radius: 200px; background: red; overflow: hidden; position: relative">
-                <img src="static/img/bg1.jpg" height="100%" style="position: absolute">
+                <img src="static/img/main5.jpg" height="100%" style="position: absolute">
             </div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ea alias excepturi praesentium iure odit provident dolorum, maiores qui reiciendis nesciunt, dignissimos ratione. Aliquid sapiente et atque fuga libero possimus.</p>
-            <div class="d-flex flex-row justify-content-center">
-                <a class="btn btn-outline-secondary" href="#"> View more</a>
-            </div>
-        </div>
-        <div class="col-sm-6  col-lg-4 mb-5 d-flex flex-column align-items-center">
-            <div class="mb-4 d-flex flex-column justify-content-center" style="width : 260px; height: 260px; border-radius: 200px; background: red; overflow: hidden; position: relative">
-                <img src="static/img/bg3.jpg" height="100%" style="position: absolute">
-            </div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ea alias excepturi praesentium iure odit provident dolorum, maiores qui reiciendis nesciunt, dignissimos ratione. Aliquid sapiente et atque fuga libero possimus.</p>
-            <div class="d-flex flex-row justify-content-center">
-                <a class="btn btn-outline-secondary" href="#"> View more</a>
-            </div>
-        </div>
-        <div class="col-sm-6  col-lg-4 mb-5 d-flex flex-column align-items-center">
-
-            <div class="mb-4 d-flex flex-column justify-content-center" style="width : 260px; height: 260px; border-radius: 200px; background: red; overflow: hidden; position: relative">
-                <img src="static/img/bg2.jpg" height="100%" style="position: absolute">
-            </div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ea alias excepturi praesentium iure odit provident dolorum, maiores qui reiciendis nesciunt, dignissimos ratione. Aliquid sapiente et atque fuga libero possimus.</p>
+            <p>Contamos con uno de los mejores chef de Bogotá, que se encarga de que nuestra comida cumpla con los mejores estándares de calidad.</p>
             <div class="d-flex flex-row justify-content-center">
                 <a class="btn btn-outline-secondary" href="#"> View more</a>
             </div>
@@ -240,9 +240,9 @@ if (isset($_GET['error'])) {
         <div class="col-sm-6 col-lg-4 mb-5 d-flex flex-column align-items-center">
 
             <div class="mb-4 d-flex flex-column justify-content-center" style="width : 260px; height: 260px; border-radius: 200px; background: red; overflow: hidden; position: relative">
-                <img src="static/img/bg1.jpg" height="100%" style="position: absolute">
+                <img src="static/img/main6.jpg" height="100%" style="position: absolute">
             </div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ea alias excepturi praesentium iure odit provident dolorum, maiores qui reiciendis nesciunt, dignissimos ratione. Aliquid sapiente et atque fuga libero possimus.</p>
+            <p>Disfruta de nuestra gran variedad de comida rápida, tenemos hamburguesas, perros calientes, pizzas, lasañas, entre otros.</p>
             <div class="d-flex flex-row justify-content-center">
                 <a class="btn btn-outline-secondary" href="#"> View more</a>
             </div>

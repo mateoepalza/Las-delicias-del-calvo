@@ -15,7 +15,7 @@
     $ajax = Array(
         "status" => ((count($data) > 0)? true : false),
         "DataT" => $data,
-        "DataL" => array(base64_encode("Vista/Ingrediente/agregarInventario.php"), base64_encode("Vista/Ingrediente/actualizarIngrediente.php")),
+        "DataL" => base64_encode("Vista/Ingrediente/agregarInventario.php"),
         "Cpage" => $pagina,
         "DataP" => $cant
     );

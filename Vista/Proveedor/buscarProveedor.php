@@ -25,7 +25,7 @@ $pagination = $cantPag / $numReg;
                         <option value="50">50</option>
                         <option value="100">100</option>
                     </select>
-                    <input id="search" type="search" placeholder="search">
+                    <input id="search" type="text" placeholder="search">
                 </div>
                 <div class="card-body">
                     <div class="table-responsive-md">
@@ -40,17 +40,17 @@ $pagination = $cantPag / $numReg;
                                 </tr>
                             </thead>
                             <tbody id="tabla">
-                                <?php
-                                foreach ($resultados as $resultado) {
-                                    echo "<tr>";
-                                    echo "<td>" . $resultado->getNit() . "</td>";
-                                    echo "<td>" . $resultado->getNombre() . "</td>";
-                                    echo "<td>" . $resultado->getTelefono() . "</td>";
-                                    echo "<td>" . $resultado->getDireccion() . "</td>";
-                                    echo "<td><a href='index.php?pid=" . base64_encode("Vista/Proveedor/actualizarProveedor.php") . "&idProveedor=" . $resultado->getIdProveedor() . "'><i class='far fa-edit'></i></a></td>";
-                                    echo "</tr>";
-                                }
-                                ?>
+                                <!--<?php
+                                    foreach ($resultados as $resultado) {
+                                        echo "<tr>";
+                                        echo "<td>" . $resultado->getNit() . "</td>";
+                                        echo "<td>" . $resultado->getNombre() . "</td>";
+                                        echo "<td>" . $resultado->getTelefono() . "</td>";
+                                        echo "<td>" . $resultado->getDireccion() . "</td>";
+                                        echo "<td><a href='index.php?pid=" . base64_encode("Vista/Proveedor/actualizarProveedor.php") . "&idProveedor=" . $resultado->getIdProveedor() . "'><i class='far fa-edit'></i></a></td>";
+                                        echo "</tr>";
+                                    }
+                                    ?>-->
                             </tbody>
                         </table>
                     </div>
@@ -73,12 +73,31 @@ $pagination = $cantPag / $numReg;
                             </li>
                         </ul>
                     </nav>
+                    <input id="escondido" style="display:none;" type="text" value="1">
                 </div>
             </div>
         </div>
     </div>
 </div>
 <script type="text/javascript">
+    $(function() {
+        json = {
+            "page": $("#escondido").val(),
+            "cantPag": $("#select-cantidad").val(),
+            "search": $("#search").val()
+        };
+
+        $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Proveedor/Ajax/searchBar.php") ?>", json, function(data) {
+
+            res = JSON.parse(data);
+            // Imprime los datos de la tabla
+            tablePrint(res.DataT, res.DataL);
+            //Imprime la paginación
+            paginationPrint(res.DataP, parseInt(res.Cpage));
+
+        });
+    });
+
     $(function() {
 
         /*
@@ -123,6 +142,8 @@ $pagination = $cantPag / $numReg;
                         tablePrint(res.DataT, res.DataL);
                         //Imprime paginación
                         paginationPrint(res.DataP, parseInt(res.Cpage));
+
+                        updateEscondido(parseInt(res.Cpage));
                     }
                 });
             }
@@ -148,6 +169,13 @@ $pagination = $cantPag / $numReg;
         });
 
     });
+
+    /*
+     * Update escondido
+     */
+    function updateEscondido(num) {
+        $("#escondido").val(num);
+    }
 
     /*
      * Imprime los datos en la tabla

@@ -229,6 +229,7 @@ class Cliente{
             "deliciasCalvo@chef.com"
         );
         $correo -> send();*/
+        echo $url;
         return $res;
     }
 

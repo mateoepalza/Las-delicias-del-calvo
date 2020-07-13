@@ -6,6 +6,7 @@ session_start();
 $email = $_POST['email'];
 $pass = $_POST['pass'];
 
+
 $admin = new Administrador("", "", "", $email, $pass);
 $clien = new Cliente("", "", "", $email, $pass);
 $invent = new Inventarista("", "", "", $email, $pass);
@@ -25,7 +26,7 @@ if ($admin->autenticar()) {
      * Inserto el registro del log
      */
     $logAdmin->insertar();
-
+    
     header('Location: index.php?pid=' . base64_encode('Vista/Administrador/mainAdministrador.php'));
 } else if ($clien->autenticar()) {
     if ($clien->getEstado() == 1) {

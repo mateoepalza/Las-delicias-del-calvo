@@ -27,6 +27,7 @@ insert into Accion (nombre) values ('Actualizar contraseña');
 insert into Accion (nombre) values ('Actualizar información personal');
 insert into Accion (nombre) values ('Compra');
 insert into Accion (nombre) values ('Crear administrador');
+insert into Accion (nombre) values ('Actualizar stock de ingredientes');
 
 
 

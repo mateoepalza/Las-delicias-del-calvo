@@ -4,7 +4,7 @@ $invent->getInfoBasic();
 
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position: sticky; top: 0px; z-index: 15;">
-    <a class="navbar-brand" href="index.php?pid=<?php echo base64_encode("Vista/Inventarista/mainInventarista.php") ?>">Navbar</a>
+    <a class="navbar-brand" href="index.php?pid=<?php echo base64_encode("Vista/Inventarista/mainInventarista.php") ?>"><img src="static/img/logo.png" width=50></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -16,6 +16,8 @@ $invent->getInfoBasic();
                     Menú rápido
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Ingrediente/buscarIngrediente.php") ?>">Agregar a inventario</a>
+                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Producto/crearProductoCIngredientes.php") ?>">Crear producto</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Producto/buscarProducto.php") ?>">Buscar producto</a>

@@ -55,7 +55,6 @@
                 include "Vista/Main/mainPage.php";/*Toca cambiarlo*/
             }
         }else if(in_array($pid, $enter)){
-            echo "Acaaa";
             include $pid;
         }else{
             header("Location: index.php");
@@ -63,6 +62,8 @@
 
     }else{
         include "Vista/Main/mainPage.php";
+        session_destroy();
+        $_SESSION = [];
     }
     
     include "Vista/Main/bottom.php";

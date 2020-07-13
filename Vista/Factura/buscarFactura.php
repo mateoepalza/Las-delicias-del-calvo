@@ -25,7 +25,7 @@ $pagination = $cantPag / $numReg;
                         <option value="50">50</option>
                         <option value="100">100</option>
                     </select>
-                    <input id="search" type="search" placeholder="search">
+                    <input id="search" type="text" placeholder="search">
                 </div>
                 <div class="card-body">
                     <div class="table-responsive-sm">

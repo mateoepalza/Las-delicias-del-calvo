@@ -6,7 +6,7 @@ $admin->getInfoBasic();
 
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position: sticky; top: 0px; z-index: 15;">
-    <a class="navbar-brand" href="index.php?pid=<?php echo base64_encode("Vista/Administrador/mainAdministrador.php") ?>">Navbar</a>
+    <a class="navbar-brand" href="index.php?pid=<?php echo base64_encode("Vista/Administrador/mainAdministrador.php") ?>"><img src="static/img/logo.png" width=50></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
