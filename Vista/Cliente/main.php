@@ -15,8 +15,8 @@ $productosDest = $producto->getDestProducts(0, 10);
             </div>
             <div class="w-100 h-100" style="background-Image: url('static/img/bg1.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover"></div>
             <div class="carousel-caption d-none d-md-block">
-                <h5>First slide label</h5>
-                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                <h5>La mejor comida de Bogotá</h5>
+                <p>Disfruta del mejor restaurante de comidas rápidas de Bogotá.</p>
             </div>
         </div>
         <div class="carousel-item" style="height: 600px; overflow: hidden">
@@ -24,8 +24,8 @@ $productosDest = $producto->getDestProducts(0, 10);
             </div>
             <div class="w-100 h-100" style="background-Image: url('static/img/bg2.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover"></div>
             <div class="carousel-caption d-none d-md-block">
-                <h5>Second slide label</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <h5>Comida para todos los gustos</h5>
+                <p>Registrate y empieza a degustar todos nuestros platos.</p>
             </div>
         </div>
         <div class="carousel-item" style="height: 600px; overflow: hidden">
@@ -33,8 +33,8 @@ $productosDest = $producto->getDestProducts(0, 10);
             </div>
             <div class="w-100 h-100" style="background-Image: url('static/img/bg3.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover"></div>
             <div class="carousel-caption d-none d-md-block">
-                <h5>Third slide label</h5>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                <h5>Llevamos tu comida donde estes</h5>
+                <p>Tenemos domicilios a toda Boogtá las 24 horas del día.</p>
             </div>
         </div>
     </div>
