@@ -4,7 +4,6 @@ $pagina = 1;
 $numReg = 5;
 
 $Producto = new Producto();
-$resultados = $Producto->buscarPaginado($pagina, $numReg);
 $cantPag = $Producto->buscarCantidad();
 $pagination = $cantPag / $numReg;
 ?>
@@ -13,7 +12,7 @@ $pagination = $cantPag / $numReg;
         <h1>Buscar producto</h1>
     </div>
     <div class="row justify-content-center mt-5">
-        <div class="col-12 col-md-12 col-lg-11 col-xl-10">
+        <div class="col-12 col-md-12 col-lg-11 col-xl-12">
             <div class="card">
                 <div class="card-header bg-dark d-flex flex-row justify-content-between">
                     <a href="index.php?pid=<?php echo base64_encode("Vista/Producto/crearProducto.php") ?>"><button type="button" class="btn btn-outline-light">Crear nuevo</button></a>
@@ -27,30 +26,19 @@ $pagination = $cantPag / $numReg;
                     </select>
                     <input id="search" type="text" placeholder="search">
                 </div>
-                <div class="card-body">
+                <div class="card-body form-table">
                     <div class="table-responsive-sm">
-                        <table class="table">
-                            <thead class="thead-dark">
+                        <table class="table table-hover table-striped">
+                            <thead >
                                 <tr>
                                     <th>#</th>
                                     <th>Nombre</th>
                                     <th>Precio</th>
                                     <th>Categoria</th>
-                                    <th></th>
+                                    <th style="text-align: center;">Servicios</th>
                                 </tr>
                             </thead>
                             <tbody id="tabla">
-                                <!-- <?php
-                                        foreach ($resultados as $resultado) {
-                                            echo "<tr>";
-                                            echo "<td>" . $resultado->getIdProducto() . "</td>";
-                                            echo "<td>" . $resultado->getNombre() . "</td>";
-                                            echo "<td>" . $resultado->getPrecio() . "</td>";
-                                            echo "<td>" . $resultado->getCategoria() . "</td>";
-                                            echo "<td style='display: flex; flex-flow: row; justify-content: center; align-items:center;'><a href='index.php?pid=" . base64_encode("Vista/Producto/actualizarProducto.php") . "&idProducto=" . $resultado->getIdProducto() . "' style='margin: 0px 2px;'><i class='far fa-edit'></i></a><a href='index.php?pid=" . base64_encode("Vista/IngredienteProducto/adicionarIngrediente.php") . "&idProducto=" . $resultado->getIdProducto() . "' style='margin: 0px 2px;'><i class='far fa-plus-square'></i></a></td>";
-                                            echo "</tr>";
-                                        }
-                                        ?>-->
                             </tbody>
                         </table>
                     </div>

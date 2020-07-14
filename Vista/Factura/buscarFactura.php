@@ -27,16 +27,16 @@ $pagination = $cantPag / $numReg;
                     </select>
                     <input id="search" type="text" placeholder="search">
                 </div>
-                <div class="card-body">
+                <div class="card-body form-table">
                     <div class="table-responsive-sm">
-                        <table class="table">
-                            <thead class="thead-dark">
+                        <table class="table table-hover table-striped">
+                            <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>Fecha</th>
                                     <th>Cliente</th>
                                     <th>Valor</th>
-                                    <th></th>
+                                    <th style="text-align:center;">Servicios</th>
                                 </tr>
                             </thead>
                             <tbody id="tabla">
@@ -68,7 +68,7 @@ $pagination = $cantPag / $numReg;
                             <?php
                             }
                             ?>
-                            <li class="page-item page-item-list" id="page-next" data-page="<?php echo ($pagina + 1) ?>">
+                            <li class="page-item page-item-list <?php echo ($pagination <= 1) ? "disabled" : ""; ?>" id="page-next" data-page="<?php echo ($pagina + 1) ?>">
                                 <a class="page-link" href="#">Next</a>
                             </li>
                         </ul>
@@ -117,12 +117,13 @@ $pagination = $cantPag / $numReg;
             };
 
             $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Factura/Ajax/searchBarFactura.php") ?>", json, function(data) {
-                
+
                 res = JSON.parse(data);
                 // Imprime los datos de la tabla
                 tablePrint(res.DataT, res.DataL);
                 //Imprime la paginación
                 paginationPrint(res.DataP, parseInt(res.Cpage));
+
 
             });
         });
@@ -132,19 +133,23 @@ $pagination = $cantPag / $numReg;
          */
 
         $(".pagination").on('click', ".page-item-list", function() {
-            json = {
-                "page": $(this).data("page"),
-                "cantPag": $("#select-cantidad").val(),
-                "search": $("#search").val()
-            };
+            if ($(this).data("page") != 0) {
+                json = {
+                    "page": $(this).data("page"),
+                    "cantPag": $("#select-cantidad").val(),
+                    "search": $("#search").val()
+                };
 
-            $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Factura/Ajax/searchBarFactura.php") ?>", json, function(data) {
-                res = JSON.parse(data);
-                //imprime los datos en la tabla
-                tablePrint(res.DataT, res.DataL);
-                //Imprime paginación
-                paginationPrint(res.DataP, parseInt(res.Cpage));
-            });
+                $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Factura/Ajax/searchBarFactura.php") ?>", json, function(data) {
+                    res = JSON.parse(data);
+                    if (res.status) {
+                        //imprime los datos en la tabla
+                        tablePrint(res.DataT, res.DataL);
+                        //Imprime paginación
+                        paginationPrint(res.DataP, parseInt(res.Cpage));
+                    }
+                });
+            }
         })
 
         /*
@@ -157,7 +162,7 @@ $pagination = $cantPag / $numReg;
                 "cantPag": $(this).val(),
                 "search": $("#search").val()
             };
-            
+
             $.post("indexAJAX.php?pid=<?php echo base64_encode("Vista/Factura/Ajax/searchBarFactura.php") ?>", json, function(data) {
                 res = JSON.parse(data);
                 //imprime los datos en la tabla

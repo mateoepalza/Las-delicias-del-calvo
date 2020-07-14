@@ -20,7 +20,7 @@ $listaProdIngredientes = $InPr->buscarIngredientes();
         }
     }
 </style>
-<div class="container mt-5">
+<div class="container mt-5 ingredientesProducto">
     <div class="row justify-content-center">
         <h1>Ingredientes</h1>
     </div>

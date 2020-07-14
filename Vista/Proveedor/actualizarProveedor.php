@@ -29,7 +29,6 @@ if (isset($_POST['actualizarProveedor'])) {
              * Inserto el registro del log
              */
             $logAdmin->insertar();
-
         } else if ($_SESSION['rol'] == 3) {
 
             /**
@@ -39,7 +38,7 @@ if (isset($_POST['actualizarProveedor'])) {
             /**
              * Inserto el registro del log
              */
-            $LogInventarista -> insertar();
+            $LogInventarista->insertar();
         }
 
         $msj = "El proveedor ha sido actualizado satisfactoriamente";
@@ -61,17 +60,15 @@ if (isset($_POST['actualizarProveedor'])) {
 ?>
 
 <div class="container mt-5 mb-5">
-    <div class="row justify-content-center">
-        <h1>Actualizar Proveedor</h1>
-    </div>
+
     <div class="row justify-content-center mt-5">
-        <div class="col-11 col-md-12 col-lg-9 col-xl-8">
+        <div class="col-11 col-md-12 col-lg-9 col-xl-8 form-bg">
             <div class="card">
-                <div class="card-header">
-                    Actualice el proveedor
-                </div>
                 <div class="card-body">
                     <form novalidate class="needs-validation" action="index.php?pid=<?php echo base64_encode("Vista/Proveedor/actualizarProveedor.php") ?>&idProveedor=<?php echo $idProveedor ?>" method="POST">
+                        <div class="form-title">
+                            <h1>Actualizar Proveedor</h1>
+                        </div>
                         <div class="form-group">
                             <label>NIT</label>
                             <input class="form-control" name="nit" type="number" value="<?php echo $Proveedor->getNit() ?>" required>

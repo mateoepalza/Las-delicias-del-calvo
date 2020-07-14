@@ -78,18 +78,14 @@ $resultados = $Proveedor->buscarTodo();
 ?>
 
 <div class="container mt-5 mb-5">
-    <div class="row justify-content-center">
-        <h1>Actualizar Ingrediente</h1>
-    </div>
     <div class="row justify-content-center mt-5">
-        <div class="col-11 col-md-12 col-lg-9 col-xl-8">
+        <div class="col-11 col-md-12 col-lg-9 col-xl-8 form-bg">
             <div class="card">
-                <div class="card-header">
-                    Actualice un ingrediente
-                </div>
                 <div class="card-body">
                     <form novalidate class="needs-validation" action="index.php?pid=<?php echo base64_encode("Vista/Ingrediente/actualizarIngrediente.php") ?>&idIngrediente=<?php echo $idIngrediente ?>" method="POST" enctype="multipart/form-data">
-
+                        <div class="form-title">
+                            <h1>Actualizar Ingrediente</h1>
+                        </div>
                         <div class="form-group">
                             <label>Nombre</label>
                             <input value="<?php echo $Ingrediente->getNombre() ?>" class="form-control" name="nombre" type="text" required>

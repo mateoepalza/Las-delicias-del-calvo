@@ -20,7 +20,7 @@ if (isset($_POST['cambiarClave'])) {
                  * Creo un objeto para retornar el dia y la hora
                  */
                 $date = new DateTime();
-                
+
                 if ($_SESSION['rol'] == 3) {
                     /**
                      * Creo el objeto de log
@@ -53,17 +53,14 @@ if (isset($_POST['cambiarClave'])) {
 
 ?>
 <div class="container  mt-5 mb-5">
-    <div class="row d-flex justify-content-center">
-        <h1>Actualizar Contraseña</h1>
-    </div>
     <div class="row d-flex justify-content-center mt-5">
-        <div class="col-11 col-md-12 col-lg-9 col-xl-8">
+        <div class="col-11 col-md-12 col-lg-9 col-xl-8 form-bg">
             <div class="card">
-                <div class="card-header">
-                    Actualice su contraseña
-                </div>
                 <div class="card-body">
                     <form novalidate class="needs-validation" action="index.php?pid=<?php echo base64_encode("Vista/Inventarista/cambiarClaveInventarista.php") ?>" method=POST>
+                        <div class="form-title">
+                            <h1>Actualizar Contraseña</h1>
+                        </div>
                         <div class="form-group">
                             <label>Contraseña Actual</label>
                             <input type="password" name="claveActual" value="" placeholder="Ingrese la contraseña actual" class="form-control" required>

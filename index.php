@@ -62,8 +62,12 @@
 
     }else{
         include "Vista/Main/mainPage.php";
-        session_destroy();
-        $_SESSION = [];
+        
+        if(isset($_SESSION['id'])){
+            session_destroy();
+            $_SESSION = [];
+        }
+        
     }
     
     include "Vista/Main/bottom.php";

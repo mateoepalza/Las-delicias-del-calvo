@@ -40,7 +40,6 @@ if (isset($_POST['sent'])) {
             /**
              * Log para el Inventarista
              */
-
         }
 
         $msj = "La categoria se ha creado satisfactoriamente";
@@ -54,21 +53,17 @@ if (isset($_POST['sent'])) {
 }
 ?>
 
-<div class="container mt-5 mb-5">
-    <div class="row justify-content-center">
-        <h1>Ingresar Categoría</h1>
-    </div>
+<div class="container mb-5">
     <div class="row justify-content-center mt-5">
-        <div class="col-11 col-md-12 col-lg-9 col-xl-8">
+        <div class="col-11 col-md-12 col-lg-9 col-xl-9 form-bg">
             <div class="card">
-                <div class="card-header">
-                    Ingrese una nueva categoría
-                </div>
                 <div class="card-body">
                     <form novalidate class="needs-validation" action="index.php?pid=<?php echo base64_encode("Vista/Categoria/crearCategoria.php") ?>" method="POST">
-
+                        <div class="form-title">
+                            <h1>Ingresar Categoría</h1>
+                        </div>
                         <div class="form-group">
-                            <label>nombre</label>
+                            <label>Nombre</label>
                             <input class="form-control" name="nombre" type="text" required>
                             <div class="invalid-feedback">
                                 Por favor ingrese el nombre.

@@ -6,23 +6,22 @@ if (isset($_POST['crearAdministrador'])) {
     $apellido = $_POST['apellido'];
     $email = $_POST['email'];
     $clave = $_POST['clave'];
-    
+
 
     $Administrador = new Administrador("", $nombre, $apellido, $email, $clave);
     $inventarista = new Inventarista("", "", "", $email);
     $Cliente = new Cliente("", "", "", $email);
-    
-    if ($Cliente -> existeCorreo() || $inventarista->existeCorreo() || $Administrador->existeCorreo()) {
+
+    if ($Cliente->existeCorreo() || $inventarista->existeCorreo() || $Administrador->existeCorreo()) {
 
         $msj = "El correo proporcionado ya se encuentra en uso.";
         $class = "alert-danger";
-
     } else {
-        $res = $Administrador -> insertar();
+        $res = $Administrador->insertar();
 
         if ($res == 1) {
 
-            if($_SESSION['rol'] == 1){
+            if ($_SESSION['rol'] == 1) {
                 /**
                  * Creo un objeto para retornar el dia y la hora
                  */
@@ -30,11 +29,11 @@ if (isset($_POST['crearAdministrador'])) {
                 /**
                  * Creo el objeto de log
                  */
-                $logAdmin = new LogAdmin("", $date -> format('Y-m-d H:i:s'), LogHCrearAdministrador($nombre, $apellido, $email, $clave), 24, getBrowser(), getOS(), $_SESSION['id']);
+                $logAdmin = new LogAdmin("", $date->format('Y-m-d H:i:s'), LogHCrearAdministrador($nombre, $apellido, $email, $clave), 24, getBrowser(), getOS(), $_SESSION['id']);
                 /**
                  * Inserto el registro del log
                  */
-                $logAdmin -> insertar();
+                $logAdmin->insertar();
             }
 
             $msj = "El administrador se ha creado satisfactoriamente";
@@ -49,16 +48,14 @@ if (isset($_POST['crearAdministrador'])) {
 }
 ?>
 <div class="container mt-5 mb-5">
-    <div class="row justify-content-center">
-        <h1>Crear Administrador</h1>
-    </div>
+
     <div class="row justify-content-center mt-5">
-        <div class="col-11 col-md-12 col-lg-9 col-xl-8">
+        <div class="col-11 col-md-12 col-lg-9 col-xl-8 form-bg">
             <div class="card">
-                <div class="card-header">
-                    Crear un nuevo Administrador
-                </div>
                 <div class="card-body">
+                    <div class="form-title">
+                        <h1>Crear Administrador</h1>
+                    </div>
                     <form novalidate class="needs-validation" action="index.php?pid=<?php echo base64_encode("Vista/Administrador/crearAdministrador.php") ?>" method="POST">
                         <div class="form-group">
                             <label>Nombre Completo</label>

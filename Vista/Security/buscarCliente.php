@@ -13,7 +13,7 @@ $pagination = $cantPag / $numReg;
         <h1>Buscar Cliente</h1>
     </div>
     <div class="row justify-content-center mt-5">
-        <div class="col-12 col-md-12 col-lg-11 col-xl-10">
+        <div class="col-12 col-md-12 col-lg-11 col-xl-11">
             <div class="card">
                 <div class="card-header bg-dark d-flex flex-row justify-content-between">
                     <a href="index.php?pid=<?php echo base64_encode("Vista/Cliente/crearCliente.php") ?>"><button type="button" class="btn btn-outline-light">Crear nuevo</button></a>
@@ -27,36 +27,19 @@ $pagination = $cantPag / $numReg;
                     </select>
                     <input id="search" type="text" placeholder="search">
                 </div>
-                <div class="card-body">
+                <div class="card-body form-table">
                     <div class="table-responsive-lg">
-                        <table class="table">
-                            <thead class="thead-dark">
+                        <table class="table table-hover table-striped">
+                            <thead>
                                 <tr>
                                     <th>Nombre</th>
                                     <th>Apellido</th>
                                     <th>Email</th>
                                     <th>Estado</th>
-                                    <th></th>
+                                    <th style='text-align:center;'>Servicios</th>
                                 </tr>
                             </thead>
                             <tbody id="tabla">
-                                <!--<?php
-                                    foreach ($resultados as $resultado) {
-                                    ?>
-                                    <tr>
-                                        <td><?php echo $resultado->getNombre() ?></td>
-                                        <td><?php echo $resultado->getApellido() ?></td>
-                                        <td><?php echo $resultado->getCorreo() ?></td>
-                                        <td> <select class='select-estado form-control' data-id='<?php echo $resultado->getIdCliente() ?>' style="min-width: 126px;">
-                                                <option value='1' <?php echo ($resultado->getEstado() == 1) ? "selected" : ""; ?>>Activo</option>
-                                                <option value='0' <?php echo ($resultado->getEstado() == 0) ? "selected" : ""; ?>>Bloqueado</option>
-                                                <option value='-1' <?php echo ($resultado->getEstado() == -1) ? "selected" : ""; ?>>Desactivado</option>
-                                            </select></td>
-                                        <td><a href='index.php?pid=<?php echo base64_encode("Vista/Cliente/actualizarCliente.php") ?>&idCliente=<?php echo $resultado->getIdCliente() ?>'><i class='far fa-edit'></i></a></td>
-                                    </tr>
-                                <?php
-                                    }
-                                ?>-->
                             </tbody>
                         </table>
                     </div>
@@ -203,7 +186,7 @@ $pagination = $cantPag / $numReg;
         $("#tabla").empty();
 
         DataT.forEach(function(data) {
-            $("#tabla").append(`<tr><td>${data[1]}</td><td>${data[2]}</td><td>${data[3]}</td><td><select class='select-estado form-control' data-id='${data[0]}'><option value='1' ${(data[4] == 1)?"selected":""}>Activado</option><option value='0' ${(data[4] == 0)?"selected":""} >Bloqueado</option><option value='-1' ${(data[4] == -1)?"selected":""}>Desactivado</option></select></td><td><a href='index.php?pid=${DataL}&idCliente=${data[0]}'><i class='far fa-edit'></i></a></td></tr>`)
+            $("#tabla").append(`<tr><td>${data[1]}</td><td>${data[2]}</td><td>${data[3]}</td><td><select class='select-estado form-control' data-id='${data[0]}'><option value='1' ${(data[4] == 1)?"selected":""}>Activado</option><option value='0' ${(data[4] == 0)?"selected":""} >Bloqueado</option><option value='-1' ${(data[4] == -1)?"selected":""}>Desactivado</option></select></td><td style='display:flex; justify-content:center;'><a href='index.php?pid=${DataL}&idCliente=${data[0]}'><i class='far fa-edit'></i></a></td></tr>`)
         });
     }
     /*

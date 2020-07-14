@@ -3,6 +3,7 @@ $invent = new Inventarista($_SESSION['id']);
 $invent->getInfoBasic();
 
 ?>
+<link rel="stylesheet" type="text/css" href="static/css/admin.css">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position: sticky; top: 0px; z-index: 15;">
     <a class="navbar-brand" href="index.php?pid=<?php echo base64_encode("Vista/Inventarista/mainInventarista.php") ?>"><img src="static/img/logo.png" width=50></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">

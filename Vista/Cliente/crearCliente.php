@@ -11,18 +11,17 @@ if (isset($_POST['crearCliente'])) {
     $Cliente = new Cliente("", $nombre, $apellido, $email, $clave, "", $estado);
     $inventarista = new Inventarista("", "", "", $email);
     $administrador = new Administrador("", "", "", $email);
-    
-    if ($Cliente -> existeCorreo() || $inventarista->existeCorreo() || $administrador->existeCorreo()) {
+
+    if ($Cliente->existeCorreo() || $inventarista->existeCorreo() || $administrador->existeCorreo()) {
 
         $msj = "El correo proporcionado ya se encuentra en uso.";
         $class = "alert-danger";
-
     } else {
         $res = $Cliente->insertar();
 
         if ($res == 1) {
 
-            if($_SESSION['rol'] == 1){
+            if ($_SESSION['rol'] == 1) {
                 /**
                  * Creo un objeto para retornar el dia y la hora
                  */
@@ -30,11 +29,11 @@ if (isset($_POST['crearCliente'])) {
                 /**
                  * Creo el objeto de log
                  */
-                $logAdmin = new LogAdmin("", $date -> format('Y-m-d H:i:s'), LogHCrearCliente($nombre, $apellido, $email, $clave, $estado), 10, getBrowser(), getOS(), $_SESSION['id']);
+                $logAdmin = new LogAdmin("", $date->format('Y-m-d H:i:s'), LogHCrearCliente($nombre, $apellido, $email, $clave, $estado), 10, getBrowser(), getOS(), $_SESSION['id']);
                 /**
                  * Inserto el registro del log
                  */
-                $logAdmin -> insertar();
+                $logAdmin->insertar();
             }
 
             $msj = "El inventarista se ha creado satisfactoriamente";
@@ -49,17 +48,15 @@ if (isset($_POST['crearCliente'])) {
 }
 ?>
 <div class="container mt-5 mb-5">
-    <div class="row justify-content-center">
-        <h1>Crear Cliente</h1>
-    </div>
+
     <div class="row justify-content-center mt-5">
-        <div class="col-11 col-md-12 col-lg-9 col-xl-8">
+        <div class="col-11 col-md-12 col-lg-9 col-xl-8 form-bg">
             <div class="card">
-                <div class="card-header">
-                    Crear un nuevo cliente
-                </div>
                 <div class="card-body">
                     <form novalidate class="needs-validation" action="index.php?pid=<?php echo base64_encode("Vista/Cliente/crearCliente.php") ?>" method="POST">
+                        <div class="form-title">
+                            <h1>Crear Cliente</h1>
+                        </div>
                         <div class="form-group">
                             <label>Nombre Completo</label>
                             <div class="row">

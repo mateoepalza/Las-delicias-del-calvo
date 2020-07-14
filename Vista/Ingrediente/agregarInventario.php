@@ -8,7 +8,7 @@ if (isset($_POST['actualizarStock'])) {
 
     $Ingrediente = new Ingrediente($idIngrediente);
     $Ingrediente->getInfoBasic();
-    $Ingrediente -> setCantidad($Ingrediente -> getCantidad() + $cantidad);
+    $Ingrediente->setCantidad($Ingrediente->getCantidad() + $cantidad);
 
     $alert = $Ingrediente->actualizarCantidad();
 
@@ -21,7 +21,7 @@ if (isset($_POST['actualizarStock'])) {
         /**
          * Creo un objeto Proveedor
          */
-        $proveedorObj = new Proveedor($Ingrediente -> getProveedor());
+        $proveedorObj = new Proveedor($Ingrediente->getProveedor());
         /**
          * Busco el nombre de la Proveedor
          */
@@ -31,7 +31,7 @@ if (isset($_POST['actualizarStock'])) {
             /**
              * Creo el objeto de log
              */
-            $logInventarista = new LogInventarista("", $date->format('Y-m-d H:i:s'), LogHActualizarIngrediente($Ingrediente -> getIdIngrediente(), $Ingrediente -> getNombre(), $Ingrediente -> getCantidad(), $proveedorObj->getNombre()), 25, getBrowser(), getOS(), $_SESSION['id']);
+            $logInventarista = new LogInventarista("", $date->format('Y-m-d H:i:s'), LogHActualizarIngrediente($Ingrediente->getIdIngrediente(), $Ingrediente->getNombre(), $Ingrediente->getCantidad(), $proveedorObj->getNombre()), 25, getBrowser(), getOS(), $_SESSION['id']);
             /**
              * Inserto el registro del log
              */
@@ -47,8 +47,7 @@ if (isset($_POST['actualizarStock'])) {
     } else if ($alert == 0) {
         $msj = "No hubo ningún cambio.";
         $class = "alert-warning";
-    }
-    else {
+    } else {
         $msj = "Ha ocurrido algo inesperado";
         $class = "alert-danger";
     }
@@ -60,27 +59,24 @@ if (isset($_POST['actualizarStock'])) {
 }
 
 $Proveedor = new Proveedor($Ingrediente->getProveedor());
-$Proveedor-> getInfo();
+$Proveedor->getInfo();
 
 
 ?>
 
 <div class="container mt-5 mb-5">
-    <div class="row justify-content-center">
-        <h1>Agregar a Stock</h1>
-    </div>
     <div class="row justify-content-center mt-5">
-        <div class="col-11 col-md-12 col-lg-9 col-xl-8">
+        <div class="col-11 col-md-12 col-lg-9 col-xl-8 form-bg">
             <div class="card">
-                <div class="card-header">
-                    Agregar a Stock
-                </div>
                 <div class="card-body">
                     <form novalidate class="needs-validation" action="index.php?pid=<?php echo base64_encode("Vista/Ingrediente/agregarInventario.php") ?>&idIngrediente=<?php echo $idIngrediente ?>" method="POST" enctype="multipart/form-data">
+                        <div class="form-title">
+                            <h1>Agregar a Stock</h1>
+                        </div>
                         <div class="row">
                             <div class="col-6">
                                 <label>Nombre</label>
-                                <input value="<?php echo $Ingrediente->getNombre() ?>" class="form-control"  type="text" disabled>
+                                <input value="<?php echo $Ingrediente->getNombre() ?>" class="form-control" type="text" disabled>
                                 <input type="hidden" name="idIngrediente" value="<?php echo $idIngrediente ?>">
                                 <div class="invalid-feedback">
                                     Por favor ingrese el nombre.
@@ -91,7 +87,7 @@ $Proveedor-> getInfo();
                             </div>
                             <div class="col-6">
                                 <label>Proveedor</label>
-                                <input type="text" value="<?php echo $Proveedor -> getNombre() ?>" class="form-control" disabled>
+                                <input type="text" value="<?php echo $Proveedor->getNombre() ?>" class="form-control" disabled>
                                 <div class="invalid-feedback">
                                     Por favor ingrese seleccione algún proveedor.
                                 </div>
@@ -112,7 +108,7 @@ $Proveedor-> getInfo();
                         </div>
                         <div class="form-group mt-4">
                             <label>En stock</label>
-                            <input type="number" min = "1" max = "999" class="form-control" name="cantidad" placeholder="Agregar la entrada" required>
+                            <input type="number" min="1" max="999" class="form-control" name="cantidad" placeholder="Agregar la entrada" required>
                             <div class="invalid-feedback">
                                 Por favor ingrese la cantidad.
                             </div>

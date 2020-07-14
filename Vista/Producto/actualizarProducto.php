@@ -179,17 +179,14 @@ $resultados = $categoria->buscarTodo();
 ?>
 
 <div class="container mt-5 mb-5">
-    <div class="row justify-content-center">
-        <h1>Actualizar Producto</h1>
-    </div>
     <div class="row justify-content-center mt-5">
-        <div class="col-11 col-md-12 col-lg-9 col-xl-8">
+        <div class="col-11 col-md-12 col-lg-9 col-xl-8 form-bg">
             <div class="card">
-                <div class="card-header">
-                    Actualice un producto
-                </div>
                 <div class="card-body">
                     <form novalidate class="needs-validation" action="index.php?pid=<?php echo base64_encode("Vista/Producto/actualizarProducto.php") ?>&idProducto=<?php echo $idProducto ?>" method="POST" enctype="multipart/form-data">
+                        <div class="form-title">
+                            <h1>Actualizar Producto</h1>
+                        </div>
                         <div class="form-group">
                             <label>Nombre</label>
                             <input value="<?php echo $producto->getNombre() ?>" class="form-control" name="nombre" type="text" required>
@@ -244,7 +241,7 @@ $resultados = $categoria->buscarTodo();
                         <div class="form-group d-flex flex-column">
                             <label>Imagen</label>
                             <div class="row d-flex flex-row justify-content-center mb-5">
-                                <img src="<?php echo $producto->getFoto() ?>" width = "200px">
+                                <img src="<?php echo $producto->getFoto() ?>" width="200px">
                             </div>
                             <input type="hidden" name="url_hidden" value="<?php echo $producto->getFoto() ?> ">
                             <div class="input-group mb-3">
@@ -256,7 +253,7 @@ $resultados = $categoria->buscarTodo();
                                     <label class="custom-file-label" for="imageUpload">Choose file</label>
                                 </div>
                             </div>
-                            
+
                         </div>
 
                         <div class="form-group">

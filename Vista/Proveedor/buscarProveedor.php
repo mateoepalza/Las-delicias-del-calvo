@@ -4,7 +4,6 @@ $pagina = 1;
 $numReg = 5;
 
 $Proveedor = new Proveedor();
-$resultados = $Proveedor->buscarPaginado($pagina, $numReg);
 $cantPag = $Proveedor->buscarCantidad();
 $pagination = $cantPag / $numReg;
 ?>
@@ -27,30 +26,19 @@ $pagination = $cantPag / $numReg;
                     </select>
                     <input id="search" type="text" placeholder="search">
                 </div>
-                <div class="card-body">
+                <div class="card-body form-table">
                     <div class="table-responsive-md">
-                        <table class="table">
-                            <thead class="thead-dark">
+                        <table class="table table-hover table-striped">
+                            <thead>
                                 <tr>
-                                    <th>nit</th>
+                                    <th>NIT</th>
                                     <th>Nombre</th>
                                     <th>Telefono</th>
                                     <th>Dirección</th>
-                                    <th></th>
+                                    <th style='text-align: center;'>Servicios</th>
                                 </tr>
                             </thead>
                             <tbody id="tabla">
-                                <!--<?php
-                                    foreach ($resultados as $resultado) {
-                                        echo "<tr>";
-                                        echo "<td>" . $resultado->getNit() . "</td>";
-                                        echo "<td>" . $resultado->getNombre() . "</td>";
-                                        echo "<td>" . $resultado->getTelefono() . "</td>";
-                                        echo "<td>" . $resultado->getDireccion() . "</td>";
-                                        echo "<td><a href='index.php?pid=" . base64_encode("Vista/Proveedor/actualizarProveedor.php") . "&idProveedor=" . $resultado->getIdProveedor() . "'><i class='far fa-edit'></i></a></td>";
-                                        echo "</tr>";
-                                    }
-                                    ?>-->
                             </tbody>
                         </table>
                     </div>
@@ -184,7 +172,7 @@ $pagination = $cantPag / $numReg;
         $("#tabla").empty();
 
         DataT.forEach(function(data) {
-            $("#tabla").append(`<tr><td>${data[1]}</td><td>${data[2]}</td><td>${data[3]}</td><td>${data[4]}</td><td><a href='index.php?pid=${DataL}&idProveedor=${data[0]}'><i class='far fa-edit'></i></a></td></tr>`)
+            $("#tabla").append(`<tr><td>${data[1]}</td><td>${data[2]}</td><td>${data[3]}</td><td>${data[4]}</td><td style='display:flex; justify-content:center;'><a href='index.php?pid=${DataL}&idProveedor=${data[0]}'><i class='far fa-edit'></i></a></td></tr>`)
         });
     }
     /*

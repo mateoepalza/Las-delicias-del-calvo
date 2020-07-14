@@ -10,7 +10,7 @@ $listaIngredientes = $Ingrediente->buscarTodo();
 
 ?>
 
-<div class="container mt-5">
+<div class="container mt-5 ">
     <div class="row justify-content-center">
         <div class="col-12">
             <form action="index.php?pid=<?php echo base64_encode("Vista/Producto/crearProducto.php") ?>" method="POST" enctype="multipart/form-data">

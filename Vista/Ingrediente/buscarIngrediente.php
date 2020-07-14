@@ -4,7 +4,6 @@ $pagina = 1;
 $numReg = 5;
 
 $Ingrediente = new Ingrediente();
-$resultados = $Ingrediente->buscarPaginado($pagina, $numReg);
 $cantPag = $Ingrediente->buscarCantidad();
 $pagination = $cantPag / $numReg;
 ?>
@@ -13,7 +12,7 @@ $pagination = $cantPag / $numReg;
         <h1>Buscar Ingrediente</h1>
     </div>
     <div class="row justify-content-center mt-5">
-        <div class="col-12 col-md-12 col-lg-11 col-xl-10">
+        <div class="col-12 col-md-12 col-lg-11 col-xl-12">
             <div class="card">
                 <div class="card-header bg-dark d-flex flex-row justify-content-between">
                     <a href="index.php?pid=<?php echo base64_encode("Vista/Ingrediente/crearIngrediente.php") ?>"><button type="button" class="btn btn-outline-light">Crear nuevo</button></a>
@@ -27,27 +26,17 @@ $pagination = $cantPag / $numReg;
                     </select>
                     <input id="search" type="text" placeholder="search">
                 </div>
-                <div class="card-body">
-                    <table class="table">
-                        <thead class="thead-dark">
+                <div class="card-body form-table">
+                    <table class="table table-hover table-striped">
+                        <thead>
                             <tr>
                                 <th>Nombre</th>
                                 <th>Cantidad</th>
                                 <th>Proveedor</th>
-                                <th></th>
+                                <th style="text-align: center;">Servicios</th>
                             </tr>
                         </thead>
                         <tbody id="tabla">
-                            <!--<?php
-                            foreach ($resultados as $resultado) {
-                                echo "<tr>";
-                                echo "<td>" . $resultado->getNombre() . "</td>";
-                                echo "<td>" . $resultado->getCantidad() . "</td>";
-                                echo "<td>" . $resultado->getProveedor() . "</td>";
-                                echo "<td><a href='index.php?pid=" . base64_encode("Vista/Ingrediente/actualizarIngrediente.php") . "&idIngrediente=" . $resultado->getIdIngrediente() . "'><i class='far fa-edit'></i></a></td>";
-                                echo "</tr>";
-                            }
-                            ?>-->
                         </tbody>
                     </table>
                 </div>
@@ -180,7 +169,7 @@ $pagination = $cantPag / $numReg;
         $("#tabla").empty();
 
         DataT.forEach(function(data) {
-            $("#tabla").append(`<tr><td>${data[1]}</td><td>${data[2]}</td><td>${data[3]}</td><td style='display:flex; flex-flow: row nowrap; justify-content: space-evenly; align-items:center'><a href='index.php?pid=${DataL[0]}&idIngrediente=${data[0]}'><i class="fas fa-calculator"></i></a><a href='index.php?pid=${DataL[1]}&idIngrediente=${data[0]}'><i class='far fa-edit'></i></a></td></tr>`)
+            $("#tabla").append(`<tr><td>${data[1]}</td><td>${data[2]}</td><td>${data[3]}</td><td style='display:flex; flex-flow: row nowrap; justify-content: center; align-items:center'><a href='index.php?pid=${DataL[0]}&idIngrediente=${data[0]}' style='margin: 0px 4px;'><i class="fas fa-calculator"></i></a><a href='index.php?pid=${DataL[1]}&idIngrediente=${data[0]}' style='margin: 0px 4px;'><i class='far fa-edit'></i></a></td></tr>`)
         });
     }
     /*

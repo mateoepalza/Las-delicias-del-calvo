@@ -4,7 +4,6 @@ $pagina = 1;
 $numReg = 5;
 
 $administrador = new Administrador();
-$resultados = $administrador->buscarPaginado($pagina, $numReg);
 $cantPag = $administrador->buscarCantidad();
 $pagination = $cantPag / $numReg;
 ?>
@@ -13,7 +12,7 @@ $pagination = $cantPag / $numReg;
         <h1>Buscar Administrador</h1>
     </div>
     <div class="row justify-content-center mt-5">
-        <div class="col-12 col-md-12 col-lg-11 col-xl-10">
+        <div class="col-12 col-md-12 col-lg-11 col-xl-9">
             <div class="card">
                 <div class="card-header bg-dark d-flex flex-row justify-content-between">
                     <a href="index.php?pid=<?php echo base64_encode("Vista/Administrador/crearAdministrador.php") ?>"><button type="button" class="btn btn-outline-light">Crear nuevo</button></a>
@@ -27,10 +26,10 @@ $pagination = $cantPag / $numReg;
                     </select>
                     <input id="search" type="text" placeholder="search">
                 </div>
-                <div class="card-body">
+                <div class="card-body form-table">
                     <div class="table-responsive-lg">
-                        <table class="table">
-                            <thead class="thead-dark">
+                        <table class="table table-hover table-striped">
+                            <thead>
                                 <tr>
                                     <th>Nombre</th>
                                     <th>Apellido</th>
@@ -38,17 +37,6 @@ $pagination = $cantPag / $numReg;
                                 </tr>
                             </thead>
                             <tbody id="tabla">
-                                <!--<?php
-                                    foreach ($resultados as $resultado) {
-                                    ?>
-                                    <tr>
-                                        <td><?php echo $resultado->getNombre() ?></td>
-                                        <td><?php echo $resultado->getApellido() ?></td>
-                                        <td><?php echo $resultado->getCorreo() ?></td>
-                                    </tr>
-                                <?php
-                                    }
-                                ?>-->
                             </tbody>
                         </table>
                     </div>

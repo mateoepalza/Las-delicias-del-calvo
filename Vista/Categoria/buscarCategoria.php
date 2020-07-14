@@ -4,7 +4,6 @@ $pagina = 1;
 $numReg = 5;
 
 $Categoria = new Categoria();
-$resultados = $Categoria->buscarPaginado($pagina, $numReg);
 $cantPag = $Categoria->buscarCantidad();
 $pagination = $cantPag / $numReg;
 ?>
@@ -13,7 +12,7 @@ $pagination = $cantPag / $numReg;
         <h1>Buscar Categoría</h1>
     </div>
     <div class="row justify-content-center mt-5">
-        <div class="col-12 col-md-12 col-lg-11 col-xl-10">
+        <div class="col-12 col-md-12 col-lg-9 col-xl-8">
             <div class="card">
                 <div class="card-header bg-dark d-flex flex-row justify-content-between">
                     <a href="index.php?pid=<?php echo base64_encode("Vista/Categoria/crearCategoria.php") ?>"><button type="button" class="btn btn-outline-light">Crear nuevo</button></a>
@@ -27,25 +26,16 @@ $pagination = $cantPag / $numReg;
                     </select>
                     <input id="search" type="text" placeholder="search">
                 </div>
-                <div class="card-body">
-                    <table class="table">
-                        <thead class="thead-dark">
+                <div class="card-body form-table">
+                    <table class="table table-hover table-striped">
+                        <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Nombre</th>
-                                <th></th>
+                                <th>Servicios</th>
                             </tr>
                         </thead>
                         <tbody id="tabla">
-                            <!--<?php
-                                foreach ($resultados as $resultado) {
-                                    echo "<tr>";
-                                    echo "<td>" . $resultado->getIdCategoria() . "</td>";
-                                    echo "<td>" . $resultado->getNombre() . "</td>";
-                                    echo "<td><a href='index.php?pid=" . base64_encode("Vista/Categoria/actualizarCategoria.php") . "&idCategoria=" . $resultado->getIdCategoria() . "'><i class='far fa-edit'></i></a></td>";
-                                    echo "</tr>";
-                                }
-                                ?>-->
                         </tbody>
                     </table>
                 </div>

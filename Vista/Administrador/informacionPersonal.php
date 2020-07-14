@@ -13,13 +13,12 @@ if (isset($_POST['actualizarInfoAdministrador'])) {
     $cliente = new Cliente("", "", "", $correo);
     $inventarista = new Inventarista("", "", "", $correo);
     $administrador = new Administrador($idAdmin);
-    $administrador -> getInfoBasic();
-    
-    if ($administrador -> getCorreo() != $correo && ($inventarista->existeCorreo() || $cliente->existeCorreo() || $administrador -> existeNuevoCorreo($correo))) {
+    $administrador->getInfoBasic();
+
+    if ($administrador->getCorreo() != $correo && ($inventarista->existeCorreo() || $cliente->existeCorreo() || $administrador->existeNuevoCorreo($correo))) {
 
         $msj = "El correo proporcionado ya se encuentra en uso.";
         $class = "alert-danger";
-
     } else {
 
         if (isset($archivo) && $archivo != "") {
@@ -35,7 +34,6 @@ if (isset($_POST['actualizarInfoAdministrador'])) {
 
                 $class = "alert-danger";
                 $msj = "El tipo de archivo no es valido o el tamañano es demasiado grande";
-                
             } else {
                 if (move_uploaded_file($temp, $url)) {
 
@@ -74,8 +72,7 @@ if (isset($_POST['actualizarInfoAdministrador'])) {
                     } else if ($resInsert == 0) {
                         $class = "alert-warning";
                         $msj = "No se ha modificado ningún valor.";
-                    }
-                    else {
+                    } else {
                         $class = "alert-danger";
                         $msj = "Ocurrió algo inesperado";
                     }
@@ -84,67 +81,62 @@ if (isset($_POST['actualizarInfoAdministrador'])) {
                     $msj = "Ocurrió algo inesperado";
                 }
             }
-
         } else {
 
             $administrador = new Administrador($idAdmin, $nombre, $apellido, $correo, "", trim($oldUrl));
 
-                $resInsert = $administrador->actualizarAdministrador();
+            $resInsert = $administrador->actualizarAdministrador();
 
-                if ($resInsert == 1) {
+            if ($resInsert == 1) {
+                /**
+                 * Creo un objeto para retornar el dia y la hora
+                 */
+                $date = new DateTime();
+
+                if ($_SESSION['rol'] == 1) {
                     /**
-                     * Creo un objeto para retornar el dia y la hora
+                     * Creo el objeto de log
                      */
-                    $date = new DateTime();
+                    $logAdmin = new LogAdmin("", $date->format('Y-m-d H:i:s'), LogHActualizarAdministrador($idAdmin, $nombre, $apellido, $correo, $oldUrl), 22, getBrowser(), getOS(), $_SESSION['id']);
+                    /**
+                     * Inserto el registro del log
+                     */
+                    $logAdmin->insertar();
 
-                    if ($_SESSION['rol'] == 1) {
-                        /**
-                         * Creo el objeto de log
-                         */
-                        $logAdmin = new LogAdmin("", $date->format('Y-m-d H:i:s'), LogHActualizarAdministrador($idAdmin, $nombre, $apellido, $correo, $oldUrl), 22, getBrowser(), getOS(), $_SESSION['id']);
-                        /**
-                         * Inserto el registro del log
-                         */
-                        $logAdmin->insertar();
-
-                        /**
-                         * Log para el Inventarista
-                         */
-                    }
-
-                    $class = "alert-success";
-                    $msj = "El producto se ha guardado correctamente";
-                } else if ($resInsert == 0) {
-                    $class = "alert-warning";
-                    $msj = "No se ha modificado ningún valor.";
+                    /**
+                     * Log para el Inventarista
+                     */
                 }
-                else {
-                    $class = "alert-danger";
-                    $msj = "Ocurrió algo inesperado";
-                }
-            
+
+                $class = "alert-success";
+                $msj = "El producto se ha guardado correctamente";
+            } else if ($resInsert == 0) {
+                $class = "alert-warning";
+                $msj = "No se ha modificado ningún valor.";
+            } else {
+                $class = "alert-danger";
+                $msj = "Ocurrió algo inesperado";
+            }
         }
     }
 
     include "Vista/Main/error.php";
-
 } else {
 
     $administrador = new Administrador($idAdmin);
     $administrador->getInfoBasic();
-    
 }
 
 
 ?>
 
 <div class="container  mt-5 mb-5">
-    <div class="row d-flex justify-content-center">
-        <h1>Información Personal</h1>
-    </div>
     <div class="row d-flex justify-content-center mt-5">
-        <div class="col-8">
+        <div class="col-8 form-personal">
             <form novalidate class="needs-validation" action="index.php?pid=<?php echo base64_encode("Vista/Administrador/informacionPersonal.php") ?>" method=POST enctype="multipart/form-data">
+                <div class="form-title">
+                    <h1>Información Personal</h1>
+                </div>
                 <div class="row d-flex flex-row justify-content-center mb-5">
                     <div style="border-radius: 500px; overflow:hidden; width: 200px; height: 200px; background-image: url('<?php echo ($administrador->getFoto() != "") ? $administrador->getFoto() : "static/img/users/basic.png"; ?>'); background-repeat: no-repeat; background-position: center; background-size: cover;">
                     </div>

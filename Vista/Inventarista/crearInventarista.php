@@ -16,7 +16,6 @@ if (isset($_POST['crearInventarista'])) {
 
         $msj = "El correo suministrado ya se encuentra en uso";
         $class = "alert-danger";
-        
     } else {
 
         $res = $inventarista->insertar();
@@ -44,7 +43,6 @@ if (isset($_POST['crearInventarista'])) {
             $msj = "Ocurrió algo inesperado, intente de nuevo.";
             $class = "alert-danger";
         }
-
     }
 
 
@@ -52,17 +50,14 @@ if (isset($_POST['crearInventarista'])) {
 }
 ?>
 <div class="container mt-5 mb-5">
-    <div class="row justify-content-center">
-        <h1>Crear Inventarista</h1>
-    </div>
     <div class="row justify-content-center mt-5">
-        <div class="col-11 col-md-12 col-lg-9 col-xl-8">
+        <div class="col-11 col-md-12 col-lg-9 col-xl-8 form-bg">
             <div class="card">
-                <div class="card-header">
-                    Crear un nuevo inventarista
-                </div>
                 <div class="card-body">
                     <form novalidate class="needs-validation" action="index.php?pid=<?php echo base64_encode("Vista/Inventarista/crearInventarista.php") ?>" method="POST">
+                        <div class="form-title">
+                            <h1>Crear Inventarista</h1>
+                        </div>
                         <div class="form-group">
                             <label>Nombre Completo</label>
                             <div class="row">

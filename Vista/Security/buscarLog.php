@@ -27,17 +27,17 @@ $pagination = $cantPag / $numReg;
                     </select>
                     <input id="search" type="text" placeholder="search">
                 </div>
-                <div class="card-body">
+                <div class="card-body form-table">
                     <div class="table-responsive-lg">
-                        <table class="table">
-                            <thead class="thead-dark">
+                        <table class="table table-hover table-striped">
+                            <thead>
                                 <tr>
                                     <th>Fecha</th>
                                     <th>Acción</th>
                                     <th>Navegador</th>
                                     <th>SO</th>
                                     <th>Usuario</th>
-                                    <th></th>
+                                    <th style="text-align:center;">Servicios</th>
                                 </tr>
                             </thead>
                             <tbody id="tabla">
@@ -50,7 +50,7 @@ $pagination = $cantPag / $numReg;
                                         <td><?php echo $resultado->getBrowser() ?></td>
                                         <td><?php echo $resultado->getOs() ?></td>
                                         <td><?php echo $resultado->getUser() ?></td>
-                                        <td><a href='#' class="moreInfoBtn" data-id="<?php echo $resultado->getIdLog() ?>" data-table="<?php echo $resultado->getTipo() ?>" data-toggle="modal" data-target="#moreInfo"><i class='fas fa-info-circle'></i></a></td>
+                                        <td style='display:flex; justify-content:center;'><a href='#' class="moreInfoBtn" data-id="<?php echo $resultado->getIdLog() ?>" data-table="<?php echo $resultado->getTipo() ?>" data-toggle="modal" data-target="#moreInfo"><i class='fas fa-info-circle'></i></a></td>
                                     </tr>
                                 <?php
                                 }
@@ -184,7 +184,7 @@ $pagination = $cantPag / $numReg;
         $("#tabla").empty();
 
         DataT.forEach(function(data) {
-            $("#tabla").append("<tr><td>" + data[1] + "</td><td>" + data[4] + "</td><td>" + data[5] + "</td><td>" + data[6] + "</td><td>" + data[7] + "</td><td style='display: flex; flex-flow: row; justify-content: center; align-items:center;'><a href='#' class='moreInfoBtn' data-toggle='modal' data-target='#moreInfo' data-id='" + data[0] + "' data-table='" + data[8] + "' style='margin: 0px 2px;'><i class='fas fa-info-circle'></i></a></a></td></tr>")
+            $("#tabla").append("<tr><td>" + data[1] + "</td><td>" + data[4] + "</td><td>" + data[5] + "</td><td>" + data[6] + "</td><td>" + data[7] + "</td><td style='display:flex; justify-content:center;'><a href='#' class='moreInfoBtn' data-toggle='modal' data-target='#moreInfo' data-id='" + data[0] + "' data-table='" + data[8] + "'><i class='fas fa-info-circle'></i></a></td></tr>");
         });
     }
     /*
