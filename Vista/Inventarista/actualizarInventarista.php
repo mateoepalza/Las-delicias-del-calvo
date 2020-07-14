@@ -10,18 +10,17 @@ if (isset($_POST['actualizarInventarista'])) {
     $clave = $_POST['clave'];
     $estado = $_POST['estado'];
 
-    
+
     $cliente = new Cliente("", "", "", $email);
     $administrador = new Administrador("", "", "", $email);
     $inventarista = new Inventarista($idInventarista);
-    $inventarista -> getInfoBasic();
+    $inventarista->getInfoBasic();
 
-    if ($inventarista -> getCorreo() != $email && ($cliente -> existeCorreo() || $administrador->existeCorreo() || $inventarista -> existeNuevoCorreo($email))) {
+    if ($inventarista->getCorreo() != $email && ($cliente->existeCorreo() || $administrador->existeCorreo() || $inventarista->existeNuevoCorreo($email))) {
 
         $msj = "El correo proporcionado ya se encuentra en uso.";
         $class = "alert-danger";
-
-    }else{
+    } else {
 
         $inventarista = new Inventarista($idInventarista, $nombre, $apellido, $email, $clave, "", $estado);
 
@@ -30,10 +29,10 @@ if (isset($_POST['actualizarInventarista'])) {
         } else {
             $res = $inventarista->actualizar();
         }
-    
+
         if ($res == 1) {
-    
-            if($_SESSION['rol'] == 1){
+
+            if ($_SESSION['rol'] == 1) {
                 /**
                  * Creo un objeto para retornar el dia y la hora
                  */
@@ -41,13 +40,13 @@ if (isset($_POST['actualizarInventarista'])) {
                 /**
                  * Creo el objeto de log
                  */
-                $logAdmin = new LogAdmin("", $date -> format('Y-m-d H:i:s'), LogHActualizarInventarista($idInventarista, $nombre, $apellido, $email, $clave, $estado), 13, getBrowser(), getOS(), $_SESSION['id']);
+                $logAdmin = new LogAdmin("", $date->format('Y-m-d H:i:s'), LogHActualizarInventarista($idInventarista, $nombre, $apellido, $email, $clave, $estado), 13, getBrowser(), getOS(), $_SESSION['id']);
                 /**
                  * Inserto el registro del log
                  */
-                $logAdmin -> insertar();
+                $logAdmin->insertar();
             }
-    
+
             $msj = "El inventarista se ha actualizado satisfactoriamente.";
             $class = "alert-success";
         } else if ($res == 0) {
@@ -60,7 +59,6 @@ if (isset($_POST['actualizarInventarista'])) {
     }
 
     include "Vista/Main/error.php";
-
 } else {
     $inventarista = new Inventarista($idInventarista);
     $inventarista->getInfoBasic();
@@ -68,17 +66,14 @@ if (isset($_POST['actualizarInventarista'])) {
 ?>
 
 <div class="container mt-5 mb-5">
-    <div class="row justify-content-center">
-        <h1>Actualizar Inventarista</h1>
-    </div>
     <div class="row justify-content-center mt-5">
-        <div class="col-11 col-md-12 col-lg-9 col-xl-8">
+        <div class="col-11 col-md-12 col-lg-9 col-xl-10 form-bg">
             <div class="card">
-                <div class="card-header">
-                    Actualizar un inventarista
-                </div>
                 <div class="card-body">
                     <form novalidate class="needs-validation" action="index.php?pid=<?php echo base64_encode("Vista/Inventarista/actualizarInventarista.php") ?>&idInventarista=<?php echo $inventarista->getIdInventarista() ?>" method="POST">
+                        <div class="form-title">
+                            <h1>Actualizar Inventarista</h1>
+                        </div>
                         <div class="form-group">
                             <label>Nombre Completo</label>
                             <div class="row">

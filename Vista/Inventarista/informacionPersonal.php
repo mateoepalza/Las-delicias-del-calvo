@@ -68,7 +68,7 @@ if (isset($_POST['actualizarInfoInventarista'])) {
                         }
 
                         $class = "alert-success";
-                        $msj = "El producto se ha guardado correctamente.";
+                        $msj = "La información se ha actualizado correctamente.";
                     } else if ($resInsert == 0) {
                         $class = "alert-warning";
                         $msj = "No se ha modificado ningún valor.";
@@ -109,7 +109,7 @@ if (isset($_POST['actualizarInfoInventarista'])) {
                 }
 
                 $class = "alert-success";
-                $msj = "El producto se ha guardado correctamente";
+                $msj = "La información se ha actualizado correctamente.";
             } else if ($resInsert == 0) {
                 $class = "alert-warning";
                 $msj = "No se ha modificado ningún valor.";

@@ -36,7 +36,7 @@ if (isset($_POST['crearCliente'])) {
                 $logAdmin->insertar();
             }
 
-            $msj = "El inventarista se ha creado satisfactoriamente";
+            $msj = "El cliente se ha creado satisfactoriamente";
             $class = "alert-success";
         } else {
             $msj = "Ocurrió algo inesperado, intente de nuevo.";

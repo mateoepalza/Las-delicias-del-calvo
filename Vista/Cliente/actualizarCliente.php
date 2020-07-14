@@ -10,18 +10,17 @@ if (isset($_POST['actualizarCliente'])) {
     $clave = $_POST['clave'];
     $estado = $_POST['estado'];
 
-    
+
     $inventarista = new Inventarista("", "", "", $email);
     $administrador = new Administrador("", "", "", $email);
     $cliente = new Cliente($idCliente);
-    $cliente -> getInfoBasic();
+    $cliente->getInfoBasic();
 
-    if ( $cliente -> getCorreo() != $email && ($inventarista->existeCorreo() || $administrador->existeCorreo() || $cliente -> existeNuevoCorreo($email) )) {
+    if ($cliente->getCorreo() != $email && ($inventarista->existeCorreo() || $administrador->existeCorreo() || $cliente->existeNuevoCorreo($email))) {
 
         $msj = "El correo proporcionado ya se encuentra en uso.";
         $class = "alert-danger";
-
-    }else{
+    } else {
 
         $cliente = new Cliente($idCliente, $nombre, $apellido, $email, $clave, "", $estado);
 
@@ -30,24 +29,24 @@ if (isset($_POST['actualizarCliente'])) {
         } else {
             $res = $cliente->actualizar();
         }
-    
+
         if ($res == 1) {
-    
-            if($_SESSION['rol'] == 1){
-                    /**
-                     * Creo un objeto para retornar el dia y la hora
-                     */
-                    $date = new DateTime();
-                    /**
-                     * Creo el objeto de log
-                     */
-                    $logAdmin = new LogAdmin("", $date -> format('Y-m-d H:i:s'), LogHActualizarCliente($idCliente, $nombre, $apellido, $email, $clave, $estado), 11, getBrowser(), getOS(), $_SESSION['id']);
-                    /**
-                     * Inserto el registro del log
-                     */
-                    $logAdmin -> insertar();
+
+            if ($_SESSION['rol'] == 1) {
+                /**
+                 * Creo un objeto para retornar el dia y la hora
+                 */
+                $date = new DateTime();
+                /**
+                 * Creo el objeto de log
+                 */
+                $logAdmin = new LogAdmin("", $date->format('Y-m-d H:i:s'), LogHActualizarCliente($idCliente, $nombre, $apellido, $email, $clave, $estado), 11, getBrowser(), getOS(), $_SESSION['id']);
+                /**
+                 * Inserto el registro del log
+                 */
+                $logAdmin->insertar();
             }
-    
+
             $msj = "El cliente se ha actualizado satisfactoriamente.";
             $class = "alert-success";
         } else if ($res == 0) {
@@ -62,22 +61,19 @@ if (isset($_POST['actualizarCliente'])) {
     include "Vista/Main/error.php";
 } else {
     $cliente = new Cliente($idCliente);
-    $cliente -> getInfoBasic();
+    $cliente->getInfoBasic();
 }
 ?>
 
 <div class="container mt-5 mb-5">
-    <div class="row justify-content-center">
-        <h1>Actualizar Cliente</h1>
-    </div>
     <div class="row justify-content-center mt-5">
-        <div class="col-11 col-md-12 col-lg-9 col-xl-8">
+        <div class="col-11 col-md-12 col-lg-9 col-xl-10 form-bg">
             <div class="card">
-                <div class="card-header">
-                    Actualizar un cliente
-                </div>
                 <div class="card-body">
                     <form novalidate class="needs-validation" action="index.php?pid=<?php echo base64_encode("Vista/Cliente/actualizarCliente.php") ?>&idCliente=<?php echo $cliente->getIdCliente() ?>" method="POST">
+                        <div class="form-title">
+                            <h1>Actualizar Cliente</h1>
+                        </div>
                         <div class="form-group">
                             <label>Nombre Completo</label>
                             <div class="row">
@@ -114,7 +110,7 @@ if (isset($_POST['actualizarCliente'])) {
                         </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <input class="form-control" name="email" type="email" value="<?php echo $cliente->getCorreo() ?>"  placeholder="Ingrese su correo" required>
+                            <input class="form-control" name="email" type="email" value="<?php echo $cliente->getCorreo() ?>" placeholder="Ingrese su correo" required>
                             <div class="invalid-feedback">
                                 Por favor ingrese el correo.
                             </div>

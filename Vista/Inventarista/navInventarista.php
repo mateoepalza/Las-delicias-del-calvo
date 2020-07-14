@@ -19,8 +19,6 @@ $invent->getInfoBasic();
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Ingrediente/buscarIngrediente.php") ?>">Agregar a inventario</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Producto/crearProductoCIngredientes.php") ?>">Crear producto</a>
-                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="index.php?pid=<?php echo base64_encode("Vista/Producto/buscarProducto.php") ?>">Buscar producto</a>
                 </div>
             </li>
