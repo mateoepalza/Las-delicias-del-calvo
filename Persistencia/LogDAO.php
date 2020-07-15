@@ -35,6 +35,7 @@ class LogDAO{
                 FROM logInventarista 
                 INNER JOIN accion ON FK_idAccion = idAccion
                 INNER JOIN Inventarista ON FK_idInventarista = idInventarista
+                ORDER BY fecha desc
                 LIMIT " . (($pagina - 1)*$numReg) . ", " . $numReg;
     }
 
@@ -70,6 +71,7 @@ class LogDAO{
                 INNER JOIN accion ON FK_idAccion = idAccion
                 INNER JOIN Inventarista ON FK_idInventarista = idInventarista
                 WHERE Accion.nombre like '%". $str ."%' OR concat(Inventarista.nombre, ' ',Inventarista.apellido) like '%" . $str . "%' OR fecha like '%" . $str . "%'
+                ORDER BY fecha desc
                 LIMIT " . (($pag - 1)*$cant) . ", " . $cant;
     }
 

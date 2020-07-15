@@ -44,7 +44,7 @@ if (isset($_POST['btnCheckout'])) {
     $res = $factura->pago();
 
     if ($res) {
-        header("Location: index.php?pid=" . base64_encode("Vista/Factura/buscarFactura.php"));
+        header("Location: index.php?pid=" . base64_encode("Vista/Cliente/clienteHistorial.php") ."&compra=1");
         $msj = "La cantidad del producto ha sido actualizada en el carrito.";
         $class = "alert-success";
     } else {
@@ -52,6 +52,12 @@ if (isset($_POST['btnCheckout'])) {
         $class = "alert-danger";
     }
 
+    include "Vista/Main/error.php";
+}
+
+if (isset($_GET['compra'])) {
+    $msj = "La compra ha sido exitosa";
+    $class = "alert-success";
     include "Vista/Main/error.php";
 }
 

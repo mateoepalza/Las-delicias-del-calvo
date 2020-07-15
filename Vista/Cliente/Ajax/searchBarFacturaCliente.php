@@ -16,6 +16,7 @@
     $cant = $resultado/$cantPag;
 
     $ajax = Array(
+        "status" => ((count($data) > 0)? true : false),
         "DataT" => $data,
         "DataL" => base64_encode("Vista/Factura/Ajax/modalInfo.php"),
         "Cpage" => $pagina,
